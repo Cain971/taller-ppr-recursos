@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller PpR · Recursos</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEEFE9; --paper-raise:#F7F7F2; --ink:#14181B; --ink-soft:#52585B; --ink-faint:#8B9089;
+  --line:#D6D7CE; --accent:#A1712A; --accent-ink:#5C4013; --accent-soft:#E7D6AE;
+  --good:#12805F; --good-soft:#D6E9E1; --critical:#AC3A2C; --critical-soft:#F0DAD3;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#14171A; --paper-raise:#1B1F22; --ink:#EDEEE8; --ink-soft:#A9AEA3; --ink-faint:#6D7268;
+    --line:#2C302B; --accent:#B8863A; --accent-ink:#F2DDB2; --accent-soft:#3B3121;
+    --good:#2F9A7C; --good-soft:#1E332E; --critical:#D9654C; --critical-soft:#3A2420;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14171A; --paper-raise:#1B1F22; --ink:#EDEEE8; --ink-soft:#A9AEA3; --ink-faint:#6D7268;
+  --line:#2C302B; --accent:#B8863A; --accent-ink:#F2DDB2; --accent-soft:#3B3121;
+  --good:#2F9A7C; --good-soft:#1E332E; --critical:#D9654C; --critical-soft:#3A2420;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:'Archivo',-apple-system,sans-serif; font-weight:400;
+  line-height:1.7; min-height:100vh; padding:4rem 1.5rem;
+}
+.wrap{max-width:760px;margin:0 auto}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.16em;
+  color:var(--accent); text-transform:uppercase; margin-bottom:1rem;
+  display:flex; align-items:center; gap:.7rem;
+}
+.eyebrow::before{content:'';display:block;width:28px;height:2px;background:var(--accent)}
+h1{
+  font-family:'Fraunces',serif; font-weight:700;
+  font-size:clamp(2rem,5vw,3rem); line-height:1.1; color:var(--ink);
+  margin-bottom:.8rem;
+}
+.sub{color:var(--ink-soft);font-size:1rem;margin-bottom:3rem;max-width:520px}
+a.card{
+  display:block; text-decoration:none; color:inherit;
+  background:var(--paper-raise); border:1px solid var(--line);
+  border-left:3px solid var(--accent); border-radius:6px;
+  padding:1.3rem 1.6rem; margin-bottom:.9rem; transition:all .2s;
+}
+a.card:hover{border-left-color:var(--good);transform:translateX(3px)}
+.card h2{
+  font-family:'Fraunces',serif; font-size:1.15rem; font-weight:700;
+  color:var(--ink); margin-bottom:.3rem;
+}
+.card p{font-size:.85rem;color:var(--ink-soft)}
+footer{
+  margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--line);
+  font-family:'IBM Plex Mono',monospace; font-size:.65rem; letter-spacing:.1em;
+  color:var(--ink-faint); text-transform:uppercase;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">EGPP · Educación Continua PUCP</div>
+  <h1>Recursos de apoyo</h1>
+  <p class="sub">Materiales interactivos de apoyo para el taller. Consúltalos cuando trabajes en grupo.</p>
+
+  <a class="card" href="instructivo-entrega-1.pdf">
+    <h2>Instructivo — Entrega 1</h2>
+    <p>Guía paso a paso para el trabajo grupal: condición de interés, cadena de resultados, supuesto más frágil y pregunta de evidencia. Con checklist final.</p>
+  </a>
+
+  <a class="card" href="triangulo-estrategico.html">
+    <h2>El triángulo estratégico de la política pública</h2>
+    <p>Marco de Moore, los tres vértices, casos aplicados y ejercicios de comprensión.</p>
+  </a>
+
+  <a class="card" href="condicion-de-interes.html">
+    <h2>La condición de interés</h2>
+    <p>Qué es según la Directiva del MEF, las tres secciones (definición, relevancia, magnitud), de dónde salen las fuentes y un autochequeo del borrador.</p>
+  </a>
+
+  <a class="card" href="cadena-desde-la-solucion.html">
+    <h2>Riesgos de construir la cadena causal desde la solución</h2>
+    <p>El vicio de partir de una intervención ya decidida y armar la cadena de resultados hacia atrás. Caso anemia + caso extorsión y sicariato (normas oficiales 2025-2026).</p>
+  </a>
+
+  <footer>Taller PpR · EGPP-PUCP · Juan Pablo Silva Macher</footer>
+</div>
+</body>
+</html>
