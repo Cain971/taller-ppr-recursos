@@ -1231,6 +1231,13 @@
     if (!document.fullscreenElement && presenting) exitPresent();
   });
 
+  document.addEventListener('click', function(e){
+    if (!presenting) return;
+    if (e.target.closest('a, #present-btn')) return;
+    var isLeft = e.clientX < window.innerWidth / 3;
+    if (isLeft){ showSlide(idx - 1); } else { showSlide(idx + 1); }
+  });
+
   var btn = document.getElementById('present-btn');
   if (btn) btn.addEventListener('click', enterPresent);
 })();
