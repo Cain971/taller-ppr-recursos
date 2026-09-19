@@ -1,0 +1,1237 @@
+<title>Cuentas Claras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEEFE9;
+    --paper-raise:#F7F7F2;
+    --ink:#14181B;
+    --ink-soft:#52585B;
+    --ink-faint:#8B9089;
+    --line:#D6D7CE;
+    --accent:#A1712A;
+    --accent-ink:#5C4013;
+    --accent-soft:#E7D6AE;
+    --good:#12805F;
+    --good-soft:#D6E9E1;
+    --critical:#AC3A2C;
+    --critical-soft:#F0DAD3;
+    --phase-open:var(--ink-soft);
+    --phase-method:#3C6E8F;
+    --phase-frame:#7A4F6B;
+    --phase-work:#9C5B3C;
+    --shadow: 0 1px 2px rgba(20,24,27,.06), 0 8px 24px rgba(20,24,27,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14171A;
+      --paper-raise:#1B1F22;
+      --ink:#EDEEE8;
+      --ink-soft:#A9AEA3;
+      --ink-faint:#6D7268;
+      --line:#2C302B;
+      --accent:#B8863A;
+      --accent-ink:#F2DDB2;
+      --accent-soft:#3B3121;
+      --good:#2F9A7C;
+      --good-soft:#1E332E;
+      --critical:#D9654C;
+      --critical-soft:#3A2420;
+      --phase-open:var(--ink-soft);
+      --phase-method:#7FB0CC;
+      --phase-frame:#C99BB8;
+      --phase-work:#D99B78;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14171A;
+    --paper-raise:#1B1F22;
+    --ink:#EDEEE8;
+    --ink-soft:#A9AEA3;
+    --ink-faint:#6D7268;
+    --line:#2C302B;
+    --accent:#B8863A;
+    --accent-ink:#F2DDB2;
+    --accent-soft:#3B3121;
+    --good:#2F9A7C;
+    --good-soft:#1E332E;
+    --critical:#D9654C;
+    --critical-soft:#3A2420;
+    --phase-open:var(--ink-soft);
+    --phase-method:#7FB0CC;
+    --phase-frame:#C99BB8;
+    --phase-work:#D99B78;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.45);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Archivo',system-ui,sans-serif;
+    padding-inline:16px;
+    padding-block:32px;
+  }
+  svg{ max-width:100%; height:auto; display:block; }
+  .deck-head{
+    max-width:1280px;
+    margin:0 auto 28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 24px;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:1px solid var(--line);
+    padding-bottom:16px;
+  }
+  .deck-head h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    margin:0;
+    letter-spacing:.01em;
+  }
+  .deck-head p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:.9rem;
+  }
+  .deck{
+    max-width:1280px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+  .slide{
+    container-type:inline-size;
+    position:relative;
+    background:var(--paper-raise);
+    border:1px solid var(--line);
+    border-left:5px solid var(--phase, var(--line));
+    border-radius:6px;
+    box-shadow:var(--shadow);
+    aspect-ratio:16/9;
+    width:100%;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide-pad{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    padding:5.4cqw 6cqw 8.6cqw 6cqw;
+    min-height:0;
+  }
+  .source-note{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(.52rem,1.02cqw,.68rem);
+    color:var(--ink-faint);
+    line-height:1.35;
+    margin-top:auto;
+    padding-top:.6em;
+    max-width:72ch;
+  }
+  .source-note.warn{ color:var(--critical); }
+  .takeaway{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(1.05rem,2.7cqw,1.7rem);
+    line-height:1.28;
+    color:var(--ink);
+    margin-top:auto;
+    padding-top:.5em;
+    padding-left:.85em;
+    border-left:4px solid var(--phase, var(--accent));
+    max-width:48ch;
+  }
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:clamp(.6rem,1.35cqw,.85rem);
+    color:var(--phase, var(--accent));
+    display:flex;
+    align-items:center;
+    gap:.6em;
+  }
+  .kicker::before{
+    content:"";
+    width:1.6em;
+    height:2px;
+    background:var(--phase, var(--accent));
+    display:inline-block;
+  }
+  .kicker .sub{ color:var(--ink-faint); font-weight:400; letter-spacing:.1em; }
+  .slide-foot{
+    position:absolute;
+    right:6cqw;
+    bottom:4cqw;
+    font-family:'IBM Plex Mono',monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:clamp(.6rem,1.2cqw,.8rem);
+    color:var(--ink-faint);
+  }
+  .logo{
+    position:absolute;
+    left:6cqw;
+    bottom:4.2cqw;
+    height:2.3cqw;
+    width:11cqw;
+    max-width:150px;
+    opacity:1;
+    background-image:url("data:image/png;base64,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");
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-size:contain;
+  }
+  .cover-logo{
+    height:3.2cqw;
+    width:16cqw;
+    max-width:220px;
+    margin-bottom:.3em;
+    background-image:url("data:image/png;base64,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");
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-size:contain;
+  }
+  .slide-title{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    text-wrap:balance;
+    font-size:clamp(1.4rem,4.4cqw,3.1rem);
+    line-height:1.06;
+    margin:.5em 0 0;
+    max-width:22ch;
+  }
+  .body-text{
+    font-size:clamp(.78rem,1.75cqw,1.15rem);
+    line-height:1.5;
+    color:var(--ink);
+    max-width:62ch;
+  }
+  .body-text b{ color:var(--ink); font-weight:600; }
+  ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6em; }
+  ul.plain li{
+    font-size:clamp(.78rem,1.75cqw,1.1rem);
+    line-height:1.4;
+    padding-left:1.4em;
+    position:relative;
+    max-width:56ch;
+  }
+  ul.plain li::before{
+    content:"";
+    position:absolute; left:0; top:.55em;
+    width:.5em; height:.5em; border-radius:50%;
+    background:var(--phase, var(--accent));
+  }
+
+  /* ---- Cover ---- */
+  .cover{ justify-content:center; align-items:flex-start; gap:1.1em; }
+  .cover .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase; letter-spacing:.16em;
+    font-size:clamp(.65rem,1.4cqw,.9rem);
+    color:var(--accent);
+  }
+  .cover h1{
+    font-family:'Fraunces',serif; font-weight:700;
+    font-size:clamp(2rem,7.2cqw,4.6rem);
+    line-height:1.02; margin:0; text-wrap:balance; max-width:16ch;
+  }
+  .cover h2{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:400;
+    color:var(--ink-soft);
+    font-size:clamp(1rem,2.6cqw,1.7rem);
+    margin:.45em 0 0; max-width:34ch;
+  }
+  .cover img.cover-logo{ height:3.2cqw; width:auto; margin-bottom:.3em; }
+  .cover .meta{
+    margin-top:auto;
+    display:flex; gap:2em; flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(.62rem,1.3cqw,.85rem);
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+    padding-top:1em; width:100%;
+  }
+  .cover .meta strong{ color:var(--ink); display:block; font-family:'Archivo',sans-serif; font-weight:600; font-size:1.1em; }
+
+  /* ---- Tiles (grupales/entregas) ---- */
+  .tiles{ display:grid; grid-template-columns:repeat(2,1fr); gap:1cqw; margin-top:auto; }
+  .tile{ background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:2cqw 2.2cqw; display:flex; flex-direction:column; gap:.4em; }
+  .tile .pct{ font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.6rem,5cqw,3rem); color:var(--accent); line-height:1; }
+  .tile .label{ font-size:clamp(.68rem,1.5cqw,.95rem); font-weight:600; }
+  .tile .desc{ font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft); line-height:1.35; }
+
+  /* ---- Big number stat tiles (brechas) ---- */
+  .stat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1cqw; flex:1; align-items:stretch; margin-top:1em; }
+  .stat{ background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:1.6cqw 1.5cqw; display:flex; flex-direction:column; gap:.5em; }
+  .stat .sector{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.08em; font-size:clamp(.55rem,1.1cqw,.72rem); color:var(--ink-faint); }
+  .stat .num{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(1.5rem,4.6cqw,2.7rem); line-height:1; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .stat .num small{ font-family:'Archivo',sans-serif; font-weight:500; font-size:.4em; color:var(--ink-soft);}
+  .stat .note{ font-size:clamp(.6rem,1.25cqw,.82rem); color:var(--ink-soft); line-height:1.35; }
+
+  /* ---- History / quote slide ---- */
+  .quote-slide{ justify-content:center; }
+  .quote-num{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(2.6rem,9cqw,6rem); color:var(--critical); line-height:.95; font-variant-numeric:tabular-nums; }
+  blockquote{ margin:1em 0 0; padding-left:1em; border-left:3px solid var(--phase, var(--accent)); font-family:'Fraunces',serif; font-style:italic; font-size:clamp(.9rem,2.1cqw,1.35rem); line-height:1.4; max-width:56ch; color:var(--ink); }
+  blockquote cite{ display:block; margin-top:.6em; font-style:normal; font-family:'IBM Plex Mono',monospace; font-size:.62em; color:var(--ink-soft); }
+
+  /* ---- data table (reglas fiscales) ---- */
+  table.rules{ border-collapse:collapse; margin-top:1em; width:100%; }
+  table.rules th, table.rules td{ text-align:left; padding:.5em .8em .5em 0; border-bottom:1px solid var(--line); font-size:clamp(.68rem,1.5cqw,.98rem); }
+  table.rules th{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:clamp(.56rem,1.15cqw,.72rem); color:var(--ink-faint); font-weight:500; }
+  table.rules td.num{ font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; }
+  .pill{ display:inline-block; padding:.15em .6em; border-radius:99px; font-family:'IBM Plex Mono',monospace; font-size:.78em; font-weight:500; }
+  .pill.good{ background:var(--good-soft); color:var(--good); }
+  .pill.critical{ background:var(--critical-soft); color:var(--critical); }
+
+  /* ---- two column layout ---- */
+  .cols2{ display:grid; grid-template-columns:1fr 1fr; gap:2cqw; margin-top:1em; flex:1; min-height:0; }
+  .col-card{ border:1px solid var(--line); border-radius:4px; padding:1.8cqw; display:flex; flex-direction:column; gap:.6em; background:var(--paper); }
+  .col-card .tag{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.58rem,1.15cqw,.75rem); text-transform:uppercase; letter-spacing:.08em; color:var(--phase, var(--accent)); }
+  .col-card h3{ font-family:'Fraunces',serif; margin:0; font-size:clamp(1rem,2.4cqw,1.5rem); font-weight:600; }
+  .col-card ul{ margin:0; padding-left:1.1em; font-size:clamp(.66rem,1.4cqw,.92rem); line-height:1.45; display:flex; flex-direction:column; gap:.35em; }
+
+  /* ---- chart cards ---- */
+  .chart-card{ border:1px solid var(--line); border-radius:4px; background:var(--paper); padding:1.4cqw 1.6cqw; display:flex; flex-direction:column; gap:.3em; min-height:0; }
+  .chart-card svg{ width:100%; flex:1; min-height:0; max-width:100%; }
+  .chart-card .chart-label{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.07em; font-size:clamp(.56rem,1.1cqw,.72rem); color:var(--ink-faint); }
+  .chart-bar-label{ font-family:'IBM Plex Mono',monospace; font-size:9px; fill:var(--ink-soft); }
+  .chart-value-label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:13px; fill:var(--ink); }
+
+  /* ---- stat-pair (before/after) ---- */
+  .stat-pair{ display:flex; align-items:center; gap:.6cqw; flex:1; min-width:0; }
+  .stat-pair .sp-tile{ flex:1; min-width:0; background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:1.1cqw .8cqw; display:flex; flex-direction:column; gap:.3em; }
+  .stat-pair .sp-tile .yr{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.5rem,.95cqw,.64rem); color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; }
+  .stat-pair .sp-tile .amt{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(.72rem,1.7cqw,1.05rem); color:var(--critical); white-space:nowrap; }
+  .stat-pair .sp-tile .pct{ font-size:clamp(.54rem,1.05cqw,.72rem); color:var(--ink-soft); white-space:nowrap; }
+  .stat-pair .sp-arrow{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(.7rem,1.5cqw,1rem); color:var(--critical); text-align:center; flex:none; }
+
+  /* ---- pending / divider ---- */
+  .divider{ align-items:center; justify-content:center; }
+  .divider .slide-pad{ align-items:center; text-align:center; justify-content:center; }
+  .divider h2{ font-family:'Fraunces',serif; color:var(--phase,var(--ink)); font-size:clamp(1.6rem,5.6cqw,3.4rem); font-weight:600; margin:.4em 0; text-wrap:balance; max-width:22ch; }
+  .divider p{ color:var(--ink-soft); max-width:56ch; font-size:clamp(.78rem,1.7cqw,1.05rem); line-height:1.5; margin:0 auto; }
+
+  .pending-tag{ display:inline-flex; align-items:center; gap:.5em; font-family:'IBM Plex Mono',monospace; font-size:clamp(.58rem,1.2cqw,.78rem); color:var(--critical); border:1px dashed var(--critical); border-radius:99px; padding:.25em .9em; width:fit-content; margin-bottom:.8em; }
+  .pending-list{ display:flex; flex-direction:column; gap:.9em; margin-top:.6em; }
+  .pending-item{ display:flex; gap:1em; align-items:baseline; border-bottom:1px dotted var(--line); padding-bottom:.7em; }
+  .pending-item .t{ font-weight:600; font-size:clamp(.75rem,1.6cqw,1.05rem); flex:1; }
+  .pending-item .src{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft); white-space:nowrap; }
+
+  a.link{ color:var(--accent); text-decoration:underline; word-break:break-all; font-family:'IBM Plex Mono',monospace; font-size:.85em; }
+
+  @media (max-width:720px){
+    .stat-grid{ grid-template-columns:repeat(2,1fr); }
+    .cols2{ grid-template-columns:1fr; }
+    .tiles{ grid-template-columns:1fr; }
+    .stat-pair{ flex-direction:column; }
+    .slide{ aspect-ratio:auto; min-height:560px; }
+  }
+
+  @media print{
+    :root{
+      --paper:#14171A; --paper-raise:#1B1F22; --ink:#EDEEE8; --ink-soft:#A9AEA3; --ink-faint:#6D7268;
+      --line:#2C302B; --accent:#B8863A; --accent-ink:#F2DDB2; --accent-soft:#3B3121;
+      --good:#2F9A7C; --good-soft:#1E332E; --critical:#D9654C; --critical-soft:#3A2420;
+      --phase-open:var(--ink-soft); --phase-method:#7FB0CC; --phase-frame:#C99BB8; --phase-work:#D99B78;
+    }
+    *{ print-color-adjust:exact !important; -webkit-print-color-adjust:exact !important; }
+    body{ padding:0; background:var(--paper); }
+    .deck-head{ display:none; }
+    .present-btn, .present-hint{ display:none !important; }
+    .deck{ gap:0; max-width:none; }
+    .slide{ box-shadow:none; border:none; border-left:5px solid var(--phase, var(--line)); border-radius:0; break-after:page; aspect-ratio:16/9; width:100%; height:auto; }
+    @page{ size:13.333in 7.5in; margin:0; }
+  }
+
+  /* ---- Modo presentación: pantalla completa, 1 diapositiva, flechas ---- */
+  .present-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    background:var(--accent-soft);
+    border:1px solid var(--accent);
+    border-radius:99px;
+    padding:.5em 1.2em;
+    cursor:pointer;
+    white-space:nowrap;
+    align-self:center;
+  }
+  .present-btn:hover{ background:var(--accent); color:var(--paper); }
+  body.presenting{ background:#000; overflow:hidden; }
+  body.presenting .deck-head{ display:none; }
+  body.presenting .deck{ max-width:none; margin:0; gap:0; }
+  body.presenting .slide{ display:none; }
+  body.presenting .slide.active{
+    display:flex;
+    position:fixed;
+    top:50%; left:50%;
+    width:1280px;
+    height:720px;
+    margin:0;
+    border-radius:0;
+    transform-origin:center center;
+    transform:translate(-50%,-50%) scale(var(--present-scale, 1));
+  }
+  .present-hint{
+    position:fixed; bottom:16px; left:50%; transform:translateX(-50%);
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:#ddd;
+    background:rgba(0,0,0,.6); padding:.4em 1.1em; border-radius:99px;
+    pointer-events:none; opacity:0; transition:opacity .4s; z-index:10;
+  }
+  .present-hint.show{ opacity:1; }
+  @media (max-width:720px){
+    .present-btn{ display:none; }
+  }
+</style>
+
+<div class="deck-head">
+  <h1>Presupuesto Público por Resultados — Día 1</h1>
+  <p>36 slides · Taller EGPP-PUCP, sáb. 19 sep. 2026</p>
+  <button id="present-btn" class="present-btn" type="button">▶ Presentar</button>
+</div>
+
+<div id="present-hint" class="present-hint">← → para avanzar · Esc para salir</div>
+
+<div class="deck">
+
+  <!-- 1 COVER -->
+  <section class="slide cover">
+    <div class="slide-pad" style="justify-content:flex-start; gap:.4em;">
+      <div class="cover-logo" role="img" aria-label="Gobierno y Políticas Públicas, PUCP"></div>
+      <span class="eyebrow">EGPP · Educación Continua PUCP</span>
+      <h1>Presupuesto Público<br>por Resultados</h1>
+      <h2>Diseño y Mejora de Programas Presupuestales</h2>
+      <div class="meta">
+        <span><strong>Sesión 1 – 2</strong>09:00–17:00</span>
+        <span><strong>Sábado 19 sep. 2026</strong>Campus PUCP</span>
+        <span><strong>Juan Pablo Silva Macher</strong>Docente</span>
+      </div>
+    </div>
+    <span class="slide-foot">01 / 36</span>
+  </section>
+
+  <!-- 2 BIENVENIDA -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Apertura</span>
+      <h2 class="slide-title">Bienvenida</h2>
+      <p class="body-text" style="margin-top:1em;">Dos jornadas, cuatro sesiones. Hoy por la mañana: fundamentos y coyuntura fiscal. Hoy por la tarde: diseño de intervenciones orientadas a resultados — y la primera entrega. El próximo sábado: medición del desempeño, evaluación y la propuesta final.</p>
+      <ul class="plain" style="margin-top:1.4em;">
+        <li>El hilo conductor: desde hoy, cada grupo elige un programa presupuestal vigente y lo trabaja las dos jornadas.</li>
+        <li>El objetivo no es aprender teoría — es producir un diagnóstico y una propuesta de mejora reales.</li>
+      </ul>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">02 / 36</span>
+  </section>
+
+  <!-- 3 EVALUACIÓN -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Apertura · Reglas del taller</span>
+      <h2 class="slide-title">Evaluación</h2>
+      <p class="body-text" style="margin-top:.8em;">La evaluación se basa en el trabajo grupal que construyen a lo largo de las 4 sesiones: el diagnóstico y la propuesta de mejora de un programa presupuestal vigente. La Entrega 1 es 100% grupal; la Entrega 2 incluye también una nota individual por tu presentación oral.</p>
+      <div class="tiles">
+        <div class="tile">
+          <span class="pct">40%</span>
+          <span class="label">Entrega 1 · Trabajo Grupal</span>
+          <span class="desc">Diagnóstico del programa. Cierre Sesión 2, sábado 19.</span>
+        </div>
+        <div class="tile">
+          <span class="pct">60%</span>
+          <span class="label">Entrega 2 · Trabajo y Exposición</span>
+          <span class="desc">Propuesta de mejora + presentación oral, con nota individual. Sesión 4, sábado 26.</span>
+        </div>
+      </div>
+      <p style="font-family:'IBM Plex Mono',monospace; font-size:clamp(.6rem,1.3cqw,.82rem); color:var(--ink-soft); margin-top:.9em;">Nota mínima aprobatoria: 11/20 · Ninguna entrega es recuperable</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">03 / 36</span>
+  </section>
+
+  <!-- 4 GRUPOS -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Apertura · Reglas del taller</span>
+      <h2 class="slide-title">Grupos</h2>
+      <p class="body-text" style="margin-top:1em;">Trabajarán en grupos durante las 4 sesiones para diagnosticar y mejorar un programa presupuestal real. El grupo puede combinar participantes de distintos sectores — esa mezcla enriquece el diagnóstico, igual que en la práctica: ningún programa se diseña desde una sola mirada.</p>
+      <p class="body-text" style="margin-top:1em; color:var(--ink-soft);">El grupo y el programa elegidos en la Sesión 1 son la base de las dos entregas.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">04 / 36</span>
+  </section>
+
+  <!-- 5 EL PROGRAMA -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Apertura · Reglas del taller</span>
+      <h2 class="slide-title">El programa que trabajarás</h2>
+      <p class="body-text" style="margin-top:1em; max-width:54ch;">Cada grupo elige, desde la Sesión 1, un programa presupuestal vigente que le interese — no necesariamente del sector de cada integrante.</p>
+      <p class="body-text" style="margin-top:1em; max-width:54ch;"><b>No van a diseñar un programa nuevo ni pedir presupuesto adicional:</b> van a diagnosticarlo con las herramientas del PpR y proponer una mejora concreta, sustentada en evidencia, sobre ese mismo programa.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">05 / 36</span>
+  </section>
+
+  <!-- 6 OBJETIVOS -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Apertura · Reglas del taller</span>
+      <h2 class="slide-title">Objetivos del trabajo</h2>
+      <ul class="plain" style="margin-top:1.3em;">
+        <li>Diagnosticar el problema público detrás de tu programa (condición de interés), con evidencia.</li>
+        <li>Construir la cadena de resultados y detectar su eslabón más frágil.</li>
+        <li>Evaluar los indicadores actuales del programa y proponer mejores.</li>
+        <li>Formular una propuesta de mejora sustentada en evidencia.</li>
+      </ul>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">06 / 36</span>
+  </section>
+
+  <!-- 7 SELECCIÓN DE PROGRAMA -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Apertura · Reglas del taller</span>
+      <h2 class="slide-title">Selección de programa</h2>
+      <p class="body-text" style="margin-top:1em;">Criterios para elegir tu programa:</p>
+      <ul class="plain" style="margin-top:1em;">
+        <li>Vigente — que exista hoy en el presupuesto, no uno hipotético.</li>
+        <li>Con información cuantitativa disponible sobre el problema (Consulta Amigable, portal de indicadores MEF).</li>
+        <li>Que le interese al grupo.</li>
+      </ul>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">07 / 36</span>
+  </section>
+
+  <!-- 8 ENTREGABLES -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Apertura · Reglas del taller</span>
+      <h2 class="slide-title" style="font-size:clamp(1.3rem,3.6cqw,2.4rem);">Entregables</h2>
+      <div class="cols2">
+        <div class="col-card">
+          <span class="tag">Día 1 · Cierre Sesión 2, 17:00 · 40% grupal</span>
+          <h3>Entrega 1</h3>
+          <ul>
+            <li>Condición de interés: el problema, con dato de magnitud y fuente.</li>
+            <li>Cadena de resultados: insumos → actividades → productos → resultados → impacto.</li>
+            <li>El supuesto más frágil de tu cadena.</li>
+            <li>Una pregunta de evidencia que tu programa no responde bien.</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <span class="tag">Día 2 · Sesión 4 · 60% grupal + individual</span>
+          <h3>Entrega 2</h3>
+          <ul>
+            <li>Evaluación crítica de 2 indicadores actuales.</li>
+            <li>2 indicadores mejorados (nombre, fórmula, fuente, frecuencia).</li>
+            <li>Propuesta de mejora al diseño, basada en evidencia.</li>
+            <li>Tipo de evaluación recomendado y su pregunta central.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">08 / 36</span>
+  </section>
+
+  <!-- 9 ANEXO 2 -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Apertura · Reglas del taller</span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.2rem);">Estructura del trabajo — Anexo 2</h2>
+      <p class="body-text" style="margin-top:1em;">El <b>Anexo II</b> de la Directiva N.º 0001-2026-EF/50.01 define el contenido mínimo de un Programa Presupuestal. Tu Entrega 1 cubre su primera sección:</p>
+      <p class="body-text" style="margin-top:.8em; font-family:'Fraunces',serif; font-style:italic;">I. Condición de Interés — I.1 Descripción · I.2 Relevancia · I.3 Indicador</p>
+      <p class="body-text" style="margin-top:1em; color:var(--ink-soft);">No necesitas llenar el Anexo completo — solo esa parte, en tu propio lenguaje.</p>
+      <a class="link" href="#" style="margin-top:1.2em;">drive.google.com/…/Directiva-0001-2026-EF-50.01_Anexos-I-II-III.pdf</a>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">09 / 36</span>
+  </section>
+
+  <!-- 10A BRECHAS — PREDICCIÓN -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Problema de fondo</span>
+      <div class="pending-tag" style="border-color:var(--accent); color:var(--accent-ink);">● antes de ver las cifras…</div>
+      <h2 class="slide-title" style="font-size:clamp(1.3rem,3.6cqw,2.3rem);">¿Qué % creen que hay en cada uno?</h2>
+      <div class="stat-grid">
+        <div class="stat">
+          <span class="sector">Pobreza · zona rural</span>
+          <span class="num">?</span>
+        </div>
+        <div class="stat">
+          <span class="sector">Salud · Anemia infantil rural</span>
+          <span class="num">?</span>
+        </div>
+        <div class="stat">
+          <span class="sector">Educación · nivel Satisfactorio en Lectura</span>
+          <span class="num">?</span>
+        </div>
+        <div class="stat">
+          <span class="sector">Seguridad · percepción de victimización</span>
+          <span class="num">?</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">10 / 36</span>
+  </section>
+
+  <!-- 10B BRECHAS -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Problema de fondo</span>
+      <h2 class="slide-title" style="font-size:clamp(1.3rem,3.6cqw,2.3rem);">Pese al gasto, persisten las brechas</h2>
+      <div class="stat-grid">
+        <div class="stat">
+          <span class="sector">Pobreza · zona rural</span>
+          <span class="num">35,5<small>%</small></span>
+          <span class="note">de la población rural en 2025 (25,7% a nivel nacional). INEI.</span>
+        </div>
+        <div class="stat">
+          <span class="sector">Salud · Anemia infantil rural</span>
+          <span class="num">43,2<small>%</small></span>
+          <span class="note">niños de 6-35 meses en zona rural, 2025 (34,9% nacional). INEI-ENDES.</span>
+        </div>
+        <div class="stat">
+          <span class="sector">Educación</span>
+          <span class="num">32,8<small>%</small></span>
+          <span class="note">4.º primaria con nivel Satisfactorio en Lectura (29,5% en Matemática). ENLA 2024, MINEDU.</span>
+        </div>
+        <div class="stat">
+          <span class="sector">Seguridad · percepción</span>
+          <span class="num">86,1<small>%</small></span>
+          <span class="note">percibe que puede ser víctima de un delito (27,7% ya lo fue en 6 meses). INEI.</span>
+        </div>
+      </div>
+      <p class="source-note">Fuentes: INEI, "Perú: Evolución de la Pobreza Monetaria, 2016-2025" · INEI-ENDES, nota de prensa 2025 (anemia) · MINEDU-UMC, ENLA 2024 · INEI, semestre móvil ene-jun 2024 (seguridad, vía El Peruano). Búsqueda 2026-09-19 — ver <span style="font-style:normal;">ppr/datos/brechas-resultados-e-hiperinflacion-1990.md</span>.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">11 / 36</span>
+  </section>
+
+  <!-- 11 TRANSICIÓN -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Problema de fondo</span>
+      <h2 class="slide-title" style="font-size:clamp(1.4rem,4cqw,2.6rem);">¿De dónde sale el margen para cerrar estas brechas?</h2>
+      <p class="body-text" style="margin-top:1.1em; max-width:56ch;">Cerrar estas brechas exige gasto sostenido en el tiempo — no un impulso de un año. Pero el espacio fiscal no es ilimitado, y la historia peruana ya mostró qué pasa cuando se ignora ese límite.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">12 / 36</span>
+  </section>
+
+  <!-- 12A HIPERINFLACIÓN — PREDICCIÓN -->
+  <section class="slide quote-slide" style="--phase:var(--accent);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Problema de fondo <span class="sub">· Equilibrio macrofiscal</span></span>
+      <div class="pending-tag" style="border-color:var(--accent); color:var(--accent-ink);">● antes de ver la cifra…</div>
+      <h2 class="slide-title" style="font-size:clamp(1.3rem,3.6cqw,2.2rem);">¿Qué tan alta creen que fue la inflación anual en 1990?</h2>
+      <p class="body-text" style="margin-top:.6em; max-width:56ch; color:var(--ink-soft);">Bajo el primer gobierno de Alan García, el déficit fiscal se financió emitiendo dinero.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">13 / 36</span>
+  </section>
+
+  <!-- 12B HIPERINFLACIÓN -->
+  <section class="slide quote-slide" style="--phase:var(--accent);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Problema de fondo <span class="sub">· Equilibrio macrofiscal</span></span>
+      <div class="quote-num" style="margin-top:.3em;">7 650%</div>
+      <p class="body-text" style="margin-top:.5em; max-width:56ch;"><b>Inflación anual de 1990.</b> Bajo el primer gobierno de Alan García, el déficit fiscal se financió emitiendo dinero. El resultado: colapso de servicios públicos, salarios pulverizados, pobreza extrema.</p>
+      <p class="body-text" style="margin-top:1.1em; color:var(--ink-soft); font-family:'Fraunces',serif; font-style:italic; font-size:clamp(.85rem,1.9cqw,1.2rem);">Perú ya vivió el costo de perder el control fiscal.</p>
+      <p class="source-note">Fuente: BCRP, Memoria Anual 1990 — verificada contra el documento primario (2026-09-19).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">14 / 36</span>
+  </section>
+
+  <!-- 13 BCRP -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Problema de fondo <span class="sub">· Equilibrio macrofiscal</span></span>
+      <h2 class="slide-title" style="font-size:clamp(1.3rem,3.6cqw,2.4rem);">Por eso el Banco Central es autónomo</h2>
+      <blockquote>
+        "El Banco [Central de Reserva] está prohibido de conceder financiamiento al erario, salvo la compra, en el mercado secundario, de valores emitidos por el Tesoro Público, dentro del límite que señala su Ley Orgánica."
+        <cite>Constitución Política del Perú, 1993 — Art. 84</cite>
+      </blockquote>
+      <p class="takeaway">Gastar más de lo que podemos sostener como país nos perjudica a todos.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">15 / 36</span>
+  </section>
+
+  <!-- 14 REGLAS FISCALES -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Problema de fondo <span class="sub">· Equilibrio macrofiscal</span></span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.2cqw,1.9rem);">Las reglas fiscales de hoy</h2>
+      <p class="body-text" style="margin-top:.4em;">Para no repetir la historia, Perú fija límites sobre el déficit y la deuda. Senda vigente (Decreto Legislativo N.º 1621, 2024):</p>
+      <div class="cols2" style="align-items:stretch; margin-top:.7em;">
+        <div class="chart-card">
+          <span class="chart-label">Déficit y deuda — metas numéricas</span>
+          <table class="rules" style="margin-top:.3em;">
+            <thead><tr><th></th><th>2025</th><th>2026</th><th>2027</th><th>2028–30</th></tr></thead>
+            <tbody>
+              <tr><td>Déficit fiscal (% PBI)</td><td class="num">2,2</td><td class="num">1,8</td><td class="num">1,4</td><td class="num">→ 1,0</td></tr>
+              <tr><td>Deuda pública (% PBI)</td><td class="num">31*</td><td class="num">29,3</td><td class="num">29,3</td><td class="num">→ 27,7</td></tr>
+            </tbody>
+          </table>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:clamp(.5rem,1cqw,.65rem); color:var(--ink-faint); margin-top:.6em;">*2025 preliminar (Consejo Fiscal) · límite legal de deuda: 38% del PBI</span>
+        </div>
+        <div class="chart-card">
+          <span class="chart-label">Reglas de gasto — atadas al crecimiento del PBI</span>
+          <div style="font-size:clamp(.68rem,1.5cqw,.98rem); color:var(--ink-soft); line-height:1.4; margin-top:.3em; display:flex; flex-direction:column; gap:.6em;">
+            <div>
+              <b style="color:var(--ink);">Gasto no financiero:</b> no puede crecer (en términos reales) más que el límite superior del rango ±1 p.p. del promedio de 20 años de crecimiento real del PBI.<br>
+              <span class="pill critical" style="margin-top:.3em;">2025: 3,5% real (permitido 0,7%)</span>
+            </div>
+            <div>
+              <b style="color:var(--ink);">Gasto corriente:</b> no puede crecer más que el límite inferior de esa misma regla, y en ningún caso más que su propia tasa de crecimiento.<br>
+              <span class="pill critical" style="margin-top:.3em;">2025: 4,8% real (permitido 2,1%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="source-note">Déficit y deuda: MEF, Exposición de Motivos — Ley de Presupuesto 2027; Decreto Legislativo N.º 1621 (2024). Reglas de gasto y cifras 2025: Decreto Legislativo N.º 1276; Consejo Fiscal, Comunicado N.º 01-2026-CF. 2026-2030 de las reglas de gasto: no disponible — el límite depende del PBI real de cada año, aún no conocido.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">16 / 36</span>
+  </section>
+
+  <!-- 15 CONSEJO FISCAL -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Problema de fondo <span class="sub">· ¿Se cumple?</span></span>
+      <h2 class="slide-title" style="font-size:clamp(1.3rem,3.6cqw,2.3rem);">¿Se están cumpliendo?</h2>
+      <blockquote style="margin-top:.6em;">
+        "No se habían registrado tres años consecutivos de incumplimiento conjunto de las reglas fiscales (2023, 2024 y 2025)… hecho sin precedentes… desde inicios de la década del 2000."
+        <cite>Consejo Fiscal del Perú, Comunicado N.º 01-2026-CF (29-ene-2026)</cite>
+      </blockquote>
+      <div class="cols2" style="margin-top:1em; flex:none;">
+        <div class="col-card" style="border-color:var(--good); background:var(--good-soft);">
+          <span class="pill good" style="background:transparent; padding:0;">✓ Déficit fiscal 2025</span>
+          <span style="font-family:'Fraunces',serif; font-weight:700; font-size:clamp(1rem,2.6cqw,1.6rem);">2,2% del PBI</span>
+          <span style="font-size:clamp(.62rem,1.3cqw,.85rem); color:var(--ink-soft);">Cumplido — pero por ingresos extraordinarios de commodities que probablemente no se repitan.</span>
+        </div>
+        <div class="col-card" style="border-color:var(--critical); background:var(--critical-soft);">
+          <span class="pill critical" style="background:transparent; padding:0;">✕ Reglas de gasto 2025</span>
+          <span style="font-size:clamp(.66rem,1.4cqw,.92rem); line-height:1.5;">Gasto no financiero: <b>+S/ 6 600 M</b> sobre el límite (creció 3,5% real vs. 0,7% permitido)<br>Gasto corriente: <b>+S/ 4 100 M</b> sobre el límite (4,8% real vs. 2,1% permitido)</span>
+        </div>
+      </div>
+      <p class="source-note">Fuente: Consejo Fiscal del Perú, Comunicado N.º 01-2026-CF (29-ene-2026).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">17 / 36</span>
+  </section>
+
+  <!-- 16A CONGRESO — PREDICCIÓN -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Problema de fondo <span class="sub">· ¿Se cumple?</span></span>
+      <div class="pending-tag" style="border-color:var(--accent); color:var(--accent-ink);">● antes de ver las cifras…</div>
+      <h2 class="slide-title" style="font-size:clamp(1.1rem,3cqw,1.85rem);">La presión viene del Congreso — ¿cuánto más?</h2>
+      <div class="cols2" style="margin-top:.5em;">
+        <div class="chart-card">
+          <span class="chart-label">Leyes con impacto fiscal adverso — el promedio histórico (2006-2021) es 64/año. ¿2021-2026?</span>
+          <svg viewBox="0 0 340 140" preserveAspectRatio="xMidYMid meet" role="img" aria-label="64 leyes en promedio 2006-2021; cifra 2021-2026 por adivinar">
+            <line x1="15" y1="110" x2="325" y2="110" stroke="var(--line)" stroke-width="1"/>
+            <rect x="80" y="89" width="60" height="21" rx="3" fill="var(--critical)"/>
+            <text x="110" y="81" text-anchor="middle" class="chart-value-label">64</text>
+            <text x="110" y="126" text-anchor="middle" class="chart-bar-label">Prom. 2006–21</text>
+
+            <text x="230" y="70" text-anchor="middle" class="chart-value-label" style="font-size:22px;">?</text>
+            <text x="230" y="126" text-anchor="middle" class="chart-bar-label">2021–2026</text>
+          </svg>
+        </div>
+        <div class="chart-card">
+          <span class="chart-label">Costo de medidas de remuneraciones y pensiones</span>
+          <div class="stat-pair" style="margin-top:.5em;">
+            <div class="sp-tile">
+              <span class="yr">2022</span>
+              <span class="amt">S/ 3 000 M</span>
+              <span class="pct">0,3% del PBI</span>
+            </div>
+            <span class="sp-arrow">→</span>
+            <div class="sp-tile">
+              <span class="yr">2027 (proy.)</span>
+              <span class="amt">?</span>
+              <span class="pct">&nbsp;</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">18 / 36</span>
+  </section>
+
+  <!-- 16B INICIATIVA DE GASTO DEL CONGRESO -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Problema de fondo <span class="sub">· ¿Se cumple?</span></span>
+      <h2 class="slide-title" style="font-size:clamp(1.1rem,3cqw,1.85rem);">La presión viene del Congreso</h2>
+      <div class="cols2" style="margin-top:.5em;">
+        <div class="chart-card">
+          <span class="chart-label">Leyes con impacto fiscal adverso — ≈4× el promedio histórico</span>
+          <svg viewBox="0 0 340 140" preserveAspectRatio="xMidYMid meet" role="img" aria-label="64 leyes en promedio 2006-2021, frente a 248 leyes en 2021-2026">
+            <line x1="15" y1="110" x2="325" y2="110" stroke="var(--line)" stroke-width="1"/>
+            <rect x="80" y="89" width="60" height="21" rx="3" fill="var(--critical)"/>
+            <text x="110" y="81" text-anchor="middle" class="chart-value-label">64</text>
+            <text x="110" y="126" text-anchor="middle" class="chart-bar-label">Prom. 2006–21</text>
+
+            <rect x="200" y="30" width="60" height="80" rx="3" fill="var(--critical)"/>
+            <text x="230" y="22" text-anchor="middle" class="chart-value-label">248</text>
+            <text x="230" y="126" text-anchor="middle" class="chart-bar-label">2021–2026</text>
+          </svg>
+        </div>
+        <div class="chart-card">
+          <span class="chart-label">Costo de medidas de remuneraciones y pensiones</span>
+          <div class="stat-pair" style="margin-top:.5em;">
+            <div class="sp-tile">
+              <span class="yr">2022</span>
+              <span class="amt">S/ 3 000 M</span>
+              <span class="pct">0,3% del PBI</span>
+            </div>
+            <span class="sp-arrow">→</span>
+            <div class="sp-tile">
+              <span class="yr">2027 (proy.)</span>
+              <span class="amt">S/ 50 000 M</span>
+              <span class="pct">3,5% del PBI</span>
+            </div>
+          </div>
+          <ul style="margin:.5em 0 0; padding-left:1.05em; font-size:clamp(.48rem,.95cqw,.6rem); color:var(--ink-soft); line-height:1.35; display:flex; flex-direction:column; gap:.15em;">
+            <li>Nivelación pensiones docentes — S/ 8 000 M/año</li>
+            <li>Régimen pensionario militar-policial (DL 1133) — S/ 14 800-15 000 M (valor presente)</li>
+            <li>Beneficios CAS — S/ 3 000 M/año</li>
+          </ul>
+        </div>
+      </div>
+      <p class="source-note">Leyes y proyección de costo: MEF, Exposición de Motivos — Ley de Presupuesto del Sector Público 2027 (2026). Detalle de normas: Consejo Fiscal, Comunicado N.º 02-2026-CF (26-mar-2026).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">19 / 36</span>
+  </section>
+
+  <!-- 17 PRESUPUESTO 2027 VS BRECHAS -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">De insumos a resultados</span>
+      <h2 class="slide-title" style="font-size:clamp(1.3rem,3.6cqw,2.3rem);">Más presupuesto no es lo mismo que mejores resultados</h2>
+      <p class="body-text" style="margin-top:1em;">El Presupuesto 2027 propuesto es de <b>S/ 266 506 millones</b> — sigue creciendo. Pero las brechas no cierran al mismo ritmo: <b>35,5%</b> de pobreza rural, <b>43,2%</b> de anemia infantil rural (vistas hoy en la apertura).</p>
+      <p class="source-note">Fuente: MEF, Exposición de Motivos — Ley de Presupuesto del Sector Público 2027 (2026); INEI/INEI-ENDES 2025 (ver slide 10).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">20 / 36</span>
+  </section>
+
+  <!-- 18 EL CÍRCULO QUE SE ROMPE + LÓGICA POR INSUMOS -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">De insumos a resultados</span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.2cqw,1.9rem);">El círculo que se rompe</h2>
+      <div style="display:flex; align-items:center; flex-wrap:wrap; gap:.5em; margin-top:.8em; font-size:clamp(.62rem,1.3cqw,.85rem);">
+        <span class="pill" style="background:var(--paper); border:1px solid var(--line);">Ciudadanos generan ingresos</span>
+        <span style="color:var(--ink-faint);">→</span>
+        <span class="pill" style="background:var(--paper); border:1px solid var(--line);">Pagan impuestos</span>
+        <span style="color:var(--ink-faint);">→</span>
+        <span class="pill" style="background:var(--paper); border:1px solid var(--line);">Financian el presupuesto público</span>
+        <span style="color:var(--ink-faint);">→</span>
+        <span class="pill critical">¿Mejores servicios?</span>
+      </div>
+      <div class="cols2" style="margin-top:1em; flex:none;">
+        <div class="col-card">
+          <span class="tag" style="color:var(--critical);">Nos preocupamos por…</span>
+          <ul style="margin:0; padding-left:1.1em; font-size:clamp(.66rem,1.4cqw,.9rem); line-height:1.5;">
+            <li>Construir colegios y hospitales</li>
+            <li>Comprar patrulleros</li>
+            <li>Contratar enfermeras</li>
+          </ul>
+        </div>
+        <div class="col-card" style="border-color:var(--good);">
+          <span class="tag" style="color:var(--good);">En vez de preguntarnos por…</span>
+          <ul style="margin:0; padding-left:1.1em; font-size:clamp(.66rem,1.4cqw,.9rem); line-height:1.5;">
+            <li>Aprendizajes de los estudiantes</li>
+            <li>Reducir la mortalidad materna</li>
+            <li>Mejorar la seguridad ciudadana</li>
+          </ul>
+        </div>
+      </div>
+      <p class="takeaway">La lógica por insumos nos sitúa lejos de mejorar las condiciones de vida del ciudadano.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">21 / 36</span>
+  </section>
+
+  <!-- 19A EL CASO DEL ASCENSOR — PREDICCIÓN -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">De insumos a resultados</span>
+      <div class="pending-tag">● antes de ver la solución…</div>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">El caso del ascensor</h2>
+      <p class="body-text" style="margin-top:.7em;">Administras un edificio de oficinas. Tus inquilinos más importantes se quejan: el ascensor es lento, las filas en hora punta son insoportables. Amenazan con irse.</p>
+      <div class="col-card" style="margin-top:.8em; max-width:56ch;">
+        <span class="tag" style="color:var(--critical);">Primera reacción</span>
+        <p style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El ascensor es muy lento" → cambiarlo, o potenciar el motor. Caro. Lento de implementar.</p>
+      </div>
+      <p class="takeaway">¿Cómo redefinirían el problema?</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">22 / 36</span>
+  </section>
+
+  <!-- 19B EL CASO DEL ASCENSOR -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">De insumos a resultados</span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">El caso del ascensor</h2>
+      <p class="body-text" style="margin-top:.7em;">Administras un edificio de oficinas. Tus inquilinos más importantes se quejan: el ascensor es lento, las filas en hora punta son insoportables. Amenazan con irse.</p>
+      <div class="cols2" style="margin-top:.8em; flex:none;">
+        <div class="col-card">
+          <span class="tag" style="color:var(--critical);">Primera reacción</span>
+          <p style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El ascensor es muy lento" → cambiarlo, o potenciar el motor. Caro. Lento de implementar.</p>
+        </div>
+        <div class="col-card" style="border-color:var(--good);">
+          <span class="tag" style="color:var(--good);">Redefiniendo el problema</span>
+          <p style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El tiempo de espera se siente largo" → pon espejos, pon música. Rápido. Barato. Resuelve lo que en verdad molestaba.</p>
+        </div>
+      </div>
+      <p class="takeaway">No podemos resolver un problema hasta que no lo hayamos entendido.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">23 / 36</span>
+  </section>
+
+  <!-- 20A NADA SE MEJORA SI NO SE MIDE — PREDICCIÓN -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">De insumos a resultados</span>
+      <div class="pending-tag">● antes de ver la lista…</div>
+      <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">¿Qué preguntas harían ustedes?</h2>
+      <p class="body-text" style="margin-top:.7em;">"Queremos mejorar la seguridad ciudadana" — ya vimos que el 86,1% percibe que puede ser víctima de un delito (apertura de hoy). Antes de ver mi lista: ¿qué preguntas de diagnóstico harían ustedes?</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">24 / 36</span>
+  </section>
+
+  <!-- 20B NADA SE MEJORA SI NO SE MIDE -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">De insumos a resultados</span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">Nada se mejora si no se mide</h2>
+      <p class="body-text" style="margin-top:.7em;">"Queremos mejorar la seguridad ciudadana" — ya vimos que el 86,1% percibe que puede ser víctima de un delito (apertura de hoy). Preguntas que sí permiten actuar:</p>
+      <ul class="plain" style="margin-top:.8em;">
+        <li>¿Cuál es la tasa de criminalidad por región y cómo cambió en 5 años?</li>
+        <li>¿Qué % de denuncias se resuelven?</li>
+        <li>¿Cómo varía la percepción de seguridad entre regiones?</li>
+        <li>¿Cuál es la tasa de reincidencia delictiva?</li>
+      </ul>
+      <p class="takeaway">Nada puede ser mejorado si no es medido.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">25 / 36</span>
+  </section>
+
+  <!-- 21 SNPP: ÁMBITO INSTITUCIONAL -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">SNPP</span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">¿Quién hace qué en el presupuesto?</h2>
+      <ul class="plain" style="margin-top:1em;">
+        <li><b>DGPP</b> — ente rector del SNPP, máxima autoridad técnico-normativa.</li>
+        <li><b>Titular de la entidad</b> — responsable de la gestión presupuestaria en todas sus fases.</li>
+        <li><b>Oficina de presupuesto</b> — conduce el proceso presupuestario de la entidad.</li>
+        <li><b>Unidad ejecutora</b> — administra los ingresos y gastos públicos.</li>
+        <li><b>Responsable de Programa Presupuestal</b> — gestión estratégica y operativa del PP.</li>
+      </ul>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">26 / 36</span>
+  </section>
+
+  <!-- 22 CLASIFICADOR DE GASTO -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">SNPP</span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">Clasificador de gasto: 3 preguntas</h2>
+      <div class="cols2" style="flex:none; margin-top:1em;">
+        <div class="col-card"><span class="tag">¿Quién gasta?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Institucional</h3><p style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Sector → Pliego → Unidad Ejecutora</p></div>
+        <div class="col-card"><span class="tag">¿En qué se gasta?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Funcional</h3><p style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Función → División funcional → Grupo funcional</p></div>
+      </div>
+      <div class="cols2" style="flex:none; margin-top:1em;">
+        <div class="col-card"><span class="tag">¿Para qué resultado?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Programático</h3><p style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Categoría presupuestal → Producto/Proyecto → Actividad</p></div>
+        <div class="col-card"><span class="tag">¿Cómo y dónde?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Económico / Geográfico</h3><p style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Genérica → Subgenérica → Específica · Departamento</p></div>
+      </div>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">27 / 36</span>
+  </section>
+
+  <!-- 23 PROGRAMAS PRESUPUESTALES Y CENTROS DE COSTO -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">SNPP</span>
+      <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">Programas Presupuestales y Centros de Costos</h2>
+      <p class="body-text" style="margin-top:1em;"><b>Programa Presupuestal (PP):</b> unidad de programación que integra las acciones de los pliegos para proveer productos y lograr resultados. Dos tipos: <b>PPoR</b> (multisectorial) y <b>PPI</b> (institucional).</p>
+      <p class="body-text" style="margin-top:1em;"><b>Centros de Costos:</b> unidades que consolidan los costos de la provisión de bienes y servicios públicos y de los procesos de soporte.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">28 / 36</span>
+  </section>
+
+  <!-- 24 FASES DEL PROCESO PRESUPUESTARIO -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">SNPP</span>
+      <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">Las 5 fases del proceso presupuestario</h2>
+      <div style="display:flex; flex-wrap:wrap; gap:.8em; margin-top:1.2em;">
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">31 may</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Programación</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Asignación Presupuestaria Multianual, 3 años</p></div>
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">30 ago</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Formulación</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Desagregación del primer año de la APM</p></div>
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">31 dic</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Aprobación</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Congreso aprueba → PIA de cada pliego</p></div>
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">Año 2</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Ejecución</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Se perciben ingresos y se atienden obligaciones</p></div>
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">Año 2</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Evaluación</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Análisis del desempeño y del logro de resultados</p></div>
+      </div>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">29 / 36</span>
+  </section>
+
+  <!-- 25 TRIÁNGULO ESTRATÉGICO: 3 VÉRTICES -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">El triángulo estratégico</h2>
+      <div class="cols2" style="flex:none; margin-top:1em; grid-template-columns:1fr 1fr 1fr;">
+        <div class="col-card"><span class="tag">Vértice 1</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Valor público</h3><p style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Qué resultado social justifica la acción?</p></div>
+        <div class="col-card"><span class="tag">Vértice 2</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Legitimidad y consenso</h3><p style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Quién autoriza y sostiene la acción?</p></div>
+        <div class="col-card"><span class="tag">Vértice 3</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Capacidad operativa</h3><p style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Puede el Estado ejecutarla?</p></div>
+      </div>
+      <p class="takeaway">Una política es viable solo cuando los 3 vértices se alinean de forma simultánea y mutuamente reforzada.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">30 / 36</span>
+  </section>
+
+  <!-- 26A CASO OPERATIVO MERCURIO — PREDICCIÓN -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
+      <div class="pending-tag" style="border-color:var(--phase-frame); color:var(--phase-frame);">● antes del análisis…</div>
+      <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">Aplicando el triángulo: Operativo Mercurio (2019)</h2>
+      <p class="body-text" style="margin-top:.3em; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Interdicción de minería ilegal, La Pampa (Madre de Dios), 2019 — 1 200 policías + ~300 militares.</p>
+      <div class="cols2" style="grid-template-columns:1fr 1fr 1fr; flex:none; margin-top:.5em;">
+        <div class="col-card" style="padding:1.2cqw;"><span class="tag">Valor público</span></div>
+        <div class="col-card" style="padding:1.2cqw;"><span class="tag">Legitimidad</span></div>
+        <div class="col-card" style="padding:1.2cqw;"><span class="tag">Capacidad operativa</span></div>
+      </div>
+      <p class="takeaway" style="font-size:clamp(.85rem,2.1cqw,1.3rem); padding-top:.3em;">¿Cada vértice se cumple, o no? ¿Por qué?</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">31 / 36</span>
+  </section>
+
+  <!-- 26B CASO OPERATIVO MERCURIO -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
+      <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">Aplicando el triángulo: Operativo Mercurio (2019)</h2>
+      <p class="body-text" style="margin-top:.3em; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Interdicción de minería ilegal, La Pampa (Madre de Dios), 2019 — 1 200 policías + ~300 militares.</p>
+      <div class="cols2" style="grid-template-columns:1fr 1fr 1fr; flex:none; margin-top:.5em;">
+        <div class="col-card" style="border-color:var(--accent); background:var(--accent-soft); padding:1.2cqw;">
+          <span class="pill" style="background:transparent; padding:0; color:var(--accent-ink);">~ Valor público</span>
+          <p style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Problema real, diseño incompleto: atacó el síntoma, no las causas estructurales (sin alternativas económicas).</p>
+        </div>
+        <div class="col-card" style="border-color:var(--accent); background:var(--accent-soft); padding:1.2cqw;">
+          <span class="pill" style="background:transparent; padding:0; color:var(--accent-ink);">~ Legitimidad</span>
+          <p style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Quienes no viven ahí apoyaron la mano dura. Quienes sí viven ahí, no (bloqueo Interoceánica, tregua 2022).</p>
+        </div>
+        <div class="col-card" style="border-color:var(--good); background:var(--good-soft); padding:1.2cqw;">
+          <span class="pill good" style="background:transparent; padding:0;">✓ Capacidad operativa</span>
+          <p style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Sí podían ejecutar: -92% deforestación en 5 meses. No sostenerlo fue decisión normativa, no falla de ejecución.</p>
+        </div>
+      </div>
+      <p class="takeaway" style="font-size:clamp(.85rem,2.1cqw,1.3rem); padding-top:.3em;">Se pudo ejecutar. Lo que nunca se diseñó fue cómo sostenerlo — y eso no es un problema de capacidad, es un problema de diseño.</p>
+      <p class="source-note">Fuente: Ministerio del Interior/Andina; MAAP #193/ACCA; Ojo Público; Mongabay Latam. Detalle: <span style="font-style:normal;">ppr/casos/operativo-mercurio-2019-triangulo-estrategico.md</span></p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">32 / 36</span>
+  </section>
+
+  <!-- 27 CONDICIÓN DE INTERÉS: DEFINICIÓN -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">La condición de interés</h2>
+      <blockquote style="margin-top:.4em; font-size:clamp(.75rem,1.7cqw,1.05rem);">
+        "Una cualidad o atributo intrínseco o extrínseco de las personas, hogares, organizaciones, comunidades, o de su entorno natural y no natural, sobre la cual se desea incidir por ser de interés al desarrollo sostenible."
+        <cite>Directiva N.º 0001-2026-EF/50.01, Art. 4.a</cite>
+      </blockquote>
+      <p class="body-text" style="margin-top:.7em; font-size:clamp(.66rem,1.4cqw,.88rem); color:var(--ink-soft);">Se documenta en 3 partes — ejemplo con comprensión lectora:</p>
+      <div class="cols2" style="grid-template-columns:1fr 1fr 1fr; flex:none; margin-top:.4em;">
+        <div class="col-card"><span class="tag">Descripción</span><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">Comprensión lectora en 4.º de primaria por debajo del nivel esperado según el currículo nacional.</p></div>
+        <div class="col-card"><span class="tag">Relevancia</span><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">La lectura es la base de todo aprendizaje posterior — sin ella, el resto del currículo se construye sobre una base débil.</p></div>
+        <div class="col-card"><span class="tag">Indicador</span><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">% de estudiantes de 4.º de primaria en nivel Satisfactorio en Lectura (ENLA, MINEDU-UMC).</p></div>
+      </div>
+      <p class="source-note">Ejemplo con datos de la apertura (slide 10): ENLA 2024, MINEDU-UMC.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">33 / 36</span>
+  </section>
+
+  <!-- 28 LOS 4 ELEMENTOS DE MAGNITUD -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
+      <h2 class="slide-title" style="font-size:clamp(.95rem,2.6cqw,1.55rem);">Dimensionar el problema: 4 elementos</h2>
+      <p class="body-text" style="margin-top:.2em; font-size:clamp(.56rem,1.15cqw,.75rem); color:var(--ink-soft);">Ejemplo: % que alcanza el nivel Satisfactorio en Lectura, 4.º de primaria (ENLA-MINEDU).</p>
+      <div class="cols2" style="flex:none; margin-top:.5em;">
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Extensión — ¿cuántos y dónde?</span><p style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">≈423 600 de 630 327 estudiantes (ESCALE 2024) no alcanza el nivel esperado. De 49,4% sin el nivel en Moquegua a 87,2% en Loreto.</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Intensidad — ¿qué tan grave?</span><p style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">De los que no llegan, no todos igual: 39,0% "en proceso" (cerca), pero 3,4% (≈18 100) en "Previo al inicio" — el nivel más bajo.</p></div>
+      </div>
+      <div class="cols2" style="flex:none; margin-top:.4em;">
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Evolución — tendencia 2016-2024</span><p style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">31,4% (2016) → 34,5% (2019, prepandemia) → 30,0% (2022, caída) → 32,8% (2024).</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Brecha — distancia a la meta</span><p style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">La meta es 100% — leer es un derecho de todos. Proyectado a toda primaria (aproximación): ≈2 497 600 de 3 716 712 estudiantes.</p></div>
+      </div>
+      <p class="takeaway" style="font-size:clamp(.68rem,1.5cqw,.98rem);">Extensión te dice que hay un problema. Intensidad te dice qué tan grave es. Evolución te dice si va mejorando o empeorando. Brecha te dice qué tan lejos estás de la meta. Sin los 4, tu diagnóstico está incompleto.</p>
+      <p class="source-note">Fuente: UMC-MINEDU, ENLA 2024; ESCALE-MINEDU, Magnitudes de la Educación (matrícula 2024).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">34 / 36</span>
+  </section>
+
+  <!-- 29 MODELO EXPLICATIVO -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
+      <h2 class="slide-title" style="font-size:clamp(1.1rem,3cqw,1.8rem);">El modelo explicativo</h2>
+      <p class="body-text" style="margin-top:.3em; font-size:clamp(.66rem,1.4cqw,.88rem); color:var(--ink-soft);">El marco causal detrás de la condición de interés, construido con evidencia — no con opiniones. Ejemplo: marco de UNICEF para desnutrición crónica infantil.</p>
+      <div class="chart-card" style="margin-top:.6em; flex:1; min-height:0;">
+        <svg viewBox="0 0 460 200" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Dieta inadecuada y enfermedades infecciosas, con evidencia, causan desnutrición crónica infantil">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-faint)"/>
+            </marker>
+          </defs>
+          <line x1="200" y1="50" x2="278" y2="88" stroke="var(--ink-faint)" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="200" y1="150" x2="278" y2="112" stroke="var(--ink-faint)" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <text x="235" y="62" text-anchor="middle" class="chart-bar-label" style="fill:var(--good); font-weight:600;">e+</text>
+          <text x="235" y="145" text-anchor="middle" class="chart-bar-label" style="fill:var(--good); font-weight:600;">e+</text>
+
+          <rect x="20" y="20" width="180" height="60" rx="4" fill="var(--paper-raise)" stroke="var(--line)"/>
+          <text x="110" y="55" text-anchor="middle" class="chart-value-label" style="font-size:14px;">Dieta inadecuada</text>
+
+          <rect x="20" y="120" width="180" height="60" rx="4" fill="var(--paper-raise)" stroke="var(--line)"/>
+          <text x="110" y="145" text-anchor="middle" class="chart-value-label" style="font-size:14px;">Enfermedades</text>
+          <text x="110" y="163" text-anchor="middle" class="chart-value-label" style="font-size:14px;">infecciosas</text>
+
+          <rect x="280" y="60" width="160" height="80" rx="4" fill="var(--phase-frame)" opacity=".15" stroke="var(--phase-frame)" stroke-width="1.5"/>
+          <text x="360" y="93" text-anchor="middle" class="chart-value-label" style="font-size:13px;">Desnutrición</text>
+          <text x="360" y="110" text-anchor="middle" class="chart-value-label" style="font-size:13px;">Crónica Infantil</text>
+          <text x="360" y="127" text-anchor="middle" class="chart-bar-label">condición de interés</text>
+        </svg>
+      </div>
+      <p class="source-note">"e+" = relación respaldada por evidencia. Cada factor se desagrega más (ej. Dieta inadecuada ← acceso a alimentos + prácticas de cuidado infantil) — a mayor evidencia, más arriba en la jerarquía. Marco conceptual: UNICEF.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">35 / 36</span>
+  </section>
+
+  <!-- 30 DIVIDER SESIÓN 2 -->
+  <section class="slide divider" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Sesión 2</span>
+      <h2>Diseño de intervenciones orientadas a resultados</h2>
+      <p>Ahora toca producir la Entrega 1 — con el instructivo y los recursos de apoyo a la mano: trabajo grupal construyendo la cadena de resultados de tu propio programa → presentación cruzada (eslabón más débil) → <b style="color:var(--phase-work);">★ Entrega 1, cierre 17:00</b>.</p>
+      <div style="margin-top:1.2em; display:flex; flex-direction:column; align-items:center; gap:.5em;">
+        <div style="background:#fff; padding:8px; border-radius:8px; border:1px solid var(--line);">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAADHUlEQVR4nO1cS46kMAy1A1IvQaoD1FGoG8yRRn0zOErfgCxLCvLIdhJqZkHBpifp2IsIghdWPZ6/oZDgiizukjqA6R+Le/P8XzH9Y3Ht6XuM8khXL3uIPexXRdp/SVyD+h2J6Ma08joQwUQBaJY9eb6Wav8VcU3qo5JzCHzTMdIb0id+KMhK58c32nNe3AVdaF3ffxB93gPgwzO0KydU43+054S4M0ov0rT+8ESYvjj+8pXI9MXErsT+E+Ka1CcSN8ye+qFOWqi7RZA5HGskLtT+8+Ia1N9y1vxB+4K/14406i7yfCzV/iviGtPvmZzpxm9IAMzf4YkEPm5TwfY7039b//aAODKJ70SRpr6P/nkZ2WcDX1n9W+H7BrGu1SAsYZbL4VWKpC4tqXCiuTT7nemf7W+gBGEueIWwROuWMmnfx06H/Z71vW/DU5MnZS3nUoK5uGuauSaemb/a6SjQ/kvi2tSfVm5i3aXq7bTJIYl1XCQcW/ytE18fOxix17ymrsbEdJZF468sBdp/SVxj+iCtDZp5oCC5lLrhNFUABVkDNLvr0ux3pn/29yHNoATkHIkXLZI2my/U+b5BHA3uA0FhstIZIKZWmcTG3wrxDYpqKn15dwgvhTFwTNanhm99+K4Sa3MGJUgLviScjsAbf2vFl7Iv5jVnzYnYwuTYAjH+Vojv2uUOxh6JYzpN6pV3YpdmvzP9Y6GXgJv7zxlu2oEXThu+9fpnUOqqf84z/0E4LSftDN9a5/uk1JU25D1iiTjK/Oj77bki7pI2NKcPaRbIsnvl/GDK00Pjb63nN0I6ocFjQPC32KBcfgWgZewCgOeh/7AWaL8z/WOhv9sYqTRKVS+kdqXVR1W+bz0jqIRFvsJ49OoWYKJ4fpL4YJbx9+d8v4AyCV6QR/tyulIyLZkjlmn/eXEt6/t4qk58dvwgJbcr7XxO1flzF3Pl19Yk5fm+zX8rxbeXNebPQ+gl1tLy4HA8yKacz8GUWJdmvzP9t/hu6TMUfyNkkOWeALaeljtj728Bp9nO59T3vqH9P0NVeDnTPxR3/PjH6f8BYXQbuHnMdqMAAAAASUVORK5CYII=" alt="QR con el enlace a los recursos del taller" style="display:block; width:84px; height:84px;">
+        </div>
+        <a class="link" href="https://cain971.github.io/taller-ppr-recursos/" style="font-size:.6rem;">cain971.github.io/taller-ppr-recursos</a>
+      </div>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">36 / 36</span>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var slides = Array.from(document.querySelectorAll('.slide'));
+  var idx = 0;
+  var presenting = false;
+  var hintTimer = null;
+  var hint = document.getElementById('present-hint');
+
+  function showSlide(i){
+    idx = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function(s, j){ s.classList.toggle('active', j === idx); });
+  }
+
+  function flashHint(){
+    if (!hint) return;
+    hint.classList.add('show');
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(function(){ hint.classList.remove('show'); }, 2600);
+  }
+
+  function updateScale(){
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    document.documentElement.style.setProperty('--present-scale', s);
+  }
+
+  function enterPresent(){
+    presenting = true;
+    document.body.classList.add('presenting');
+    showSlide(idx);
+    updateScale();
+    flashHint();
+    var el = document.documentElement;
+    if (el.requestFullscreen) { el.requestFullscreen().catch(function(){}); }
+  }
+
+  window.addEventListener('resize', function(){ if (presenting) updateScale(); });
+
+  function exitPresent(){
+    presenting = false;
+    document.body.classList.remove('presenting');
+    if (hint) hint.classList.remove('show');
+    if (document.fullscreenElement) { document.exitFullscreen().catch(function(){}); }
+  }
+
+  document.addEventListener('keydown', function(e){
+    if (!presenting) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' '){
+      e.preventDefault(); showSlide(idx + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'){
+      e.preventDefault(); showSlide(idx - 1);
+    } else if (e.key === 'Home'){
+      e.preventDefault(); showSlide(0);
+    } else if (e.key === 'End'){
+      e.preventDefault(); showSlide(slides.length - 1);
+    } else if (e.key === 'Escape'){
+      exitPresent();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', function(){
+    if (!document.fullscreenElement && presenting) exitPresent();
+  });
+
+  var btn = document.getElementById('present-btn');
+  if (btn) btn.addEventListener('click', enterPresent);
+})();
+</script>
