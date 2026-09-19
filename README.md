@@ -12,6 +12,11 @@ Requiere `push` (no solo commit); Pages reconstruye en ~1–2 min.
 
 ## Recursos
 
+- **`dia1.html`** — deck de diapositivas del Día 1 (Claude Artifact, fuente
+  de edición fuera de este repo), publicado aquí solo para poder proyectarlo
+  desde cualquier computadora sin depender de la sesión de Claude:
+  https://cain971.github.io/taller-ppr-recursos/dia1.html. No enlazado desde
+  `index.html` — es material del docente, no de los participantes.
 - **`index.html`** — página de entrada, enlaza a los cuatro recursos de abajo.
 - **`instructivo-entrega-1.pdf`** — guía paso a paso para la Entrega 1
   (condición de interés, cadena de resultados, supuesto más frágil, pregunta
