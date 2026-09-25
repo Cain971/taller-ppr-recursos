@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuentas Claras · Día 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEEFE9;
+    --paper-raise:#F7F7F2;
+    --ink:#14181B;
+    --ink-soft:#52585B;
+    --ink-faint:#8B9089;
+    --line:#D6D7CE;
+    --accent:#A1712A;
+    --accent-ink:#5C4013;
+    --accent-soft:#E7D6AE;
+    --good:#12805F;
+    --good-soft:#D6E9E1;
+    --critical:#AC3A2C;
+    --critical-soft:#F0DAD3;
+    --phase-open:var(--ink-soft);
+    --phase-method:#3C6E8F;
+    --phase-frame:#7A4F6B;
+    --phase-work:#9C5B3C;
+    --shadow: 0 1px 2px rgba(20,24,27,.06), 0 8px 24px rgba(20,24,27,.08);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14171A;
+      --paper-raise:#1B1F22;
+      --ink:#EDEEE8;
+      --ink-soft:#A9AEA3;
+      --ink-faint:#6D7268;
+      --line:#2C302B;
+      --accent:#B8863A;
+      --accent-ink:#F2DDB2;
+      --accent-soft:#3B3121;
+      --good:#2F9A7C;
+      --good-soft:#1E332E;
+      --critical:#D9654C;
+      --critical-soft:#3A2420;
+      --phase-open:var(--ink-soft);
+      --phase-method:#7FB0CC;
+      --phase-frame:#C99BB8;
+      --phase-work:#D99B78;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14171A;
+    --paper-raise:#1B1F22;
+    --ink:#EDEEE8;
+    --ink-soft:#A9AEA3;
+    --ink-faint:#6D7268;
+    --line:#2C302B;
+    --accent:#B8863A;
+    --accent-ink:#F2DDB2;
+    --accent-soft:#3B3121;
+    --good:#2F9A7C;
+    --good-soft:#1E332E;
+    --critical:#D9654C;
+    --critical-soft:#3A2420;
+    --phase-open:var(--ink-soft);
+    --phase-method:#7FB0CC;
+    --phase-frame:#C99BB8;
+    --phase-work:#D99B78;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 28px rgba(0,0,0,.45);
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Archivo',system-ui,sans-serif;
+    padding-inline:16px;
+    padding-block:32px;
+  }
+  svg{ max-width:100%; height:auto; display:block; }
+  .deck-head{
+    max-width:1280px;
+    margin:0 auto 28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 24px;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:1px solid var(--line);
+    padding-bottom:16px;
+  }
+  .deck-head h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.35rem;
+    margin:0;
+    letter-spacing:.01em;
+  }
+  .deck-head p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:.9rem;
+  }
+  .deck{
+    max-width:1280px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+  }
+  .slide{
+    container-type:inline-size;
+    position:relative;
+    background:var(--paper-raise);
+    border:1px solid var(--line);
+    border-left:5px solid var(--phase, var(--line));
+    border-radius:6px;
+    box-shadow:var(--shadow);
+    aspect-ratio:16/9;
+    width:100%;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .slide-pad{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    padding:5.4cqw 6cqw 8.6cqw 6cqw;
+    min-height:0;
+  }
+  .source-note{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(.52rem,1.02cqw,.68rem);
+    color:var(--ink-faint);
+    line-height:1.35;
+    margin-top:auto;
+    padding-top:.6em;
+    max-width:72ch;
+  }
+  .source-note.warn{ color:var(--critical); }
+  .takeaway{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:clamp(1.05rem,2.7cqw,1.7rem);
+    line-height:1.28;
+    color:var(--ink);
+    margin-top:auto;
+    padding-top:.5em;
+    padding-left:.85em;
+    border-left:4px solid var(--phase, var(--accent));
+    max-width:48ch;
+  }
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:clamp(.6rem,1.35cqw,.85rem);
+    color:var(--phase, var(--accent));
+    display:flex;
+    align-items:center;
+    gap:.6em;
+  }
+  .kicker::before{
+    content:"";
+    width:1.6em;
+    height:2px;
+    background:var(--phase, var(--accent));
+    display:inline-block;
+  }
+  .kicker .sub{ color:var(--ink-faint); font-weight:400; letter-spacing:.1em; }
+  .slide-foot{
+    position:absolute;
+    right:6cqw;
+    bottom:4cqw;
+    font-family:'IBM Plex Mono',monospace;
+    font-variant-numeric:tabular-nums;
+    font-size:clamp(.6rem,1.2cqw,.8rem);
+    color:var(--ink-faint);
+  }
+  .logo{
+    position:absolute;
+    left:6cqw;
+    bottom:4.2cqw;
+    height:2.3cqw;
+    width:11cqw;
+    max-width:150px;
+    opacity:1;
+    background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQcAAAA/CAYAAADt9Q3TAAAfkklEQVR4nO2dCbSWVdXH93sHpgsKoogIJSKG88SXn1qkopnklENlplmpidFgZX1OWepnoV+moOKQWs6ioIIpmknO5QAypSBOiAhXjHm+977fOmv9tmu3O8/w3kEQn/9a74L7vs9zznnOsIf/3uc8pcuuGC5tgFLO68ptUXmBAgVajhppfYFQbsait/cWKFBgIxAOMYFQLSJdRKRORDYVkS35f5WIrBORf4nIQhFZJCJLRaTB3FsIiQIFNhLhoIu6nYhsLyL7isggEdlPRDZHKMRcjNUi8q6ITBaRJ0XkWRGZKSLLW9ieAgUKbCDCobuIHCgix4jI1yq4r4OI9ONzLN89KiI3ichfsSwEwVK4GgUKfAyEgy7WTiJyiIicJSL7tFJbvshnkohcISLjRGRJISAKFFg/CDxAJQiCYTsW79hWFAwWe4rILSLyRxHZOcJHFChQYAMTDoFXOEJEHhKRU6XtcZSI/E1EjheR9m3gXpQin7a6t9TM+koVlpdUdkvqT7uu0nJa0td5yi6wHoRDewTCAyLSXz46BE7jDhH5EeRma8BHWOxHUiZaKee9McSut8Iu7b5KyouV3dL604Ry1u/N7evmtKHgptYD59AOwTBS1h9CptYmInKJiKxsYVlhEtWKyI4iMlBEtoIADZGT6SKyIuU+IUy7Gy5PNxGpF5G/E20JYVmPzgg5P3mbRGQx9fnfQh1dzfeBe1mGMO9OmQ0srFCOuEVWJky8lHI2NdfptWWiQ4sj9QdlsBnzo1FEPhCRNe6a7rSzic+iSN+FcjvS17uLSE9C2YFXmpYxloHX6kH91dRfz9+2bzfleWqoP4xlISg+AuEQJuN31rNgUJzLZP89+RLNQZj0B4vIUBEZEvk9LPKrIEPDYrTYnMjK6QgHj8DBXEdodrVZgIfSf91ot9Wm4XlexDp60IRyB3FPHxbvRfy9Oc//VbNYmyizijLD/1eJyM+J/nwT4eojPyUWU3jmP4nII+aZ9xKRa0XkM7Qx3D9CRNbye6jrJyLyC+oPYekfish4U09YuF8SkWEi8oVIfz0nIqNE5D4Xwtb7Q2j8GgR4qG+GiJwmIv/guiB0zqEdTfT5b+in8P8CbexWHMoAbigYDhfRHAQtdyYTOCYYAv5bRG7DQullvt+GxTEqQTAEHM0C+ylWji7E7UgEa4dr1IlPHVbL4SJyp4j8mBBvwLYi0hfhvTlat4r7Dub7Oj5dWIhaZie0etDWAbvyXUdTt/4dyj5MRO6h3eE7oV270OZwzWUi8nU0uC7gffi7lv4J7RWeO9zzK8qNCQbh/lvo6y0iv89BeNVST3iOH/CsSlyfjcDviPB9G6FZ8A9tJBy0Y3dEE25oCNpwb/6fdxJU4xoFzZIHw8xk74bmDsRoHlwsIieahZQXF7EgxbkA4kzpvFaT3hNzdWK4QEQGJ9Sv/a7RqerINfp3J/ovCJs8CAv+fxynVML9CILD4gSEQok+thiP9VXwD23kVqhJ1wVNtnXG/fNMmnSl+KeIPIV2Os5ohCx0ZgEeiy+eBn2eMKEujfx+PVxBDyZeb76/FDNW0OzBNPfPfRvmdFjQp7jf/xf3YlpEgE0UkRup83L3204i8kLK88R86UloTH3WGszqR00fWAQ34Rn6/QCnIMI4/DmhnmpC2Mei1WMRkYD/QtCIE2iX086+uGZhjimCa/CYiDwccT2Cy/Mt892xCKLvuWt/D4dRJM61MedwQM5w5fOYdcH9qBQ7Mph/YrL5CZWGg6jzrpyT4ZCIJj+csKxqmpGYqY1o8eWQed9w973GIprKfdUsxNHmmk1xf6ZFNOxshGIvyLNggitsZmgMse+vRaDU0p5gir9n/Hh/z+/QyEEofJv7FVvj2iT1515YBMHXT4J32VbS13+jL6pwN8YaYayL/i+GaC0h5K51wuF03CyLm+nTgIKMbAPhoItsk4zBV0xHk3TCRw7kVaUYyCfLAojhQhF5WkTmJggIm83pk7UuQzA04V8PRMg9y+QdAlFYw4LwxOgUQwI2MtlHYiIrPo929u06lVTz0M8WYwzZ1hh5liRcjzVQTX0TMOsDkSmR+vdAsCo5a7GWutPqC2XPSnArgjXwuQhP9LgjTV9AQAXC0SqkrkZAlo1ldCkEqyAEQ98qllOOCpVCOLSh5fAl49PHsBCG+QHMvhp8xiPQlsFHz8ISWPLX0A5VlBNMzs9C4GWhP5M7aI00dMCEt3jaLIDgZ98aue8yntFq9jLWgF0Q1SyoYEVZfDolN8MLBsGc1wWdhnJGeUFLn481FuOVjkohdZ80EYk0jIhskmuiry2RG/Cyu6YU+V4Y+yDILUq05yaiZnYsFJeYsgrB0EbCQbWsJ3o8Nkf7fQtBEpjie3MScPfgqwerY4GJc6vE70D5O6FdT84o70Q07tIUrdEUidHbaEKSMNuKRd9g+qmExtVFZ7Wnn9ir3Xb0LIzEJ388sqArmfRL3fV5732aqIlELIfnCXMqYSkRjkjzHUIYVSL9ov2l1pbvr1URi0lDszNxhzyhPBfXsrAa2gBVbjJsh3+eB8GE/TI7MvMIhhBGPIkcgjdM8k+ZSVNmgryDaTw0h3tzAGRjDLooQj2vu9++ZrT6VPzVVZHFPd9oYMVh9JdO5EbK0t2lihloV784R7O1PbT9SvN9KOP7CC6/ONOyGUfD11wIETqM/pWUyIPHIjbRvR2pT+iDsxDoSaimr23d2l8dXX+VmDsW0xBsSbgXYeBdqjcLd6JthYNOhv3w6fKiPzHuLARf+naTHNQF1+Vw+IDuZtJXmf9bwioJg1M0ZAmmPEQI/IS9BFL0ddyiILQs2iMcgrlvcTGkWG+yCHeEiff++wOGsLR4G038FFEDi4EJ2ZRpHMCTtPFh6nwNyyup756PRG66ZaSnt0OIhiSkJGiUJAh2ixMQXNvDKfQjeSooCx+KXJYylgucSydwPwXaCDXGHG+HcKgE2+bIsryXxfOBqasBDRLSaY/ElbgG1l+tie0jIcQY9kPbprkWExBQlksZxuc9FocmICk06079Xbt4roGTWJmQwDPehOW85v4J7aiKkHf1WDBJYUI13S1CRmcMv0mwvMZhYQQt/2vz/VmQsLpN3qMKEvdc7vfQdj2MIAlJS4qf8dwLGGuvgN5lnuizJgl6j4JjaENY33azlGw2SfHLkyyHtZCUJ0FcqusgLIAwEf+An/v5SFRgYAJxJxH23ZNgCq1vPiG4+oRn8IJBF7hAdgVLwaMuQTC8zaJLMpGrSY/2gkHoi/cjnIMuDGX88yDs/YgtILVk7nAu0yFYVDHoHo4GskRvTREObyAM/L6JKvo6ZpmeCa8Qa6/nH3y7slDs2mwm7ETrmtOMt+iesLA0hPVggia0GkJJrDluAge/PA+6JixSj2fhR8K/aXiTvQtBS1oi9USSn9Lwd+59yfRtHp9fMPVvwaLygkWzIssVZEhqNMFfv84sYp+E9T1yNHxW5RozZotwrV5x19jnnEhfZ5n9r2I5qguWBrU4/XdZKHZttoJb0ZwsR8nwhcsRVj/GGXR2ZFjw93eooK48FkYZRv5I8hiOw+roymKchbUwGlLUL47bECxHQ6Ztj/WwGCtoDG5RcJ/EPLNubKphYVqeZzXP/Rd2hfYlwWtXkqXe5N9xlLcE1n5fylL2PxYqvJ9/H4Lj6YA2f8Jcew8u1QDaMwvycAbCamsW5HgXSZhFtOqbKIgPTI6GLuIJCIfQV18xu1iXkB07gfrn5hg3HYM7uL8GVyQIl6x5cSDuawN9/HIkKlIggtJlVwzXOP2QCPnWXCzBLZht8vCTpPy9LIh9jDbajOSXkCuQByeyeCtJgqkhn6ITlsvCCnbzdTRW0yrclpZOuE7wG3oW51QE2KyNILmnFuuujv6qz5lP0Vxof30DItzOk9s/5n35kaGmQu2bF8vMQlPBoL5fk6t/CywFqwGrU9yVGDT3IAvWd29E+8R+T5o8VXzWRDReUpZmFjTuP9gd0nsjrpbdil0p7KEq9u8k/sIKcX8+hL0vqR4PraMp4pJlCbw8h8Ak1deI4D/P/PaIIby9NZtWVzlH+/IIm6y5pdfEwthZ5TenLf6ecppwaM0X3PQwi7sOLbHWTTwN89VyrRdOeX11LS8PyhkTK6tjY9GCtEHPM1B6mEkIPyquI/Oztc4lSGpbmrWTRgxWUm9jM8crzyLy1yiHpWF2dZVfIlxdH1FQWXVJSl2VoBJ+pFI0py2Z91iB0JoHZOhOy46E7Zbj7z3NQGk8u8HUazmPWKZdGrIetJq2xLRwGV+8Mccz9TFp0aF9b6HdYyayWj8aHViVQiZW4YNPoz/+SR/Vmftj2lufpZH7NMtUx3VtyrhuQdJbd+5/n5yPQDgmoZZ+0H5cyzMl9X81eQ3b0KalEKFZxG5Hs5HMC981kf7247uO6McxfDcPwdDF9NdKo6DsOPkcmdURYaL1lVLaZMvpxD1VXLcyInhKjEV/kyb+Pm5l2L6eBPvs4p4thhpSELbB4l4Mt/Wuv6fGfKFEWmvB78UPRJ5AIoXc/Lt56OCvCxu3Jph8+vd4iDxImtDa8QMg8nZwqbb673Q4i8ciZYXO359Q6GAWh2I191zJrkNb9t6w+tshGK4iDGgZd732M1y7M89+B9efT7+tcURmyVkdc9GMQjn9+O0uEpBUQJQQcGE35nf5v8WrWC13RMK+tWStDmNSlSAhz08gBncit+FEF758hzyRWxKERJiTvyXj1Ao2feZ5EJmjmSMCOXwp2bKNuBDnQAYLi/9sCNRaBPrPIZhDWPn/EJY23b2K+l+mPx43x+DtQR5JP64bwTPFBPEAyt+Ntt3AXNQoXpk5cjJuZfi/xSu4mLdGxqQaXuU8+q0jSvhH8H3e4vkMCWgnOWH4HtmmN9C/ZSUk1f/aAxKwtfEcD7Yv1oTyA5OYWGER/RIJ+V0si9WY1XarbhoGm51/tjP02Q7g9yxcTSqyCspunNUQOwvC4xdsL15GG05A4IiJHpyQoDUOdaHTyWi9iRWQsscz4LbOKeSQLKOuLyDIbIJSDI8iDKebNvZmLH24exj9ZjX8DgimtHpG0WdqRWo9tUzsT2W08S9mh+h+WKWWEN/LpHJvyviHOa74JuTkaTkPNToHIbCC6EvYcq54kEVqjxbU5/mc2U4u/P9wk2z2WfrCti2GxxBok03ZW6NQNadF8UP26tgx2Z7XPaS9TiL0xxmaUKhmmETOTGwpgvQWLINRZBnujpT7F1L+zyRKCY1/Cinb3w12FrIOnc3LX3zfkIK1aNg8gkHzOk5JIUfTtkJ7E3Atba6E0dckJV+OWhx7oK2zBIPwciEdF23zwIQ8mCMJRasfW0O/ZdWzwrXX9oHfKBfDwWR1Vic8t81vKKWciNVYgSW8a6StWWX4MbSu5S5EqLIEgxDR80lqn40IBuFIv26unafmeM/McvMsZctWf5BxClElWGSsgb74zuswPy/BxAoHqkjk4I4zkJK9cgqst4xrkoTYopySkBCliUC7YP55jMPkD3kNHr/jJKSkOvOSfOo33kwbJyaY4M8iRMeakKeFCv86shBjbsT1ZKqG+xVvmz0STQi8IASSFqkebycQyz4NfyrK4QrG9GZch1iCnEYTLGbTB37j13dRJLHzLywjb4lKe41E6nqHDM/LIs/az91r25wE37Yq06c/N2d9Kl5jTG50m9jqWRcWwQKJYV8ncDpFDmR6g7V2Bcr6dtbsihjnsIQB0MndEtRRyYOYu1vSGM15mIv5fjempd8m3ocU5Dwk6V+N75k0SH5irKFds5DIE5yvvFVkl+U6TP1HjBVwAPfaCXYEG6paGktfzdFnV6P1jnIx+0fQ0Euof3lkotXS1p0i+1SuRkDr4SrdsZwGY0JPMhN5QMY+l6/gcgj94lOkG0isGoNpvijlMJrYgj2ZPh2Ay9PH1NUX4q7SaEiSNfkC5ncPxjdYTFnRrrT6YinfTbhewc20uI6Deevpg81we/SMjueMS2HfMxvDYSQiNlCWt2g1SHAPruZST3z67LqJZuDuZIPNmUyaiynkKvxnnyNg0Q7p9RAWye6RnIcyE2Yogx8jtToYbR38X4ks2JubceJwOxZDj8i+jDK/27MLhEEbb0zWBgRT+N5iPyyPSkN+SQJiGVaEP1ylge9WGrcqZoFURUz8OWjGBSY8W482P8bsFtXyDnKRrT85wX2M6ceVkd2Te0JejmfSdq2wP3pCGPaKhLxtiNwiax+G3cxmcTTrYIITDFPgw2L3pLmtSW3zRw28h0s934xdPd99hbnmXT97DudYt7iPNUJ0ecRK3hVhMxrhs0mWhH6GTMn98eeGY3bcx7XbIGEegAw6AgHiJ4Og1d5kQuzurBSbFLWCyXYoQuhhBM8SmOIz8Jd0YCzOMA+dthhjG5nuR0sEn89vaV4RIQJ127dqU9UAnhvpjRlXiXBIm8illISlpHM5fFlhcVm84FwxHY/VCAy1jMosZO9S3OoOg92WY/0FV2FUwia3QVgO92acNub77g4iD391Ie81uJV+cVouTRELVSZhlwgheiPuTVJ787qMOpa9IvPO5mHomKzBpbRj0iViNdxqUuYFwWCF27UJY3IAY3If4/Nhv/gJt4yFeS5+4gwW7oH8XYvJeTOF/QwtdAIa8wKzgWofGjcGH7ZLQofq5H+LSXUsUnVHGj4KtyREOjwjmzcVNjYRuiecrj0Sa8cnhXVK8Gfb5azPPqtf8P4ZqiL9FDslKUtzxd6GJYyjFShpiVwD3JmNglXoNc0Q896Ll7AQ/BkZir3gOfomZOz59rZLCGtfgwLybowN92o/58l0TMNw5mOSsqly/5YShJLyHz7nRd8uljQmtp07syYt9oxsQDzKWN/Ps89Ft8Z77I479eGY2Ie0jTkCf6cPMdHb8H1ud2cEDMJPehBBMAIN8i0mRhfj1+ix4Umpm/rdSiTcPHPw7BfN4pzI9uKrKkiUyqvFz8YqWhrREocbH14Y4NoIgzwz4cBcTUiyLLou3ubyE1nEmFo5QfBa7G8Wm23PZoxjFxN5iL0A6MKI2zXELfYXUBr7s7D8ZradE3be5s0SvJldpRrVsRGODiaJSsvy6firExbvDNzcExBgio5E2tpFBHUD9du+THuGcuR0soMgV611XSbqsBc8npK1XjAInMThkaiFkqhNbBA8GSF3Ecl2Fn2tAPRnSApk4eUsFIsD+VxETPcyo3k/BR9xIr/fhRm4E65IzPRTxBh26w92pGPG4qLMgoDSXY7NxRS4leXwHQ/hF6vAGetM3x9hAd3NfZ3xBYN7ZfG4ySuw6Ef/NRphuA6LLKtPYogx8En+7WRcJT2wZhMW7HkIwSqSb37BM/0U4btlBS/z2YqY/j8hv06jj27Ctx0HmWgPzUk6IqApkgg0n+9n08cTDRFZD8uvYb1OLO6RjOehkZDfnIS6pmCiN8ED2HeSfA6F6YVDfxa3PRO1gXbHxqSMy7zEuEntceF/xjM24dqeCadzNlZ0L7cHJw1VnPM6A+H4HXi260gbeBhuxVqBn8p6qc0tsNM+9KUS6g/wAL91ZNdANO8N+IcHkSU3G2HxCoOylEFTTeo7ToxUb89CfQEJegHZiD9sgXBYiVTVCMoaZ4KXEUTnOXfociTvbBa7fzXe4siLWRR7mxfNWBwTycqMxc3zHDrrhYr6qbMIj9mj2b7M+DxGHx9o6hjBM9ZGMvaWm5yKYGlYfBUr8etMdEG4PIyg8UfRLckpGIfCLbVn7PyCrkdgWAFwLmHWVZFDjJ5LOVzmIEjm6sg5lyvd+06tSR6sZ49vuBCx0PYa3KEbEAaKL/CcT3DdIGPxXI3irnKhYzFEZEPkpPXjsfyPNKeGHUkSWYzgXZAkHFSjzSQGq6cRe5yCRfArSMHQoRanYkXciSYZYk6SXsxDzmFxzkdYNLjj3jti5uyAZLaC6tkWJm0p+bbW+abWHHyVSWkzDgVhmJTgc3oCOZuGLRNStrPY9tg1SSdIrUWwbe8mfPvIAlDsHyFlbzIvxGmAF7KLYjAun30V3k5uU5md0JbMtYvUL9gVLMpGQwZbX7wBbf9tJ8xDkpAk5KMsSairBwowyZWZm/K+VA/7pnSFTX0fQUqzdQdqI+vJPo+3tsbxdroalNyu5hQzQaEOcTtUd0t4hrWEPwOaYjsx9WHGYnoGUzOGg2DBz0WiakadogODNQkJ2ZPF1pVPLLMrD34NcdISeK4iyfS7mw67ErM5CQtwO+4xZeXNymxIOHkpK1wWC+H5a3SvQIlJPZQxzXIVroHAClafxRh8ZbsN+1E4IUuMjXAna8fwY3N+h3+OrBOfYoJkMkprVMSisTgTF1IFTN4MyfsNx5GXxIydY2Kt3XeYN8tzjMn1WMxhTlr80Z3AXR8Zk4G4WPq29RjKuB0fjknaNu21aIltI5ECxc5YD+fB8Adh4LEnn9G8EWoHOiLPy288RjPx1LTLIq7097fgSHozsV802jqtjAaE5HTafAhasI4FPBXJPQZLw5Y1jQXSy7S32nAF1Vgvk7GehtPXazH1fQrxq5S3Ndc8YK7ReqezsHsw6ScaIVJiMg6lvcdjtirD/a45nekJ+moUQr1M/fryGCWV15KoNR9l0IDJ/gDXnoA1oaTY+5izN2D9xRZmmbCbugKzciS5CWWN4fpTsYj6MN4LeLZbCNfbvJjJLLzNjGWiKFH3M/joGgqcyVj0TnAzaphfL1L37xjbRrS63Qj3JiH8sbiY+5vQ8zzqHYNA64b19mmea4ZLPhPKvpx21/E8zxFdfJoxOQSrvJoxmWiEz4djEjZeuef6t47RTKw/0OgkzIKY+1JE21isw3eaijl1rJk4WfgzwqU57ylIC9VVgk2ZEHoC1NyMdy1syKjhWTY3SVDzKjxHI0+/b4nVVcKlnFPBm7+biyoE5JY850LGakM/Hq4aZbI5c3Uhi7w12615Lz35/yL65j/4uzThoAWV4ReGQzglYRFEVHekUNZbs8cZDbk7/tQukbyBp/D774ukyVaCNFMwbww8KdU3Ka3WlhErq5I03Ky2tpagrFTwptWT1h+tUYdUUH5z6y01874NdUyS6vmPOrKEg0V3SEp9oWkShkFCnhuJhcfwOpGN2WiWegTGckjHORkHkLQGKpkArXltpROvLSbqhjD5N7Z6N4oxqeRouA/YtfUyIcyk/fZX8TmL8Nj5GSdb93OuxRsw4BeaF+G0tLOq8b/8W8UFE9e/X1JZ484mArAsctRdnbF01kVOlCqbuHtPTMb2+KFzIy/O7WCyDL0VsbKVT+vybWxLrK/F+XETChvUmFQiHDTP+07SY38QSQBSDMNN0Ey6010ySRq2ZcHazLWWZBCWCYWeY05IsgJnFc8znsiK5l7sBtnajWuuJfVUy+zO6Uv78N0U9pnMNddsSlTnOBJotjYL/e/sGRhvcuq/bk4r0my4Em2eh4U1IWPTW4ECrYJK3AqPjiygk8iGS3qZ7lg2rawjKeUkiCKPuezjuAs2uCXZjwoNue0feV9mDL8021f9sebXwSpreKovAsHG1Xc0oaA+CIust5Y/CYn7EtyK38brMY0zJ5SlLlCgTdCSE6dXof1eJIY6mGSLvV2c+WiSPM4jR2EkiRr9MaPnwze8ATPbFiZVXgb+QsJ9f4wkFPm/G1NY956EgfO863MQlta3c7L4u9CHh9F3rUVWFSjwb2jpcfQ2h/wVFlVPUjL7EY/tQdKTnsv4TmQTji+ztSd70vsl10QOwRiK9ZIlUOweEIW2+5gEwTAOovVgt4PuiZR2rjI8hM16+zw5CQUKbJDCwZJzZSa+7macZFJ8Syy2xoytqHl35LUUa7B03mah2jMd9iT+n0eLx85YqItwMVNJzJnONVvw92kkZ2mauhc25+OSdeXQD7tDcjc4kMJqKNAmaK0X2STFlK32TcoF+Cgmt190a0kwWRg5kj/0SVpaedp3ZXI2whkIFj8lHVnb8Q67V2+kDZrp6K2VJfxejmRMtuZLiAoU+A+01QTb0LVZF8KlqyN7PF7EovDHeMUOKI3tgvQ7WWeS5qrQVOYG8/LgJAznENWukU1QM0xZG3p/F/gY4pOsffxWZMVN+PneZfCnDUlEOPgQrJgFrNfnyk5zEaFYunqe6EuBAq1O1H1ScaXZ9eY5h94kPOkibu9SxBvIX/A5CAPYR+JdqyqsDH3nQ168B6ehL/ItrIYCbYJPiuUQ27Mwk6xHfa/i/Whj3Ujl36J9CCTmRKyD41y5byEcXkSzh7MTrNA5hYhOI27C1ziw5kbzejS/0JeTiq4bZJ6hnbGTuAsUaFV8UoSDxzqSjeaw8JYYwk9N/NcRGqr1hc1fD6LtD4rsGtUFfi3bZm1uwtNsV14Fz6HlXgQpGrZHe1xM8lVH+JGlH4OdhQU2EnxS3IpyQrTifT66v18FQ4kEIz1WywrToyKCYY07CftWzp7wnMUQciCswBGSxKoTTktaTFsWZbxSr0CBVsUnRTjEjlzTxWjzLiwnUCadO2jvNDRxBN4kU95CzgYM92dhErkOjRHSU/9ujc1nBQpUhI3drSibvIK7Sdmu5sSbtNexKZbxqvXppDcPMtmKizid5zp3qpGt88e4EseT0biJESj/IIlptOE3HiVk2RmrYdpHnBxWoECrbLz6OKHEtmlNeV6XcPJ1GupIDe9kCML5OTeIdSSNvDP3rmLbtn/FXXs+uhMzXFdwDAXWCzZ2y0FRtm8PrhBqzq+IvIhEf886zGVVQsKTdxXW5Hz9fIECbY5PinBQNMdvt9fmOeqtNe4t+IUCsr7x/ytpMgBPj+YDAAAAAElFTkSuQmCC");
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-size:contain;
+  }
+  .cover-logo{
+    height:3.2cqw;
+    width:16cqw;
+    max-width:220px;
+    margin-bottom:.3em;
+    background-image:url("data:image/png;base64,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");
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-size:contain;
+  }
+  .slide-title{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    text-wrap:balance;
+    font-size:clamp(1.4rem,4.4cqw,3.1rem);
+    line-height:1.06;
+    margin:.5em 0 0;
+    max-width:22ch;
+  }
+  .body-text{
+    font-size:clamp(.78rem,1.75cqw,1.15rem);
+    line-height:1.5;
+    color:var(--ink);
+    max-width:62ch;
+  }
+  .body-text b{ color:var(--ink); font-weight:600; }
+  ul.plain{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.6em; }
+  ul.plain li{
+    font-size:clamp(.78rem,1.75cqw,1.1rem);
+    line-height:1.4;
+    padding-left:1.4em;
+    position:relative;
+    max-width:56ch;
+  }
+  ul.plain li::before{
+    content:"";
+    position:absolute; left:0; top:.55em;
+    width:.5em; height:.5em; border-radius:50%;
+    background:var(--phase, var(--accent));
+  }
+
+  /* ---- Cover ---- */
+  .cover{ justify-content:center; align-items:flex-start; gap:1.1em; }
+  .cover .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase; letter-spacing:.16em;
+    font-size:clamp(.65rem,1.4cqw,.9rem);
+    color:var(--accent);
+  }
+  .cover h1{
+    font-family:'Fraunces',serif; font-weight:700;
+    font-size:clamp(2rem,7.2cqw,4.6rem);
+    line-height:1.02; margin:0; text-wrap:balance; max-width:16ch;
+  }
+  .cover h2{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:400;
+    color:var(--ink-soft);
+    font-size:clamp(1rem,2.6cqw,1.7rem);
+    margin:.45em 0 0; max-width:34ch;
+  }
+  .cover img.cover-logo{ height:3.2cqw; width:auto; margin-bottom:.3em; }
+  .cover .meta{
+    margin-top:auto;
+    display:flex; gap:2em; flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:clamp(.62rem,1.3cqw,.85rem);
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+    padding-top:1em; width:100%;
+  }
+  .cover .meta strong{ color:var(--ink); display:block; font-family:'Archivo',sans-serif; font-weight:600; font-size:1.1em; }
+
+  /* ---- Tiles (grupales/entregas) ---- */
+  .tiles{ display:grid; grid-template-columns:repeat(2,1fr); gap:1cqw; margin-top:auto; }
+  .tile{ background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:2cqw 2.2cqw; display:flex; flex-direction:column; gap:.4em; }
+  .tile .pct{ font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.6rem,5cqw,3rem); color:var(--accent); line-height:1; }
+  .tile .label{ font-size:clamp(.68rem,1.5cqw,.95rem); font-weight:600; }
+  .tile .desc{ font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft); line-height:1.35; }
+
+  /* ---- Big number stat tiles (brechas) ---- */
+  .stat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:1cqw; flex:1; align-items:stretch; margin-top:1em; }
+  .stat{ background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:1.6cqw 1.5cqw; display:flex; flex-direction:column; gap:.5em; }
+  .stat .sector{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.08em; font-size:clamp(.55rem,1.1cqw,.72rem); color:var(--ink-faint); }
+  .stat .num{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(1.5rem,4.6cqw,2.7rem); line-height:1; color:var(--ink); font-variant-numeric:tabular-nums; }
+  .stat .num small{ font-family:'Archivo',sans-serif; font-weight:500; font-size:.4em; color:var(--ink-soft);}
+  .stat .note{ font-size:clamp(.6rem,1.25cqw,.82rem); color:var(--ink-soft); line-height:1.35; }
+
+  /* ---- History / quote slide ---- */
+  .quote-slide{ justify-content:center; }
+  .quote-num{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(2.6rem,9cqw,6rem); color:var(--critical); line-height:.95; font-variant-numeric:tabular-nums; }
+  blockquote{ margin:1em 0 0; padding-left:1em; border-left:3px solid var(--phase, var(--accent)); font-family:'Fraunces',serif; font-style:italic; font-size:clamp(.9rem,2.1cqw,1.35rem); line-height:1.4; max-width:56ch; color:var(--ink); }
+  blockquote cite{ display:block; margin-top:.6em; font-style:normal; font-family:'IBM Plex Mono',monospace; font-size:.62em; color:var(--ink-soft); }
+
+  /* ---- data table (reglas fiscales) ---- */
+  table.rules{ border-collapse:collapse; margin-top:1em; width:100%; }
+  table.rules th, table.rules td{ text-align:left; padding:.5em .8em .5em 0; border-bottom:1px solid var(--line); font-size:clamp(.68rem,1.5cqw,.98rem); }
+  table.rules th{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:clamp(.56rem,1.15cqw,.72rem); color:var(--ink-faint); font-weight:500; }
+  table.rules td.num{ font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; }
+  .pill{ display:inline-block; padding:.15em .6em; border-radius:99px; font-family:'IBM Plex Mono',monospace; font-size:.78em; font-weight:500; }
+  .pill.good{ background:var(--good-soft); color:var(--good); }
+  .pill.critical{ background:var(--critical-soft); color:var(--critical); }
+
+  /* ---- two column layout ---- */
+  .cols2{ display:grid; grid-template-columns:1fr 1fr; gap:2cqw; margin-top:1em; flex:1; min-height:0; }
+  .col-card{ border:1px solid var(--line); border-radius:4px; padding:1.8cqw; display:flex; flex-direction:column; gap:.6em; background:var(--paper); }
+  .col-card .tag{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.58rem,1.15cqw,.75rem); text-transform:uppercase; letter-spacing:.08em; color:var(--phase, var(--accent)); }
+  .col-card h3{ font-family:'Fraunces',serif; margin:0; font-size:clamp(1rem,2.4cqw,1.5rem); font-weight:600; }
+  .col-card ul{ margin:0; padding-left:1.1em; font-size:clamp(.66rem,1.4cqw,.92rem); line-height:1.45; display:flex; flex-direction:column; gap:.35em; }
+
+  /* ---- chart cards ---- */
+  .chart-card{ border:1px solid var(--line); border-radius:4px; background:var(--paper); padding:1.4cqw 1.6cqw; display:flex; flex-direction:column; gap:.3em; min-height:0; }
+  .chart-card svg{ width:100%; flex:1; min-height:0; max-width:100%; }
+  .chart-card .chart-label{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.07em; font-size:clamp(.56rem,1.1cqw,.72rem); color:var(--ink-faint); }
+  .chart-bar-label{ font-family:'IBM Plex Mono',monospace; font-size:9px; fill:var(--ink-soft); }
+  .chart-value-label{ font-family:'Archivo',sans-serif; font-weight:700; font-size:13px; fill:var(--ink); }
+
+  /* ---- stat-pair (before/after) ---- */
+  .stat-pair{ display:flex; align-items:center; gap:.6cqw; flex:1; min-width:0; }
+  .stat-pair .sp-tile{ flex:1; min-width:0; background:var(--paper); border:1px solid var(--line); border-radius:4px; padding:1.1cqw .8cqw; display:flex; flex-direction:column; gap:.3em; }
+  .stat-pair .sp-tile .yr{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.5rem,.95cqw,.64rem); color:var(--ink-faint); text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; }
+  .stat-pair .sp-tile .amt{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(.72rem,1.7cqw,1.05rem); color:var(--critical); white-space:nowrap; }
+  .stat-pair .sp-tile .pct{ font-size:clamp(.54rem,1.05cqw,.72rem); color:var(--ink-soft); white-space:nowrap; }
+  .stat-pair .sp-arrow{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(.7rem,1.5cqw,1rem); color:var(--critical); text-align:center; flex:none; }
+
+  /* ---- pending / divider ---- */
+  .divider{ align-items:center; justify-content:center; }
+  .divider .slide-pad{ align-items:center; text-align:center; justify-content:center; }
+  .divider h2{ font-family:'Fraunces',serif; color:var(--phase,var(--ink)); font-size:clamp(1.6rem,5.6cqw,3.4rem); font-weight:600; margin:.4em 0; text-wrap:balance; max-width:22ch; }
+  .divider p{ color:var(--ink-soft); max-width:56ch; font-size:clamp(.78rem,1.7cqw,1.05rem); line-height:1.5; margin:0 auto; }
+
+  .pending-tag{ display:inline-flex; align-items:center; gap:.5em; font-family:'IBM Plex Mono',monospace; font-size:clamp(.58rem,1.2cqw,.78rem); color:var(--critical); border:1px dashed var(--critical); border-radius:99px; padding:.25em .9em; width:fit-content; margin-bottom:.8em; }
+  .pending-list{ display:flex; flex-direction:column; gap:.9em; margin-top:.6em; }
+  .pending-item{ display:flex; gap:1em; align-items:baseline; border-bottom:1px dotted var(--line); padding-bottom:.7em; }
+  .pending-item .t{ font-weight:600; font-size:clamp(.75rem,1.6cqw,1.05rem); flex:1; }
+  .pending-item .src{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft); white-space:nowrap; }
+
+  a.link{ color:var(--accent); text-decoration:underline; word-break:break-all; font-family:'IBM Plex Mono',monospace; font-size:.85em; }
+
+  @media (max-width:720px){
+    .stat-grid{ grid-template-columns:repeat(2,1fr); }
+    .cols2{ grid-template-columns:1fr; }
+    .tiles{ grid-template-columns:1fr; }
+    .stat-pair{ flex-direction:column; }
+    .slide{ aspect-ratio:auto; min-height:560px; }
+  }
+
+  @media print{
+    :root{
+      --paper:#14171A; --paper-raise:#1B1F22; --ink:#EDEEE8; --ink-soft:#A9AEA3; --ink-faint:#6D7268;
+      --line:#2C302B; --accent:#B8863A; --accent-ink:#F2DDB2; --accent-soft:#3B3121;
+      --good:#2F9A7C; --good-soft:#1E332E; --critical:#D9654C; --critical-soft:#3A2420;
+      --phase-open:var(--ink-soft); --phase-method:#7FB0CC; --phase-frame:#C99BB8; --phase-work:#D99B78;
+    }
+    *{ print-color-adjust:exact !important; -webkit-print-color-adjust:exact !important; }
+    body{ padding:0; background:var(--paper); }
+    .deck-head{ display:none; }
+    .present-btn, .present-hint{ display:none !important; }
+    .deck{ gap:0; max-width:none; }
+    .slide{ box-shadow:none; border:none; border-left:5px solid var(--phase, var(--line)); border-radius:0; break-after:page; aspect-ratio:16/9; width:100%; height:auto; }
+    @page{ size:13.333in 7.5in; margin:0; }
+  }
+
+  /* ---- Modo presentación: pantalla completa, 1 diapositiva, flechas ---- */
+  .present-btn{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--accent-ink);
+    background:var(--accent-soft);
+    border:1px solid var(--accent);
+    border-radius:99px;
+    padding:.5em 1.2em;
+    cursor:pointer;
+    white-space:nowrap;
+    align-self:center;
+  }
+  .present-btn:hover{ background:var(--accent); color:var(--paper); }
+  body.presenting{ background:#000; overflow:hidden; }
+  body.presenting .deck-head{ display:none; }
+  body.presenting .deck{ max-width:none; margin:0; gap:0; }
+  body.presenting .slide{ display:none; }
+  body.presenting .slide.active{
+    display:flex;
+    position:fixed;
+    top:50%; left:50%;
+    width:1280px;
+    height:720px;
+    margin:0;
+    border-radius:0;
+    transform-origin:center center;
+    transform:translate(-50%,-50%) scale(var(--present-scale, 1));
+  }
+  .present-hint{
+    position:fixed; bottom:16px; left:50%; transform:translateX(-50%);
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; color:#ddd;
+    background:rgba(0,0,0,.6); padding:.4em 1.1em; border-radius:99px;
+    pointer-events:none; opacity:0; transition:opacity .4s; z-index:10;
+  }
+  .present-hint.show{ opacity:1; }
+  @media (max-width:720px){
+    .present-btn{ display:none; }
+  }
+
+  /* Semáforo: amarillo "en proceso" (token propio, distinto del acento ocre) */
+  :root{ --warn:#7A5E00; --warn-soft:#F4E4A1; }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --warn:#E6C84F; --warn-soft:#3A3318; } }
+  :root[data-theme="dark"]{ --warn:#E6C84F; --warn-soft:#3A3318; }
+  @media print{ :root{ --warn:#E6C84F; --warn-soft:#3A3318; } }
+
+  /* ---- Día 2: componentes nuevos ---- */
+  .card-p{ margin:0; font-size:clamp(.64rem,1.35cqw,.9rem); line-height:1.45; color:var(--ink); }
+  .card-p.big{ font-family:'Fraunces',serif; font-size:clamp(.85rem,2cqw,1.3rem); line-height:1.35; }
+  .card-p.muted{ color:var(--ink-soft); }
+  .tile .desc.ex{ color:var(--ink); border-top:1px dotted var(--line); padding-top:.4em; margin-top:auto; }
+  .bignum{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(1.8rem,5.4cqw,3.4rem); line-height:1; font-variant-numeric:tabular-nums; color:var(--ink); }
+  .stat-pair .sp-tile .amt.big{ font-size:clamp(1.2rem,3.6cqw,2.3rem); color:var(--ink); }
+  .stat-pair .sp-tile:last-child .amt.big{ color:var(--accent); }
+
+  .flow{ display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:1cqw; align-items:stretch; }
+  .flow-box{ border:1px solid var(--line); background:var(--paper); border-radius:4px; padding:1.4cqw 1.6cqw; font-weight:600; font-size:clamp(.7rem,1.6cqw,1.02rem); line-height:1.3; display:flex; flex-direction:column; gap:.3em; justify-content:center; }
+  .flow-box small{ font-weight:400; color:var(--ink-soft); font-size:.82em; }
+  .flow-box.accent{ border:2px solid var(--phase, var(--accent)); background:var(--paper-raise); }
+  .flow-box.ghost{ border:none; background:none; }
+  .flow-arrow{ align-self:center; font-family:'Fraunces',serif; font-size:clamp(1rem,2.4cqw,1.6rem); color:var(--phase, var(--accent)); }
+
+  .chain{ display:grid; grid-template-columns:repeat(5,1fr); gap:1cqw; margin-top:1em; }
+  .chain-step{ border:1px solid var(--line); border-top:3px solid var(--phase, var(--accent)); background:var(--paper); border-radius:4px; padding:1.3cqw 1.2cqw; display:flex; flex-direction:column; gap:.4em; }
+  .chain-step .tag{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:clamp(.54rem,1.08cqw,.72rem); color:var(--phase, var(--accent)); }
+  .chain-step p{ margin:0; font-size:clamp(.64rem,1.35cqw,.9rem); line-height:1.35; font-weight:600; }
+  .chain-step small{ margin-top:auto; color:var(--ink-soft); font-size:clamp(.56rem,1.12cqw,.76rem); line-height:1.3; }
+
+  .quad{ display:grid; grid-template-columns:auto 1fr; grid-template-rows:1fr auto; gap:.6cqw; margin-top:1em; flex:1; min-height:0; }
+  .quad-axis-y{ writing-mode:vertical-rl; transform:rotate(180deg); font-family:'IBM Plex Mono',monospace; font-size:clamp(.56rem,1.1cqw,.74rem); color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; text-align:center; }
+  .quad-axis-x{ grid-column:2; font-family:'IBM Plex Mono',monospace; font-size:clamp(.56rem,1.1cqw,.74rem); color:var(--ink-faint); text-transform:uppercase; letter-spacing:.08em; text-align:right; }
+  .quad-grid{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; gap:.6cqw; }
+  .quad-cell{ border:1px solid var(--line); background:var(--paper); border-radius:4px; padding:1.2cqw 1.5cqw; display:flex; flex-direction:column; gap:.3em; font-size:clamp(.72rem,1.65cqw,1.05rem); }
+  .quad-cell .tag{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:clamp(.5rem,1cqw,.68rem); color:var(--ink-faint); }
+  .quad-cell small{ color:var(--phase-method); font-family:'IBM Plex Mono',monospace; font-size:clamp(.54rem,1.08cqw,.72rem); }
+  .quad-cell.good{ background:var(--good-soft); border-color:var(--good); }
+  .quad-cell.crit{ background:var(--critical-soft); border-color:var(--critical); }
+
+  .table-wrap{ overflow-x:auto; margin-top:1em; }
+  table.matrix{ border-collapse:collapse; width:100%; table-layout:fixed; }
+  table.matrix th, table.matrix td{ border:1px solid var(--line); padding:.55em .6em; font-size:clamp(.58rem,1.2cqw,.82rem); line-height:1.3; vertical-align:top; }
+  table.matrix thead th{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.05em; font-weight:500; color:var(--ink-faint); font-size:clamp(.52rem,1.04cqw,.7rem); text-align:left; }
+  table.matrix tbody th{ text-align:left; font-weight:600; background:var(--paper); width:13%; }
+  table.matrix td.hit{ background:var(--accent-soft); color:var(--accent-ink); font-weight:500; }
+
+  ol.numbered{ margin:1.1em 0 0; padding-left:1.6em; columns:2; column-gap:4cqw; font-size:clamp(.74rem,1.7cqw,1.08rem); line-height:1.45; }
+  ol.numbered li{ margin-bottom:.55em; break-inside:avoid; padding-left:.3em; }
+  ol.numbered li::marker{ font-family:'IBM Plex Mono',monospace; color:var(--phase, var(--accent)); font-weight:600; }
+  ol.msgs li span{ display:block; font-family:'IBM Plex Mono',monospace; font-size:.7em; color:var(--ink-faint); }
+  .pill.dim{ background:var(--accent-soft); color:var(--accent-ink); }
+
+  .ficha{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:4px; overflow:hidden; margin-top:1.1em; }
+  .ficha div{ background:var(--paper); padding:1.1cqw 1.2cqw; font-size:clamp(.62rem,1.3cqw,.88rem); line-height:1.35; display:flex; flex-direction:column; gap:.3em; }
+  .ficha span{ font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:clamp(.5rem,1cqw,.68rem); color:var(--phase-method); }
+
+  .eq{ display:flex; align-items:stretch; gap:1cqw; margin-top:1.3em; }
+  .eq-box{ flex:1; border:1px solid var(--line); background:var(--paper); border-radius:4px; padding:1.4cqw; font-size:clamp(.72rem,1.6cqw,1.02rem); display:flex; flex-direction:column; justify-content:center; gap:.3em; }
+  .eq-box small{ color:var(--ink-soft); font-size:.8em; }
+  .eq-box.ghost{ border-style:dashed; }
+  .eq-box.strong{ background:var(--phase, var(--accent)); color:var(--paper-raise); font-family:'Fraunces',serif; font-weight:700; font-size:clamp(1rem,2.4cqw,1.5rem); text-align:center; }
+  .eq-op{ align-self:center; font-family:'Fraunces',serif; font-size:clamp(1.2rem,3cqw,2rem); color:var(--ink-soft); }
+
+  .timebar{ display:flex; gap:.5cqw; margin-top:1.4em; }
+  .timebar div{ border-top:6px solid var(--phase, var(--accent)); background:var(--paper); border:1px solid var(--line); border-top-width:6px; border-top-color:var(--phase, var(--accent)); padding:1cqw; font-size:clamp(.6rem,1.3cqw,.86rem); line-height:1.3; display:flex; flex-direction:column; gap:.2em; min-width:0; }
+  .timebar div:nth-child(3){ border-top-color:var(--accent); }
+  .timebar div:nth-child(4){ border-top-color:var(--line); }
+  .timebar b{ font-family:'Fraunces',serif; font-size:1.4em; }
+
+  .turno .slide-pad{ justify-content:center; }
+  .turno h2{ font-family:'Fraunces',serif; font-weight:700; font-size:clamp(2.4rem,9cqw,6rem); line-height:1; margin:.25em 0 .2em; color:var(--phase, var(--accent)); }
+  .turno-pp{ font-family:'Fraunces',serif; font-style:italic; font-size:clamp(1rem,2.6cqw,1.7rem); margin:0; max-width:34ch; line-height:1.3; }
+  .turno-par{ margin:1.4em 0 0; font-family:'IBM Plex Mono',monospace; font-size:clamp(.66rem,1.4cqw,.92rem); color:var(--ink-soft); }
+
+  svg .grid line{ stroke:var(--line); stroke-width:1; }
+  svg .axis{ stroke:var(--ink-faint); stroke-width:1; }
+  svg polyline{ fill:none; stroke-width:2.5; stroke-linejoin:round; stroke-linecap:round; }
+  svg .ln-dir{ stroke:var(--accent); stroke-width:3.5; }
+  svg .ln-doc{ stroke:var(--phase-method); }
+  svg .ln-est{ stroke:var(--ink-faint); }
+  svg .pt-dir{ fill:var(--accent); } svg .pt-doc{ fill:var(--phase-method); } svg .pt-est{ fill:var(--ink-faint); }
+  svg .lbl-dir, svg .lbl-doc, svg .lbl-est{ font-family:'Archivo',sans-serif; font-size:12px; font-weight:600; }
+  svg .lbl-dir{ fill:var(--accent); } svg .lbl-doc{ fill:var(--phase-method); } svg .lbl-est{ fill:var(--ink-soft); }
+  svg .bar{ fill:var(--ink-faint); } svg .bar.hi{ fill:var(--accent); }
+
+  .head-actions{ display:flex; gap:.6em; align-items:center; }
+  .theme-btn{ background:transparent; color:var(--ink-soft); border-color:var(--line); }
+  .theme-btn:hover{ background:var(--line); color:var(--ink); }
+  .present-btn:focus-visible, .theme-btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  @media (max-width:720px){
+    .flow{ grid-template-columns:1fr; }
+    .flow-arrow{ transform:rotate(90deg); justify-self:center; }
+    .flow-box.ghost{ display:none; }
+    .chain{ grid-template-columns:1fr 1fr; }
+    .ficha{ grid-template-columns:1fr 1fr; }
+    .eq{ flex-direction:column; }
+    .timebar{ flex-direction:column; }
+    ol.numbered{ columns:1; }
+    .stat-pair .sp-arrow{ transform:rotate(90deg); }
+  }
+
+  /* Títulos-afirmación del Día 2: más anchos y un punto más chicos */
+  .slide-title{ max-width:34ch; font-size:clamp(1.15rem,3.3cqw,2.25rem); line-height:1.1; }
+  .chart-card svg{ height:100%; min-height:0; }
+  .chart-card svg .chart-bar-label{ font-size:12px; }
+  .chart-card svg .chart-value-label{ font-size:15px; }
+
+  /* Etapas del diseño (6) */
+  .chain.six{ grid-template-columns:repeat(6,1fr); margin-top:1.4em; }
+  .chain-step.done{ background:var(--paper-raise); }
+  .chain-step.today{ border-top-color:var(--phase-method); border-style:dashed; border-top-style:solid; }
+  .chain-step.today .tag{ color:var(--phase-method); }
+
+  /* Explicativo vs teoría de cambio */
+  .tc{ display:flex; flex-direction:column; gap:.7cqw; margin-top:1.1em; }
+  .tc-row{ display:grid; grid-template-columns:9cqw 1fr auto 1fr auto 1fr; gap:1cqw; align-items:stretch; }
+  .tc-lbl{ align-self:center; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.06em; font-size:clamp(.5rem,1cqw,.68rem); color:var(--phase, var(--accent)); line-height:1.3; }
+  .tc-down{ text-align:center; font-family:'IBM Plex Mono',monospace; font-size:clamp(.54rem,1.1cqw,.74rem); color:var(--ink-soft); }
+
+  /* Semáforo de entregas */
+  table.sem{ border-collapse:separate; border-spacing:.35cqw; width:100%; table-layout:fixed; margin-top:.4em; }
+  table.sem th, table.sem td{ font-size:clamp(.58rem,1.25cqw,.86rem); padding:.5em .6em; text-align:center; border-radius:3px; }
+  table.sem thead th{ font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--ink); font-size:clamp(.62rem,1.35cqw,.9rem); }
+  table.sem thead th small{ display:block; font-weight:400; color:var(--ink-faint); font-size:.78em; letter-spacing:.02em; }
+  table.sem tbody th{ text-align:left; font-weight:600; width:24%; padding-left:0; }
+  table.sem td.c{ background:var(--good-soft); color:var(--good); font-weight:600; }
+  table.sem td.p{ background:var(--warn-soft); color:var(--warn); font-weight:600; }
+  table.sem td.n{ background:var(--critical-soft); color:var(--critical); font-weight:600; }
+
+  /* Lámina final: QR grande para leer desde el fondo del salón */
+  .qr-final .slide-pad{ flex-direction:row; align-items:center; gap:4cqw; padding-top:4cqw; padding-bottom:6cqw; }
+  .qr-text{ flex:1; display:flex; flex-direction:column; gap:.6em; min-width:0; }
+  .qr-text h2{ font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.4rem,4.4cqw,3rem); line-height:1.08; margin:.2em 0 0; text-wrap:balance; }
+  .qr-text p{ margin:0; color:var(--ink-soft); font-size:clamp(.8rem,1.9cqw,1.2rem); }
+  .qr-text .link{ font-size:clamp(.66rem,1.5cqw,.95rem); }
+  .qr-box{ flex:none; width:44cqw; max-width:100%; }
+  .qr-box > div{ padding:1.4cqw !important; border-radius:1cqw !important; }
+  .qr-box img{ display:block; width:100%; height:auto; image-rendering:pixelated; }
+  @media (max-width:720px){
+    .chain.six{ grid-template-columns:1fr 1fr; }
+    .tc-row{ grid-template-columns:1fr; }
+    .tc-row .flow-arrow{ transform:rotate(90deg); justify-self:center; }
+    .qr-final .slide-pad{ flex-direction:column; }
+    .qr-box{ width:80%; }
+  }
+  .qr-box > div{ width:100%; box-sizing:border-box; }
+  .qr-box img{ width:100% !important; height:auto !important; max-width:none !important; }
+  .qr-box{ width:40cqw; }
+  table.sem th, table.sem td{ font-size:clamp(.66rem,1.5cqw,1.02rem); padding:.75em .6em; }
+  table.sem thead th{ font-size:clamp(.7rem,1.6cqw,1.08rem); }
+
+  /* Semáforo agregado (sin identificar grupos) */
+  .sem-legend{ display:flex; gap:1.6em; margin-top:1em; font-family:'IBM Plex Mono',monospace; font-size:clamp(.56rem,1.15cqw,.78rem); color:var(--ink-soft); }
+  .sem-legend span{ display:inline-flex; align-items:center; gap:.5em; }
+  .d{ display:inline-block; width:2.2cqw; height:2.2cqw; min-width:12px; min-height:12px; border-radius:50%; margin-right:.6cqw; vertical-align:middle; }
+  .sem-legend .d{ width:1.3cqw; height:1.3cqw; min-width:9px; min-height:9px; margin-right:0; }
+  .d.c{ background:var(--good); } .d.p{ background:var(--warn); } .d.n{ background:var(--critical); }
+  table.semagg{ border-collapse:collapse; margin-top:.6em; }
+  table.semagg th, table.semagg td{ border-bottom:1px solid var(--line); padding:.5em 0; }
+  table.semagg th{ text-align:left; font-weight:600; font-size:clamp(.7rem,1.6cqw,1.05rem); padding-right:3cqw; white-space:nowrap; }
+  table.semagg td.dots{ white-space:nowrap; padding-right:3cqw; }
+  table.semagg td.cnt{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.56rem,1.15cqw,.78rem); color:var(--ink-soft); }
+
+  @media print{ .head-actions{ display:none !important; } }
+</style>
+</head>
+<body>
+
+<div class="deck-head">
+  <h1>Presupuesto Público por Resultados — Día 2</h1>
+  <p>56 slides · Taller EGPP-PUCP, sáb. 26 sep. 2026</p>
+  <div class="head-actions">
+    <button id="theme-btn" class="present-btn theme-btn" type="button">◑ Tema claro</button>
+    <button id="present-btn" class="present-btn" type="button">▶ Presentar</button>
+  </div>
+</div>
+
+<div id="present-hint" class="present-hint">← → para avanzar · Esc para salir</div>
+
+<div class="deck">
+
+  <!-- COVER -->
+  <section class="slide cover">
+    <div class="slide-pad" style="justify-content:flex-start; gap:.4em;">
+      <div class="cover-logo" role="img" aria-label="Gobierno y Políticas Públicas, PUCP"></div>
+      <span class="eyebrow">EGPP · Educación Continua PUCP · Día 2</span>
+      <h1>Medir, seguir,<br>evaluar</h1>
+      <h2>Del diagnóstico del programa a una propuesta que se pueda gestionar</h2>
+      <div class="meta">
+        <span><strong>Sesión 3 – 4</strong>09:00–17:00</span>
+        <span><strong>Sábado 26 sep. 2026</strong>Campus PUCP</span>
+        <span><strong>Juan Pablo Silva Macher</strong>Docente</span>
+      </div>
+    </div>
+    <span class="slide-foot">01 / 56</span>
+  </section>
+
+  <!-- AGENDA -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Apertura</span>
+      <h2 class="slide-title">Hoy: de la teoría a su programa, y del programa al plenario</h2>
+      <div class="cols2" style="flex:none; margin-top:1.1em;">
+        <div class="col-card">
+          <span class="tag">Mañana</span>
+          <h3>Teoría y taller en paralelo</h3>
+          <ul>
+            <li>Qué aprendimos de las Entregas 1</li>
+            <li>De la condición de interés al resultado: la teoría de cambio</li>
+            <li>¿Para qué medir? Dimensiones y ámbitos del desempeño</li>
+            <li><b>Taller 1:</b> los indicadores de su programa hoy</li>
+            <li>Construir un buen indicador · Semáforo Escuela</li>
+            <li>Evaluación en 10 minutos</li>
+            <li><b>Taller 2:</b> preparan lo que van a mostrar</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <span class="tag">Tarde</span>
+          <h3>Presentaciones y revisión</h3>
+          <ul>
+            <li>Cada grupo presenta desde su propio documento, responde preguntas y recibe comentarios</li>
+            <li>Orden: G4 · G3 · G1 · G2 · G5</li>
+            <li>Cinco mensajes del taller</li>
+            <li>Ronda final: una cosa que llevas el lunes</li>
+          </ul>
+        </div>
+      </div>
+      <p class="takeaway">La tarde es para consolidar lo aprendido, no para lucir láminas.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">02 / 56</span>
+  </section>
+
+  <!-- DIVIDER DEVOLUCIÓN -->
+  <section class="slide divider" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Devolución</span>
+      <h2>Qué aprendimos de las Entregas 1</h2>
+      <p>Primero, la pieza que une todo: la teoría de cambio. Luego, dónde está cada grupo, cinco conceptos para reforzar y tres cosas que salieron muy bien. El detalle por grupo está en el informe de devolución.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">03 / 56</span>
+  </section>
+
+  <!-- ETAPAS DEL DISEÑO -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Teoría de cambio <span class="sub">1 de 3</span></span>
+      <h2 class="slide-title">El diseño de un programa tiene seis etapas, y la Entrega 1 recorrió una versión simple de las cuatro primeras</h2>
+      <div class="chain six">
+        <div class="chain-step done"><span class="tag">1</span><p>Condición de interés</p><small>Parte I de la Entrega 1</small></div>
+        <div class="chain-step done"><span class="tag">2</span><p>Modelo explicativo</p><small>¿Qué causas, con qué evidencia?</small></div>
+        <div class="chain-step done"><span class="tag">3</span><p>Modelo prescriptivo</p><small>¿Sobre qué causa actuamos, y cómo?</small></div>
+        <div class="chain-step done" style="border-color:var(--phase-frame);"><span class="tag">4</span><p>Teoría de cambio</p><small>Parte II: la cadena de resultados</small></div>
+        <div class="chain-step"><span class="tag">5</span><p>Líneas de producción</p><small>Cómo se produce cada producto</small></div>
+        <div class="chain-step today"><span class="tag">6</span><p>Indicadores</p><small>Hoy en la mañana</small></div>
+      </div>
+      <p class="takeaway">Hoy sumamos la etapa 6: cómo saber si la teoría de cambio se está cumpliendo.</p>
+      <p class="source-note">Etapas del Art. 9.1 de la Directiva N° 0001-2026-EF/50.01 (MEF).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">04 / 56</span>
+  </section>
+
+  <!-- DEL PROBLEMA A LA INTERVENCIÓN -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Teoría de cambio <span class="sub">2 de 3</span></span>
+      <h2 class="slide-title">El modelo explicativo ordena las causas; la teoría de cambio ordena lo que hacemos contra una de ellas</h2>
+      <div class="tc">
+        <div class="tc-row">
+          <span class="tc-lbl">Explicativo</span>
+          <div class="flow-box">Prácticas inadecuadas de alimentación y cuidado<small>causa, con evidencia</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">Dieta inadecuada<small>causa directa</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box accent">Desnutrición crónica infantil<small>condición de interés</small></div>
+        </div>
+        <div class="tc-down">↓ el modelo prescriptivo elige la causa sobre la que se actúa ↓</div>
+        <div class="tc-row">
+          <span class="tc-lbl">Teoría de cambio</span>
+          <div class="flow-box">Madres de menores de 24 meses reciben consejería<small>producto · lo que se financia</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">Aumenta la lactancia materna exclusiva<small>resultado intermedio</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box accent">Baja la desnutrición crónica<small>resultado final</small></div>
+        </div>
+      </div>
+      <p class="source-note">Ejemplo con el marco conceptual de UNICEF sobre desnutrición infantil, el mismo del Día 1 y del instructivo de la Entrega 1.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">05 / 56</span>
+  </section>
+
+  <!-- POR QUÉ IMPORTA -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Teoría de cambio <span class="sub">3 de 3</span></span>
+      <h2 class="slide-title">La teoría de cambio es el argumento para pedir presupuesto</h2>
+      <ul class="plain" style="margin-top:1.2em;">
+        <li>El presupuesto financia <b>productos</b>. Lo que justifica ese gasto es el <b>resultado final</b> sobre la condición de interés.</li>
+        <li>La teoría de cambio es la cadena más sus <b>supuestos</b>: lo que tiene que ser cierto para que cada flecha funcione.</li>
+        <li>El supuesto frágil es la flecha más débil. Los indicadores y la evaluación se usan para vigilarla.</li>
+      </ul>
+      <p class="takeaway">Si no puedes dibujar la flecha que va de tu intervención al resultado final, no puedes defender su presupuesto.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">06 / 56</span>
+  </section>
+
+  <!-- SEMÁFORO DE ENTREGAS (agregado) -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Devolución · la clase en conjunto</span>
+      <h2 class="slide-title">Lo que más falta afinar es la magnitud, el indicador y las fuentes</h2>
+      <div class="sem-legend"><span><i class="d c"></i>Cumplido</span><span><i class="d p"></i>En proceso</span><span><i class="d n"></i>No desarrollado</span></div>
+      <div class="table-wrap">
+        <table class="semagg">
+          <tbody>
+            <tr><th>Condición de interés</th><td class="dots"><span class="d c"></span><span class="d c"></span><span class="d c"></span><span class="d p"></span><span class="d p"></span></td><td class="cnt">3 de 5 cumplido</td></tr>
+            <tr><th>Magnitud (4 elementos)</th><td class="dots"><span class="d c"></span><span class="d p"></span><span class="d p"></span><span class="d p"></span><span class="d p"></span></td><td class="cnt">1 de 5 cumplido</td></tr>
+            <tr><th>Indicador de la condición</th><td class="dots"><span class="d c"></span><span class="d c"></span><span class="d p"></span><span class="d p"></span><span class="d p"></span></td><td class="cnt">2 de 5 cumplido</td></tr>
+            <tr><th>Cadena de resultados</th><td class="dots"><span class="d c"></span><span class="d c"></span><span class="d p"></span><span class="d p"></span><span class="d n"></span></td><td class="cnt">2 de 5 cumplido</td></tr>
+            <tr><th>Supuesto más frágil</th><td class="dots"><span class="d c"></span><span class="d c"></span><span class="d p"></span><span class="d p"></span><span class="d n"></span></td><td class="cnt">2 de 5 cumplido</td></tr>
+            <tr><th>Pregunta de evidencia</th><td class="dots"><span class="d c"></span><span class="d c"></span><span class="d p"></span><span class="d p"></span><span class="d n"></span></td><td class="cnt">2 de 5 cumplido</td></tr>
+            <tr><th>Fuentes verificables</th><td class="dots"><span class="d c"></span><span class="d c"></span><span class="d p"></span><span class="d p"></span><span class="d p"></span></td><td class="cnt">2 de 5 cumplido</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source-note">Cada punto es un grupo (5 en total), ordenados por estado, no por grupo. El detalle de cada grupo está en su informe de devolución.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">07 / 56</span>
+  </section>
+
+  <!-- PATRÓN 1 -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Para reforzar <span class="sub">1 de 5</span></span>
+      <h2 class="slide-title">Un supuesto frágil no es una causa ni un vacío de información</h2>
+      <div class="cols2" style="flex:none; margin-top:1em; grid-template-columns:1fr 1fr 1fr;">
+        <div class="col-card"><span class="tag">Factor causal</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Explica el problema</h3><p class="card-p">"Falta de empleo juvenil." Va en el modelo explicativo, no en la cadena.</p></div>
+        <div class="col-card"><span class="tag">Vacío de evidencia</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Algo que no sabemos</h3><p class="card-p">"No hay estudios que midan la reducción." Es el origen de una pregunta, no un supuesto.</p></div>
+        <div class="col-card" style="border-color:var(--phase-work);"><span class="tag">Supuesto frágil</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Lo que la cadena da por cierto</h3><p class="card-p">Una condición entre dos eslabones que, si falla, rompe el resultado aunque el producto se entregue al 100%.</p></div>
+      </div>
+      <p class="takeaway">Se elige uno solo: el eslabón donde más se juega el programa.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">08 / 56</span>
+  </section>
+
+  <!-- PATRÓN 2 -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Para reforzar <span class="sub">2 de 5</span></span>
+      <h2 class="slide-title">La pregunta de evidencia nace del supuesto frágil</h2>
+      <div class="flow" style="margin-top:1.4em;">
+        <div class="flow-box">Producto entregado</div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box accent">Supuesto frágil<small>¿y si esto no se cumple?</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">Resultado esperado</div>
+      </div>
+      <div class="flow" style="margin-top:.6em;">
+        <div class="flow-box ghost"></div>
+        <div class="flow-arrow" style="visibility:hidden;">→</div>
+        <div class="flow-box">Pregunta de evidencia<small>¿cuántas veces se cumple, y qué pasa cuando no?</small></div>
+        <div class="flow-arrow" style="visibility:hidden;">→</div>
+        <div class="flow-box ghost"></div>
+      </div>
+      <p class="takeaway">Si la pregunta habla de otra cosa que el supuesto, el diagnóstico pierde su hilo.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">09 / 56</span>
+  </section>
+
+  <!-- PATRÓN 3 -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Para reforzar <span class="sub">3 de 5</span></span>
+      <h2 class="slide-title">La condición de interés describe lo que está mal</h2>
+      <div class="cols2" style="flex:none; margin-top:1.2em;">
+        <div class="col-card"><span class="tag" style="color:var(--critical);">Así no · es un objetivo</span><p class="card-p big">"La salvaguarda de la población e infraestructura expuesta a peligros naturales."</p></div>
+        <div class="col-card"><span class="tag" style="color:var(--good);">Así sí · es un problema medible</span><p class="card-p big">"Alta exposición de la población de Nepeña a movimientos en masa e inundaciones: 97,7% en nivel alto o muy alto."</p></div>
+      </div>
+      <p class="takeaway">Un problema bien escrito ya sugiere su indicador. Un objetivo, no.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">10 / 56</span>
+  </section>
+
+  <!-- PATRÓN 4 -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Para reforzar <span class="sub">4 de 5</span></span>
+      <h2 class="slide-title">La IA busca; ustedes verifican y concluyen</h2>
+      <ul class="plain" style="margin-top:1.2em;">
+        <li><b>Cada referencia con URL o DOI que abra.</b> Un título genérico sin enlace ("Governance and Crime in Latin American Cities") es la firma típica de una fuente inventada.</li>
+        <li><b>Cada cifra, contra el documento original.</b> Magnitudes de INEI, MEF o el sector antes que de prensa o gremios.</li>
+        <li><b>Lean la categoría del estudio.</b> Un cuasi-experimento en un país no es "evidencia meta-analítica global".</li>
+        <li><b>El documento es la síntesis del grupo.</b> Los prompts y las tablas de la IA se quedan en su borrador.</li>
+      </ul>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">11 / 56</span>
+  </section>
+
+  <!-- PATRÓN 5 -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Para reforzar <span class="sub">5 de 5 · puente al Tema III</span></span>
+      <h2 class="slide-title">Un buen dato para dimensionar no siempre sirve para gestionar</h2>
+      <p class="body-text" style="margin-top:1em;">La magnitud responde "¿qué tan grave es?". El indicador de seguimiento responde "¿nos estamos moviendo, y por nosotros?". Son preguntas distintas y a veces piden indicadores distintos. De eso trata la mañana.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">12 / 56</span>
+  </section>
+
+  <!-- BUEN EJEMPLO G1 -->
+  <section class="slide quote-slide" style="--phase:var(--good);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Bien hecho · Grupo 1 <span class="sub">PP 0030 · evidencia detrás del supuesto</span></span>
+      <blockquote style="font-size:clamp(.95rem,2.3cqw,1.45rem);">"No basta con incrementar la presencia policial para lograr una reducción del delito. Los resultados favorables se observan principalmente cuando los recursos policiales se focalizan en puntos calientes."<cite>Entrega 1 · Grupo 1, a partir de Braga et al. (2019)</cite></blockquote>
+      <ul class="plain" style="margin-top:1.3em;">
+        <li>Buscaron evidencia para cada causa y la clasificaron por tipo de estudio: experimental, cuasi-experimental u observacional.</li>
+        <li>El supuesto toca de lleno un producto real del programa: el patrullaje por sector.</li>
+      </ul>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">13 / 56</span>
+  </section>
+
+  <!-- BUEN EJEMPLO G2 -->
+  <section class="slide" style="--phase:var(--good);">
+    <div class="slide-pad">
+      <span class="kicker">Bien hecho · Grupo 2 <span class="sub">PP 0090 · cadena de resultados</span></span>
+      <h2 class="slide-title">Una cadena ordenada con las preguntas guía, fiel a los productos reales del programa</h2>
+      <div class="flow" style="margin-top:1.2em;">
+        <div class="flow-box">Docentes y directivos reciben evaluación y formación<small>producto · ¿qué recibe la población?</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">Mejoran sus competencias en el aula y en la escuela<small>resultado · ¿qué cambia?</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box accent">Suben los logros en lectura y matemática<small>resultado final</small></div>
+      </div>
+      <p class="takeaway">"La evaluación es un diagnóstico, no un catalizador de cambio profesional": ahí vieron su flecha más débil.</p>
+      <p class="source-note">Entrega 1 del Grupo 2: cuatro líneas de cadena (infraestructura, formación, materiales, evaluación). Se muestra una.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">14 / 56</span>
+  </section>
+
+  <!-- BUEN EJEMPLO G4 -->
+  <section class="slide" style="--phase:var(--good);">
+    <div class="slide-pad">
+      <span class="kicker">Bien hecho · Grupo 4 <span class="sub">PP 1002 · magnitud y brecha</span></span>
+      <h2 class="slide-title">Magnitud completa, brecha contra una meta y proyección</h2>
+      <div class="stat-grid" style="flex:none;">
+        <div class="stat"><span class="sector">Extensión</span><span class="num">49,1<small>%</small></span><span class="note">mujeres alguna vez unidas que sufrieron violencia de pareja (ENDES 2025)</span></div>
+        <div class="stat"><span class="sector">Intensidad</span><span class="num">12,1<small>%</small></span><span class="note">de las agredidas físicamente necesitó atención médica</span></div>
+        <div class="stat"><span class="sector">Evolución</span><span class="num">−21,7<small>p.p.</small></span><span class="note">de 70,8% (2015) a 49,1% (2025)</span></div>
+        <div class="stat"><span class="sector">Brecha</span><span class="num">~38<small>% al 2030</small></span><span class="note">al ritmo actual, lejos de la meta ODS 5.2 (eliminación)</span></div>
+      </div>
+      <p class="takeaway">Los cuatro elementos, con fuente oficial y una meta contra la cual medir la distancia.</p>
+      <p class="source-note">Fuente: Entrega 1 del Grupo 4, con datos de INEI, ENDES 2025.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">15 / 56</span>
+  </section>
+
+  <!-- BUEN EJEMPLO G3 -->
+  <section class="slide quote-slide" style="--phase:var(--good);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Bien hecho · Grupo 3 <span class="sub">PP 0117 · supuesto frágil</span></span>
+      <blockquote style="font-size:clamp(.95rem,2.3cqw,1.45rem);">"Los cuidadores que reciben la intervención no presentan problemas severos de salud mental, adicciones ni pobreza extrema que impidan adoptar las pautas de crianza enseñadas."<cite>Entrega 1 · Grupo 3</cite></blockquote>
+      <ul class="plain" style="margin-top:1.3em;">
+        <li>Está entre dos eslabones: taller de crianza entregado → cambio de conducta en casa.</li>
+        <li>Está fuera del control del programa, y si falla, el resultado se cae aunque los talleres se cumplan al 100%.</li>
+      </ul>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">16 / 56</span>
+  </section>
+
+  <!-- BUEN EJEMPLO G5 -->
+  <section class="slide quote-slide" style="--phase:var(--good);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Bien hecho · Grupo 5 <span class="sub">PP 0068 · pregunta de evidencia</span></span>
+      <blockquote style="font-size:clamp(.95rem,2.3cqw,1.45rem);">"¿Qué porcentaje de las áreas declaradas de alto riesgo, recientemente intervenidas con descolmatación y canalización, vuelve a ser ocupada con viviendas o actividades productivas?"<cite>Entrega 1 · Grupo 5</cite></blockquote>
+      <ul class="plain" style="margin-top:1.3em;">
+        <li>Es concreta, medible y cabe en un indicador.</li>
+        <li>Revela el verdadero supuesto frágil del programa: que la población no vuelva a ocupar las zonas de riesgo.</li>
+      </ul>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">17 / 56</span>
+  </section>
+
+  <!-- TAREA E1 -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Para la tarde</span>
+      <h2 class="slide-title">Ustedes eligen el formato: una presentación o su propio documento</h2>
+      <ul class="plain" style="margin-top:1.2em;">
+        <li>Hay una <b>plantilla de presentación</b> en la página de recursos. Es opcional.</li>
+        <li>Si prefieren, presentan desde el documento de su Entrega 1, ajustado con el informe de devolución.</li>
+        <li>En cualquier caso, que se vea la línea completa: condición de interés → teoría de cambio → supuesto frágil → indicadores.</li>
+      </ul>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">18 / 56</span>
+  </section>
+
+  <!-- DIVIDER TEMA III -->
+  <section class="slide divider" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Sesión 3 · Tema III</span>
+      <h2>Medición del desempeño y seguimiento</h2>
+      <p>Qué es el desempeño, cómo se mide con indicadores y qué hace falta para que el seguimiento cambie decisiones.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">19 / 56</span>
+  </section>
+
+  <!-- PARA QUÉ MEDIR 2x2 -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">¿Para qué medir?</span>
+      <h2 class="slide-title">El PpR necesita saber dos cosas de cada programa: si es prioritario y si funciona</h2>
+      <div class="quad">
+        <div class="quad-axis-y">Prioridad →</div>
+        <div class="quad-grid">
+          <div class="quad-cell"><span class="tag">Alta prioridad · bajo desempeño</span><b>Mejorar el desempeño</b><small>Objetivo 2 del PpR</small></div>
+          <div class="quad-cell good"><span class="tag">Alta prioridad · alto desempeño</span><b>Proteger y, si hay espacio, expandir</b></div>
+          <div class="quad-cell crit"><span class="tag">Baja prioridad · bajo desempeño</span><b>Reasignar recursos</b><small>Objetivo 1: eficiencia asignativa</small></div>
+          <div class="quad-cell"><span class="tag">Baja prioridad · alto desempeño</span><b>Revisar su lugar en el presupuesto</b></div>
+        </div>
+        <div class="quad-axis-x">Desempeño →</div>
+      </div>
+      <p class="source-note">Adaptado de MEF (2011), esquema de prioridad y desempeño del PpR. Sin indicadores de desempeño, este cuadro no se puede llenar.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">20 / 56</span>
+  </section>
+
+  <!-- ROBINSON -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Modelos de PpR <span class="sub">Robinson (ed.), 2007</span></span>
+      <h2 class="slide-title">Cuánto pesa el desempeño en la decisión de asignar</h2>
+      <div class="cols2" style="flex:none; margin-top:1em; grid-template-columns:1fr 1fr 1fr;">
+        <div class="col-card"><span class="tag">Presentacional</span><p class="card-p">La información de desempeño acompaña al presupuesto, pero no se usa para decidir.</p></div>
+        <div class="col-card" style="border-color:var(--phase-method);"><span class="tag">Informado por desempeño</span><p class="card-p">El desempeño es un insumo más en la negociación. Es el modelo más extendido y el del Perú.</p></div>
+        <div class="col-card"><span class="tag">Vinculación directa</span><p class="card-p">Una fórmula asigna según resultados. Funciona en pocos servicios medibles, como el financiamiento por alumno.</p></div>
+      </div>
+      <p class="body-text" style="margin-top:1em;"><b>Dos referencias internacionales:</b> PART en EE.UU. calificaba programas y publicaba la nota junto al presupuesto; los PSA del Reino Unido fijaban metas entre el Tesoro y cada ministerio.</p>
+      <p class="source-note">Robinson, M. (ed.) (2007). Performance Budgeting: Linking Funding and Results. FMI / Palgrave Macmillan. Lectura obligatoria de los Temas III–IV.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">21 / 56</span>
+  </section>
+
+  <!-- SEGUIMIENTO VS EVALUACIÓN -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Dos instrumentos</span>
+      <h2 class="slide-title">El seguimiento avisa; la evaluación explica</h2>
+      <table class="rules" style="margin-top:1em;">
+        <thead><tr><th style="width:50%;">Seguimiento</th><th>Evaluación</th></tr></thead>
+        <tbody>
+          <tr><td>Continuo, rutinario, durante toda la ejecución</td><td>Puntual: antes, durante o después</td></tr>
+          <tr><td>Traduce objetivos en indicadores y metas</td><td>Analiza por qué se lograron o no los resultados</td></tr>
+          <tr><td>Compara lo logrado con la meta</td><td>Estima cuánto del cambio se debe al programa</td></tr>
+          <tr><td>Alerta a los gerentes sobre problemas</td><td>Explora efectos no previstos y recomienda</td></tr>
+        </tbody>
+      </table>
+      <p class="takeaway">Se necesitan los dos: seguimiento sin evaluación mide sin entender; evaluación sin seguimiento no tiene datos.</p>
+      <p class="source-note">Fuente: Banco Mundial (2000), adaptado.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">22 / 56</span>
+  </section>
+
+  <!-- DIMENSIONES -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Qué se mide</span>
+      <h2 class="slide-title">Cuatro dimensiones del desempeño</h2>
+      <p class="body-text" style="margin-top:.6em;">Ejemplo: un programa de becas escolares.</p>
+      <div class="tiles" style="margin-top:.9em; grid-template-columns:repeat(4,1fr);">
+        <div class="tile"><span class="label">Eficacia</span><span class="desc">¿Logra sus objetivos?</span><span class="desc ex">% de la población escolar vulnerable cubierta con becas</span></div>
+        <div class="tile"><span class="label">Eficiencia</span><span class="desc">¿Cuántos recursos usa por producto?</span><span class="desc ex">Becas entregadas por persona del equipo</span></div>
+        <div class="tile"><span class="label">Economía</span><span class="desc">¿Moviliza y administra bien sus recursos?</span><span class="desc ex">Aportes privados al financiamiento</span></div>
+        <div class="tile"><span class="label">Calidad</span><span class="desc">¿Cumple estándares y satisface al usuario?</span><span class="desc ex">Satisfacción de becarios; pago puntual</span></div>
+      </div>
+      <p class="takeaway">Las dimensiones entran en tensión: más calidad suele costar más.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">23 / 56</span>
+  </section>
+
+  <!-- ÁMBITOS -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Dónde se mide</span>
+      <h2 class="slide-title">Cinco ámbitos de control, uno por eslabón de la cadena</h2>
+      <div class="chain">
+        <div class="chain-step"><span class="tag">Insumo</span><p>¿Se cuenta con los recursos y se usan bien?</p><small>presupuesto, personal</small></div>
+        <div class="chain-step"><span class="tag">Proceso</span><p>¿Se trabaja según los estándares?</p><small>focalización, compras</small></div>
+        <div class="chain-step"><span class="tag">Producto</span><p>¿Se entrega lo comprometido?</p><small>niños vacunados</small></div>
+        <div class="chain-step"><span class="tag">Resultado</span><p>¿Cambia la conducta o la condición del usuario?</p><small>egresados de secundaria</small></div>
+        <div class="chain-step"><span class="tag">Impacto</span><p>¿Mejora la condición de interés?</p><small>desnutrición, ingresos</small></div>
+      </div>
+      <p class="takeaway">A la izquierda, lo que el programa controla. A la derecha, lo que le importa al ciudadano.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">24 / 56</span>
+  </section>
+
+  <!-- MATRIZ -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">La matriz</span>
+      <h2 class="slide-title">Todo indicador tiene una dimensión y un ámbito</h2>
+      <div class="table-wrap">
+        <table class="matrix">
+          <thead><tr><th></th><th>Insumo</th><th>Proceso</th><th>Producto</th><th>Resultado</th><th>Impacto</th></tr></thead>
+          <tbody>
+            <tr><th>Eficacia</th><td></td><td></td><td></td><td class="hit">% de casos de TBC curados</td><td class="hit">Mortalidad infantil por 1 000 nacidos vivos</td></tr>
+            <tr><th>Eficiencia</th><td></td><td></td><td class="hit">Fiscalizaciones por fiscalizador</td><td></td><td></td></tr>
+            <tr><th>Economía</th><td></td><td></td><td class="hit">% de créditos recuperados</td><td></td><td></td></tr>
+            <tr><th>Calidad</th><td></td><td class="hit">Tiempo promedio de atención</td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="takeaway">Un programa con todos sus indicadores en la columna "producto" no sabe si sirve.</p>
+      <p class="source-note">Ejemplos de indicadores: Politeia (2008). Clasificación en la matriz: elaboración propia.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">25 / 56</span>
+  </section>
+
+  <!-- EJERCICIO -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Ejercicio relámpago · 5 min</span>
+      <h2 class="slide-title">¿Qué dimensión mide cada uno?</h2>
+      <ol class="numbered">
+        <li>Pacientes atendidos / población objetivo</li>
+        <li>% de usuarios satisfechos</li>
+        <li>Expedientes resueltos por persona</li>
+        <li>% de estudiantes con logro satisfactorio</li>
+        <li>% de ejecución presupuestal</li>
+        <li>Costo unitario</li>
+        <li>Tiempo promedio de atención</li>
+        <li>Gastos de operación / transferencias entregadas</li>
+      </ol>
+      <p class="source-note">Eficacia · eficiencia · economía · calidad. Fuente de la lista: Cáceres (2019).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">26 / 56</span>
+  </section>
+
+  <!-- RESPUESTAS -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Ejercicio · respuestas</span>
+      <h2 class="slide-title">Una propuesta de respuesta (se puede discutir)</h2>
+      <table class="rules" style="margin-top:.8em;">
+        <tbody>
+          <tr><td>1 · Atendidos / población objetivo</td><td><span class="pill dim">Eficacia</span> cobertura</td><td>5 · % de ejecución presupuestal</td><td><span class="pill dim">Economía</span> no dice nada del resultado</td></tr>
+          <tr><td>2 · % de usuarios satisfechos</td><td><span class="pill dim">Calidad</span> percibida</td><td>6 · Costo unitario</td><td><span class="pill dim">Eficiencia</span></td></tr>
+          <tr><td>3 · Expedientes por persona</td><td><span class="pill dim">Eficiencia</span></td><td>7 · Tiempo de atención</td><td><span class="pill dim">Calidad</span> oportunidad</td></tr>
+          <tr><td>4 · % con logro satisfactorio</td><td><span class="pill dim">Eficacia</span> resultado</td><td>8 · Operación / transferencias</td><td><span class="pill dim">Eficiencia</span></td></tr>
+        </tbody>
+      </table>
+      <p class="takeaway">El indicador más citado en el Estado, el % de ejecución, es el que menos informa sobre resultados.</p>
+      <p class="source-note">Clasificación basada en razonamiento sobre las definiciones de la lámina anterior.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">27 / 56</span>
+  </section>
+
+  <!-- RESULTA -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Los datos existen</span>
+      <h2 class="slide-title">RESULTA publica los indicadores de cada programa, año por año</h2>
+      <table class="rules" style="margin-top:.8em;">
+        <thead><tr><th>PP · indicador</th><th>Nivel</th><th class="num">2019</th><th class="num">2020</th><th class="num">2021</th><th class="num">2022</th><th class="num">2023</th><th class="num">2024</th></tr></thead>
+        <tbody>
+          <tr><td>0030 · % de población urbana víctima de delito con arma de fuego (12 meses)</td><td>R</td><td class="num">12,1</td><td class="num">13,6</td><td class="num">13,5</td><td class="num">12,2</td><td class="num">13,4</td><td class="num">10,9</td></tr>
+          <tr><td>0030 · % de viviendas urbanas afectadas por robo (12 meses)</td><td>R</td><td class="num">4,4</td><td class="num">4,8</td><td class="num">3,8</td><td class="num">4,4</td><td class="num">6,1</td><td class="num">4,9</td></tr>
+          <tr><td>0002 · % de parto institucional en zonas rurales</td><td>P</td><td class="num">80,8</td><td class="num">83,9</td><td class="num">81,1</td><td class="num">81,3</td><td class="num">81,9</td><td class="num">81,1</td></tr>
+        </tbody>
+      </table>
+      <p class="body-text" style="margin-top:.9em;">Aplicativo RESULTA del MEF: <a class="link" href="https://apps5.mineco.gob.pe/ca_bi/resulta2/" target="_blank" rel="noopener">apps5.mineco.gob.pe/ca_bi/resulta2</a></p>
+      <p class="source-note">Fuente: MEF, RESULTA (valores 2019–2024). P = producto, R = resultado.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">28 / 56</span>
+  </section>
+
+  <!-- TALLER 1 -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Taller 1 · 30 min · en grupos</span>
+      <h2 class="slide-title">Los indicadores de su programa hoy</h2>
+      <ol class="numbered" style="columns:1;">
+        <li>Busquen su PP en RESULTA o en el Anexo 2 del programa.</li>
+        <li>Elijan <b>2 indicadores</b> que el programa ya reporta.</li>
+        <li>Ubíquenlos en la matriz: ¿qué dimensión y qué ámbito?</li>
+        <li>Respondan por cada uno: ¿mide lo correcto?, ¿es verificable?, ¿le sirve a alguien para decidir?</li>
+      </ol>
+      <p class="takeaway">Lo que salga de aquí es parte de lo que muestran en la tarde.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">29 / 56</span>
+  </section>
+
+  <!-- PAUSA -->
+  <section class="slide divider" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">15 min</span>
+      <h2>Pausa</h2>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">30 / 56</span>
+  </section>
+
+  <!-- SMART -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Construir un buen indicador</span>
+      <h2 class="slide-title">Cinco pruebas que todo indicador debe pasar</h2>
+      <div class="chain" style="margin-top:1.2em;">
+        <div class="chain-step"><span class="tag">S · Específico</span><p>Mide un aspecto claramente definido.</p></div>
+        <div class="chain-step"><span class="tag">M · Medible</span><p>Se cuantifica con una fórmula y una fuente.</p></div>
+        <div class="chain-step" style="border-color:var(--phase-method);"><span class="tag">A · Atribuible</span><p>Sus cambios se pueden vincular al programa.</p></div>
+        <div class="chain-step"><span class="tag">R · Realista</span><p>Se puede medir con los recursos disponibles.</p></div>
+        <div class="chain-step"><span class="tag">T · Focalizado</span><p>Tiene meta y población objetivo definidas.</p></div>
+      </div>
+      <p class="takeaway">La A es la más difícil y la que más se olvida.</p>
+      <p class="source-note">Criterios SMART según Cáceres (2019).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">31 / 56</span>
+  </section>
+
+  <!-- FICHA -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">La ficha del indicador</span>
+      <h2 class="slide-title">Un indicador sin ficha es solo una buena intención</h2>
+      <div class="ficha">
+        <div><span>Nombre</span>Qué mide, en una frase</div>
+        <div><span>Ámbito · dimensión</span>Producto, resultado… · eficacia, calidad…</div>
+        <div><span>Fórmula</span>Numerador / denominador × 100</div>
+        <div><span>Fuente de datos</span>ENDES, ENAPRES, SIAF, registro administrativo…</div>
+        <div><span>Frecuencia</span>Mensual, anual…</div>
+        <div><span>Línea de base</span>Valor y año de partida</div>
+        <div><span>Sentido esperado</span>Sube ↗ o baja ↘</div>
+        <div><span>Limitaciones</span>Qué no captura; sesgos conocidos</div>
+      </div>
+      <p class="source-note">Campos típicos de la ficha de indicadores de programas presupuestales del MEF (Directiva N° 0001-2026-EF/50.01). Estos son los que se piden en la lámina 4.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">32 / 56</span>
+  </section>
+
+  <!-- TRAMPAS -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Errores frecuentes</span>
+      <h2 class="slide-title">Cinco trampas al elegir indicadores</h2>
+      <ul class="plain" style="margin-top:1.1em;">
+        <li><b>Solo productos.</b> Es cómodo porque se controla, pero no dice si la población está mejor.</li>
+        <li><b>Solo lo que ya existe.</b> La información disponible es un punto de partida, no un límite.</li>
+        <li><b>Stock en vez de flujo.</b> Un indicador que acumula el pasado casi no se mueve año a año.</li>
+        <li><b>Demasiados indicadores.</b> Con veinte, nadie mira ninguno.</li>
+        <li><b>Nadie lo usa.</b> Si ningún gerente cambia una decisión con él, sobra.</li>
+      </ul>
+      <p class="source-note">Basado en Cáceres (2019), y en razonamiento propio.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">33 / 56</span>
+  </section>
+
+  <!-- STOCK VS FLUJO -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Ejemplo en vivo <span class="sub">con el trabajo del Grupo 4</span></span>
+      <h2 class="slide-title">Dos indicadores del mismo problema, dos usos distintos</h2>
+      <div class="cols2" style="flex:none; margin-top:1em;">
+        <div class="col-card">
+          <span class="tag">Stock · para dimensionar</span>
+          <span class="bignum">49,1%</span>
+          <p class="card-p">de las mujeres de 15 a 49 años alguna vez unidas ha sufrido, <b>en algún momento de su vida</b>, violencia psicológica, física o sexual de su pareja.</p>
+          <p class="card-p muted">Acumula violencia ocurrida antes del programa: se mueve lento.</p>
+        </div>
+        <div class="col-card" style="border-color:var(--phase-method);">
+          <span class="tag">Flujo · para hacer seguimiento</span>
+          <span class="bignum">6,8%</span>
+          <p class="card-p">de las mujeres de 15 a 49 años alguna vez unidas sufrió violencia física o sexual de su pareja <b>en los últimos 12 meses</b>.</p>
+          <p class="card-p muted">Refleja lo que pasa hoy y tiene meta nacional: 5,4% al 2025 (PNIG).</p>
+        </div>
+      </div>
+      <p class="source-note">Fuente: INEI, ENDES 2025; MIMP, PNIG (D.S. N° 008-2019-MIMP). Datos de la Entrega 1 del Grupo 4.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">34 / 56</span>
+  </section>
+
+  <!-- DELIVERY UNITS -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Seguimiento que cambia decisiones</span>
+      <h2 class="slide-title">Una unidad de cumplimiento responde cuatro preguntas</h2>
+      <div class="tiles" style="margin-top:1em; grid-template-columns:repeat(4,1fr);">
+        <div class="tile"><span class="label">1</span><span class="desc">¿Qué buscamos lograr exactamente?</span></div>
+        <div class="tile"><span class="label">2</span><span class="desc">¿Cómo lo vamos a hacer?</span></div>
+        <div class="tile"><span class="label">3</span><span class="desc">¿Cómo sabemos, en todo momento, si vamos bien?</span></div>
+        <div class="tile"><span class="label">4</span><span class="desc">Si no vamos bien, ¿qué haremos para corregirlo?</span></div>
+      </div>
+      <p class="body-text" style="margin-top:1em;">Son equipos pequeños que reportan al jefe del Ejecutivo o del sector. Trabajan con datos por prioridad, trayectorias con metas y <b>rutinas</b> de revisión con la autoridad.</p>
+      <p class="source-note">Fuente: Lafuente, M. y González Córdoba, S. (2018). ¿Qué impacto tienen las unidades de cumplimiento? Evaluando innovaciones en los gobiernos. BID.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">35 / 56</span>
+  </section>
+
+  <!-- SEMÁFORO CÓMO -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Caso peruano · Semáforo Escuela (2015)</span>
+      <h2 class="slide-title">Información mensual, metas por UGEL y rutinas con consecuencias</h2>
+      <div class="cols2" style="flex:none; margin-top:1em;">
+        <div class="col-card">
+          <span class="tag">Información</span>
+          <ul>
+            <li>~300 monitores con tablets visitan escuelas al azar</li>
+            <li>Datos mensuales representativos por UGEL</li>
+            <li>Reporte tipo semáforo a los 15 días de cerrado el mes</li>
+            <li>Cada región y UGEL ve sus datos y los de las demás</li>
+          </ul>
+        </div>
+        <div class="col-card">
+          <span class="tag">Metas, rutinas e incentivos</span>
+          <ul>
+            <li>Pocas prioridades: asistencia de estudiantes, docentes y directores; materiales; servicios básicos</li>
+            <li>Meta anual por UGEL y reunión cada 2 meses con regiones y UGEL</li>
+            <li>Asistencia técnica a las UGEL desviadas</li>
+            <li>Incentivos a las UGEL que cumplen</li>
+          </ul>
+        </div>
+      </div>
+      <p class="source-note">Fuente: MINEDU (2016). Semáforo Escuela: Generando evidencia sobre la entrega del servicio educativo para impulsar mejoras rápidas. Secretaría de Planificación Estratégica.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">36 / 56</span>
+  </section>
+
+  <!-- SEMÁFORO CHART -->
+  <section class="slide" style="--phase:var(--phase-method);">
+    <div class="slide-pad">
+      <span class="kicker">Semáforo Escuela · 2015</span>
+      <h2 class="slide-title">El promedio nacional se mueve poco; el valor está en que cada UGEL ve su trayectoria cada mes</h2>
+      <div class="chart-card" style="flex:1; margin-top:.8em;">
+        <span class="chart-label">% de asistencia registrada en visitas, abril a noviembre de 2015</span>
+        <svg viewBox="0 0 640 230" role="img" aria-label="Asistencia de directores de 84% a 90%, docentes de 93% a 94%, estudiantes de 88% a 88%, abril a noviembre de 2015">
+          <g class="grid">
+            <line x1="50" x2="560" y1="40" y2="40"/><line x1="50" x2="560" y1="80" y2="80"/><line x1="50" x2="560" y1="120" y2="120"/><line x1="50" x2="560" y1="160" y2="160"/><line x1="50" x2="560" y1="200" y2="200"/>
+          </g>
+          <g class="chart-bar-label" text-anchor="end">
+            <text x="42" y="43">100%</text><text x="42" y="83">95%</text><text x="42" y="123">90%</text><text x="42" y="163">85%</text><text x="42" y="203">80%</text>
+          </g>
+          <g class="chart-bar-label" text-anchor="middle">
+            <text x="60" y="222">Abr</text><text x="130" y="222">May</text><text x="200" y="222">Jun</text><text x="270" y="222">Jul</text><text x="340" y="222">Ago</text><text x="410" y="222">Set</text><text x="480" y="222">Oct</text><text x="550" y="222">Nov</text>
+          </g>
+          <polyline class="ln-doc" points="60,96 130,104 200,96 270,88 340,96 410,96 480,88 550,88"/>
+          <polyline class="ln-est" points="60,136 130,144 200,160 270,168 340,152 410,128 480,120 550,136"/>
+          <polyline class="ln-dir" points="60,168 130,160 200,152 270,144 340,160 410,152 480,136 550,120"/>
+          <circle class="pt-dir" cx="550" cy="120" r="4.5"/>
+          <circle class="pt-doc" cx="550" cy="88" r="3.5"/>
+          <circle class="pt-est" cx="550" cy="136" r="3.5"/>
+          <text class="lbl-doc" x="566" y="92">Docentes 94%</text>
+          <text class="lbl-dir" x="566" y="118">Directores 90%</text>
+          <text class="lbl-est" x="566" y="142">Estudiantes 88%</text>
+        </svg>
+      </div>
+      <p class="takeaway">La herramienta permite saber, escuela por escuela, si lo que hacemos está funcionando, y corregir en el mismo año escolar.</p>
+      <p class="source-note">Fuente: MINEDU (2016), Semáforo Escuela, reportes mensuales de 2015.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">37 / 56</span>
+  </section>
+
+  <!-- SEMÁFORO PREGUNTA -->
+  <section class="slide quote-slide" style="--phase:var(--accent);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Semáforo Escuela · pregunta abierta</span>
+      <h2 class="slide-title" style="font-size:clamp(1.4rem,4cqw,2.6rem); max-width:28ch;">El Semáforo Escuela daba información mensual de cada escuela, pero en 2020 se descontinuó y no volvió. ¿Por qué?</h2>
+      <p class="body-text" style="margin-top:1em;">Piensen en las 6 claves: liderazgo político, priorización, trayectorias, buenos datos, corrección rápida y rutinas con el líder de la reforma.</p>
+      <p class="source-note">Seis claves del delivery: MINEDU (2016).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">38 / 56</span>
+  </section>
+
+  <!-- DIVIDER EVALUACIÓN -->
+  <section class="slide divider" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Tema IV en compacto</span>
+      <h2>Evaluación en 10 minutos</h2>
+      <p>Lo justo para que cada grupo piense qué evaluación necesita su programa.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">39 / 56</span>
+  </section>
+
+  <!-- 5 TIPOS -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad">
+      <span class="kicker">Tipos de evaluación</span>
+      <h2 class="slide-title">Cada tipo responde una pregunta distinta</h2>
+      <div class="chain" style="margin-top:1em;">
+        <div class="chain-step"><span class="tag">Necesidades</span><p>¿Cuál es el problema y a quién afecta?</p><small>Cuándo: situaciones nuevas, poca información</small></div>
+        <div class="chain-step"><span class="tag">Diseño</span><p>¿La teoría del programa es consistente?</p><small>Cuándo: siempre que se evalúa</small></div>
+        <div class="chain-step"><span class="tag">Procesos</span><p>¿Se implementa como se planificó?</p><small>Cuándo: siempre</small></div>
+        <div class="chain-step" style="border-color:var(--phase-frame);"><span class="tag">Impacto</span><p>¿Cuánto del cambio se debe al programa?</p><small>Cuándo: depende de costo y diseño</small></div>
+        <div class="chain-step"><span class="tag">Costo-efectividad</span><p>¿Cuánto resultado por cada sol, frente a otras opciones?</p><small>Cuándo: hay alternativas comparables</small></div>
+      </div>
+      <p class="takeaway">La evaluación que recomienden debe responder su pregunta de evidencia.</p>
+      <p class="source-note">Tipología de J-PAL LAC (2012). Referencia abierta: Gertler, P. et al. (2017), La evaluación de impacto en la práctica, 2.ª ed., BID y Banco Mundial.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">40 / 56</span>
+  </section>
+
+  <!-- CONTRAFACTUAL -->
+  <section class="slide" style="--phase:var(--phase-frame);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Impacto</span>
+      <h2 class="slide-title">Impacto es la diferencia entre lo que pasó y lo que habría pasado sin el programa</h2>
+      <div class="eq">
+        <div class="eq-box">Resultado <b>con</b> programa</div>
+        <div class="eq-op">−</div>
+        <div class="eq-box ghost">Resultado <b>sin</b> programa<small>el contrafactual: nunca se observa</small></div>
+        <div class="eq-op">=</div>
+        <div class="eq-box strong">Impacto</div>
+      </div>
+      <p class="body-text" style="margin-top:1.2em;">Como el contrafactual no se observa, se construye con un grupo de comparación. Puede ser un sorteo (experimental), un umbral de elegibilidad (regresión discontinua) o un emparejamiento con doble diferencia (cuasi-experimental).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">41 / 56</span>
+  </section>
+
+  <!-- ATRIBUCIÓN -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Micro-ejercicio · 3 min</span>
+      <h2 class="slide-title">¿Alguna de estas afirmaciones demuestra impacto?</h2>
+      <ol class="numbered" style="columns:1;">
+        <li>"La desnutrición crónica bajó 8% en la última década; queda demostrado el impacto del programa."</li>
+        <li>"Los estudiantes se declararon satisfechos con el refuerzo escolar; hay que ampliarlo."</li>
+        <li>"Las autoridades no hicieron todos los talleres previstos; por eso el programa no tiene impacto."</li>
+      </ol>
+      <p class="source-note">Afirmaciones adaptadas de Cáceres (2019).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">42 / 56</span>
+  </section>
+
+  <!-- ATRIBUCIÓN RESPUESTA -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Micro-ejercicio · respuesta</span>
+      <h2 class="slide-title">¿Alguna de estas afirmaciones demuestra impacto?</h2>
+      <ol class="numbered" style="columns:1;">
+        <li>"La desnutrición crónica bajó 8% en la última década; queda demostrado el impacto del programa."</li>
+        <li>"Los estudiantes se declararon satisfechos con el refuerzo escolar; hay que ampliarlo."</li>
+        <li>"Las autoridades no hicieron todos los talleres previstos; por eso el programa no tiene impacto."</li>
+      </ol>
+      <p class="takeaway">Ninguna. La primera no tiene contrafactual, la segunda mide satisfacción y la tercera describe un problema de proceso.</p>
+      <p class="source-note">Afirmaciones adaptadas de Cáceres (2019).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">43 / 56</span>
+  </section>
+
+  <!-- TALLER 2 -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Taller 2 · 25 min · en grupos</span>
+      <h2 class="slide-title">Qué mostrar en la tarde</h2>
+      <ul class="plain" style="margin-top:1.1em;">
+        <li><b>Su Entrega 1, ajustada con la devolución:</b> condición de interés, una línea de la teoría de cambio, el supuesto frágil y la pregunta de evidencia.</li>
+        <li><b>Sus indicadores:</b> los 2 que evaluaron en el Taller 1 y, si les alcanza, cómo los mejorarían.</li>
+        <li><b>Hacia dónde iría la mejora:</b> qué cambiarían del programa y qué evaluación pedirían.</li>
+      </ul>
+      <p class="takeaway">Con la plantilla o desde su documento: lo que importa es que el argumento se sostenga y que cada integrante explique una parte.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">44 / 56</span>
+  </section>
+
+  <!-- LOGÍSTICA TARDE -->
+  <section class="slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">Para la tarde</span>
+      <h2 class="slide-title">Orden de presentación y grupo par</h2>
+      <table class="rules" style="margin-top:.8em;">
+        <thead><tr><th>Orden</th><th>Presenta</th><th>Abre las preguntas</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td>G4 · Violencia contra la mujer</td><td>G3</td></tr>
+          <tr><td class="num">2</td><td>G3 · NNA en desprotección</td><td>G1</td></tr>
+          <tr><td class="num">3</td><td>G1 · Seguridad ciudadana</td><td>G2</td></tr>
+          <tr><td class="num">4</td><td>G2 · Logros de aprendizaje</td><td>G5</td></tr>
+          <tr><td class="num">5</td><td>G5 · PREVAED</td><td>G4</td></tr>
+        </tbody>
+      </table>
+      <p class="body-text" style="margin-top:.9em;">El grupo par llega con <b>una pregunta preparada</b> sobre el supuesto frágil o los indicadores del grupo que presenta.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">45 / 56</span>
+  </section>
+
+  <!-- DIVIDER SESIÓN 4 -->
+  <section class="slide divider" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Sesión 4</span>
+      <h2>Presentaciones y revisión</h2>
+      <p>Cinco programas, un mismo método: es el momento de consolidar lo aprendido. <b style="color:var(--phase-work);">★ Entrega 2 · Trabajo y Exposición · 60%</b></p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">46 / 56</span>
+  </section>
+
+  <!-- REGLAS -->
+  <section class="slide" style="--phase:var(--phase-work);">
+    <div class="slide-pad">
+      <span class="kicker">Reglas del juego</span>
+      <h2 class="slide-title">Cómo funciona cada turno</h2>
+      <div class="timebar">
+        <div style="flex:3;"><b>Presentan</b>Desde su documento. Cada integrante explica una parte.</div>
+        <div style="flex:2;"><b>Preguntas</b>Primero el grupo par, luego el docente.</div>
+        <div style="flex:2;"><b>Comentarios</b>Qué está sólido y qué ajustar.</div>
+      </div>
+      <p class="body-text" style="margin-top:1.2em;">Se valora la solidez del argumento y la capacidad de defenderlo, no el formato.</p>
+      <p class="takeaway">La Entrega 2 (60%) combina una nota grupal con una individual: la parte que cada uno explica y cómo responde.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">47 / 56</span>
+  </section>
+
+  <!-- G4 TURNO -->
+  <section class="slide turno" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Presenta</span>
+      <h2>Grupo 4</h2>
+      <p class="turno-pp">PP 1002 · Productos específicos para la reducción de la violencia contra la mujer</p>
+      <p class="turno-par">Abre las preguntas: Grupo 3</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">48 / 56</span>
+  </section>
+
+  <!-- G3 TURNO -->
+  <section class="slide turno" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Presenta</span>
+      <h2>Grupo 3</h2>
+      <p class="turno-pp">PP 0117 · Atención oportuna de niñas, niños y adolescentes en presunto estado de abandono</p>
+      <p class="turno-par">Abre las preguntas: Grupo 1</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">49 / 56</span>
+  </section>
+
+  <!-- G1 TURNO -->
+  <section class="slide turno" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Presenta</span>
+      <h2>Grupo 1</h2>
+      <p class="turno-pp">PP 0030 · Reducción de delitos y faltas que afectan la seguridad ciudadana</p>
+      <p class="turno-par">Abre las preguntas: Grupo 2</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">50 / 56</span>
+  </section>
+
+  <!-- PAUSA TARDE -->
+  <section class="slide divider" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <span class="kicker">15 min</span>
+      <h2>Pausa</h2>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">51 / 56</span>
+  </section>
+
+  <!-- G2 TURNO -->
+  <section class="slide turno" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Presenta</span>
+      <h2>Grupo 2</h2>
+      <p class="turno-pp">PP 0090 · Logros de aprendizaje de estudiantes de la Educación Básica Regular</p>
+      <p class="turno-par">Abre las preguntas: Grupo 5</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">52 / 56</span>
+  </section>
+
+  <!-- G5 TURNO -->
+  <section class="slide turno" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Presenta</span>
+      <h2>Grupo 5</h2>
+      <p class="turno-pp">PP 0068 · Reducción de la vulnerabilidad y atención de emergencias por desastres</p>
+      <p class="turno-par">Abre las preguntas: Grupo 4</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">53 / 56</span>
+  </section>
+
+  <!-- CINCO MENSAJES -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Cierre</span>
+      <h2 class="slide-title">Cinco mensajes del taller, uno por programa</h2>
+      <ol class="numbered msgs" style="columns:1;">
+        <li><b>Medir el problema no es medir el programa.</b> <span>G4 · violencia contra la mujer</span></li>
+        <li><b>El supuesto frágil decide qué medir y qué evaluar.</b> <span>G3 · NNA</span></li>
+        <li><b>Más insumos no son mejores resultados: la evidencia dice dónde.</b> <span>G1 · seguridad ciudadana</span></li>
+        <li><b>Evaluar con rigor es posible, y el Perú ya lo hizo.</b> <span>G2 · aprendizajes</span></li>
+        <li><b>Ejecutar no es lograr.</b> <span>G5 · desastres</span></li>
+      </ol>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">54 / 56</span>
+  </section>
+
+  <!-- RONDA FINAL -->
+  <section class="slide quote-slide" style="--phase:var(--phase-open);">
+    <div class="slide-pad" style="justify-content:center;">
+      <span class="kicker">Ronda final</span>
+      <h2 class="slide-title" style="font-size:clamp(1.6rem,5cqw,3.2rem); max-width:20ch;">Una cosa que llevas a tu trabajo el lunes</h2>
+      <p class="body-text" style="margin-top:1em;">Una frase por persona. Todos hablan.</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">55 / 56</span>
+  </section>
+
+  <!-- GRACIAS -->
+  <section class="slide qr-final" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <div class="qr-text">
+        <span class="kicker">Gracias</span>
+        <h2>Los recursos del taller siguen disponibles</h2>
+        <p>Escanea el código con la cámara del celular.</p>
+        <a class="link" href="https://cain971.github.io/taller-ppr-recursos/">cain971.github.io/taller-ppr-recursos</a>
+      </div>
+      <div class="qr-box"><div style="background:#fff; padding:8px; border-radius:8px; border:1px solid var(--line);">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAADHUlEQVR4nO1cS46kMAy1A1IvQaoD1FGoG8yRRn0zOErfgCxLCvLIdhJqZkHBpifp2IsIghdWPZ6/oZDgiizukjqA6R+Le/P8XzH9Y3Ht6XuM8khXL3uIPexXRdp/SVyD+h2J6Ma08joQwUQBaJY9eb6Wav8VcU3qo5JzCHzTMdIb0id+KMhK58c32nNe3AVdaF3ffxB93gPgwzO0KydU43+054S4M0ov0rT+8ESYvjj+8pXI9MXErsT+E+Ka1CcSN8ye+qFOWqi7RZA5HGskLtT+8+Ia1N9y1vxB+4K/14406i7yfCzV/iviGtPvmZzpxm9IAMzf4YkEPm5TwfY7039b//aAODKJ70SRpr6P/nkZ2WcDX1n9W+H7BrGu1SAsYZbL4VWKpC4tqXCiuTT7nemf7W+gBGEueIWwROuWMmnfx06H/Z71vW/DU5MnZS3nUoK5uGuauSaemb/a6SjQ/kvi2tSfVm5i3aXq7bTJIYl1XCQcW/ytE18fOxix17ymrsbEdJZF468sBdp/SVxj+iCtDZp5oCC5lLrhNFUABVkDNLvr0ux3pn/29yHNoATkHIkXLZI2my/U+b5BHA3uA0FhstIZIKZWmcTG3wrxDYpqKn15dwgvhTFwTNanhm99+K4Sa3MGJUgLviScjsAbf2vFl7Iv5jVnzYnYwuTYAjH+Vojv2uUOxh6JYzpN6pV3YpdmvzP9Y6GXgJv7zxlu2oEXThu+9fpnUOqqf84z/0E4LSftDN9a5/uk1JU25D1iiTjK/Oj77bki7pI2NKcPaRbIsnvl/GDK00Pjb63nN0I6ocFjQPC32KBcfgWgZewCgOeh/7AWaL8z/WOhv9sYqTRKVS+kdqXVR1W+bz0jqIRFvsJ49OoWYKJ4fpL4YJbx9+d8v4AyCV6QR/tyulIyLZkjlmn/eXEt6/t4qk58dvwgJbcr7XxO1flzF3Pl19Yk5fm+zX8rxbeXNebPQ+gl1tLy4HA8yKacz8GUWJdmvzP9t/hu6TMUfyNkkOWeALaeljtj728Bp9nO59T3vqH9P0NVeDnTPxR3/PjH6f8BYXQbuHnMdqMAAAAASUVORK5CYII=" alt="QR con el enlace a los recursos del taller" style="display:block; width:84px; height:84px;">
+        </div></div>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">56 / 56</span>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var slides = Array.from(document.querySelectorAll('.slide'));
+  var idx = 0;
+  var presenting = false;
+  var hintTimer = null;
+  var hint = document.getElementById('present-hint');
+
+  function showSlide(i){
+    idx = Math.max(0, Math.min(slides.length - 1, i));
+    slides.forEach(function(s, j){ s.classList.toggle('active', j === idx); });
+  }
+
+  function flashHint(){
+    if (!hint) return;
+    hint.classList.add('show');
+    clearTimeout(hintTimer);
+    hintTimer = setTimeout(function(){ hint.classList.remove('show'); }, 2600);
+  }
+
+  function updateScale(){
+    var s = Math.min(window.innerWidth / 1280, window.innerHeight / 720);
+    document.documentElement.style.setProperty('--present-scale', s);
+  }
+
+  function enterPresent(){
+    presenting = true;
+    document.body.classList.add('presenting');
+    showSlide(idx);
+    updateScale();
+    flashHint();
+    var el = document.documentElement;
+    if (el.requestFullscreen) { el.requestFullscreen().catch(function(){}); }
+  }
+
+  window.addEventListener('resize', function(){ if (presenting) updateScale(); });
+
+  function exitPresent(){
+    presenting = false;
+    document.body.classList.remove('presenting');
+    if (hint) hint.classList.remove('show');
+    if (document.fullscreenElement) { document.exitFullscreen().catch(function(){}); }
+  }
+
+  document.addEventListener('keydown', function(e){
+    if (!presenting) return;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' '){
+      e.preventDefault(); showSlide(idx + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp'){
+      e.preventDefault(); showSlide(idx - 1);
+    } else if (e.key === 'Home'){
+      e.preventDefault(); showSlide(0);
+    } else if (e.key === 'End'){
+      e.preventDefault(); showSlide(slides.length - 1);
+    } else if (e.key === 'Escape'){
+      exitPresent();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', function(){
+    if (!document.fullscreenElement && presenting) exitPresent();
+  });
+
+  document.addEventListener('click', function(e){
+    if (!presenting) return;
+    if (e.target.closest('a, #present-btn')) return;
+    var isLeft = e.clientX < window.innerWidth / 3;
+    if (isLeft){ showSlide(idx - 1); } else { showSlide(idx + 1); }
+  });
+
+  var btn = document.getElementById('present-btn');
+  if (btn) btn.addEventListener('click', enterPresent);
+})();
+</script>
+<script>
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-btn');
+  function label(){
+    var t = root.getAttribute('data-theme');
+    if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    btn.textContent = t === 'dark' ? '◐ Tema oscuro' : '◑ Tema claro';
+    btn.setAttribute('aria-label', 'Cambiar tema. Actual: ' + (t === 'dark' ? 'oscuro' : 'claro'));
+    return t;
+  }
+  try { var saved = localStorage.getItem('taller-ppr-tema'); if (saved) root.setAttribute('data-theme', saved); } catch(e){}
+  label();
+  btn.addEventListener('click', function(){
+    var next = label() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('taller-ppr-tema', next); } catch(e){}
+    label();
+  });
+})();
+</script>
+</body>
+</html>
