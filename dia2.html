@@ -562,6 +562,15 @@
   table.semagg td.cnt{ font-family:'IBM Plex Mono',monospace; font-size:clamp(.56rem,1.15cqw,.78rem); color:var(--ink-soft); }
 
   @media print{ .head-actions{ display:none !important; } }
+
+
+  /* Día 2 · lámina 38 (Semáforo Escuela): gráfico de línea a todo el ancho, etiquetas legibles al proyectar */
+  .chart-card.wide svg .chart-bar-label{ font-size:15px; }
+  .chart-card.wide svg .lbl-dir, .chart-card.wide svg .lbl-doc, .chart-card.wide svg .lbl-est{ font-size:16px; }
+
+  /* Día 2 · tablas de las seis secciones (láminas 19 y 45): la sección manda, la explicación acompaña */
+  table.rules.secs td b{ font-weight:700; color:var(--ink); }
+  table.rules.secs td:last-child{ font-weight:400; color:var(--ink-soft); }
 </style>
 </head>
 <body>
@@ -592,7 +601,7 @@
         <span><strong>Juan Pablo Silva Macher</strong>Docente</span>
       </div>
     </div>
-    <span class="slide-foot">01 / 56</span>
+    <span class="slide-foot">01 / 57</span>
   </section>
 
   <!-- AGENDA -->
@@ -618,7 +627,7 @@
           <span class="tag">Tarde</span>
           <h3>Presentaciones y revisión</h3>
           <ul>
-            <li>Cada grupo presenta desde su propio documento, responde preguntas y recibe comentarios</li>
+            <li>Cada grupo presenta (con la plantilla o desde su documento), responde preguntas y recibe comentarios</li>
             <li>Orden: G4 · G3 · G1 · G2 · G5</li>
             <li>Cinco mensajes del taller</li>
             <li>Ronda final: una cosa que llevas el lunes</li>
@@ -628,7 +637,24 @@
       <p class="takeaway">La tarde es para consolidar lo aprendido, no para lucir láminas.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">02 / 56</span>
+    <span class="slide-foot">02 / 57</span>
+  </section>
+
+  <!-- RECURSOS AL INICIO (el QR también cierra el deck) -->
+  <section class="slide qr-final" style="--phase:var(--phase-open);">
+    <div class="slide-pad">
+      <div class="qr-text">
+        <span class="kicker">Para tener a mano</span>
+        <h2>Los recursos del taller, en su celular</h2>
+        <p>Escanea el código con la cámara del celular. Ahí están las diapositivas, los instructivos y la plantilla de la Entrega 2.</p>
+        <a class="link" href="https://cain971.github.io/taller-ppr-recursos/">cain971.github.io/taller-ppr-recursos</a>
+      </div>
+      <div class="qr-box"><div style="background:#fff; padding:8px; border-radius:8px; border:1px solid var(--line);">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAADHUlEQVR4nO1cS46kMAy1A1IvQaoD1FGoG8yRRn0zOErfgCxLCvLIdhJqZkHBpifp2IsIghdWPZ6/oZDgiizukjqA6R+Le/P8XzH9Y3Ht6XuM8khXL3uIPexXRdp/SVyD+h2J6Ma08joQwUQBaJY9eb6Wav8VcU3qo5JzCHzTMdIb0id+KMhK58c32nNe3AVdaF3ffxB93gPgwzO0KydU43+054S4M0ov0rT+8ESYvjj+8pXI9MXErsT+E+Ka1CcSN8ye+qFOWqi7RZA5HGskLtT+8+Ia1N9y1vxB+4K/14406i7yfCzV/iviGtPvmZzpxm9IAMzf4YkEPm5TwfY7039b//aAODKJ70SRpr6P/nkZ2WcDX1n9W+H7BrGu1SAsYZbL4VWKpC4tqXCiuTT7nemf7W+gBGEueIWwROuWMmnfx06H/Z71vW/DU5MnZS3nUoK5uGuauSaemb/a6SjQ/kvi2tSfVm5i3aXq7bTJIYl1XCQcW/ytE18fOxix17ymrsbEdJZF468sBdp/SVxj+iCtDZp5oCC5lLrhNFUABVkDNLvr0ux3pn/29yHNoATkHIkXLZI2my/U+b5BHA3uA0FhstIZIKZWmcTG3wrxDYpqKn15dwgvhTFwTNanhm99+K4Sa3MGJUgLviScjsAbf2vFl7Iv5jVnzYnYwuTYAjH+Vojv2uUOxh6JYzpN6pV3YpdmvzP9Y6GXgJv7zxlu2oEXThu+9fpnUOqqf84z/0E4LSftDN9a5/uk1JU25D1iiTjK/Oj77bki7pI2NKcPaRbIsnvl/GDK00Pjb63nN0I6ocFjQPC32KBcfgWgZewCgOeh/7AWaL8z/WOhv9sYqTRKVS+kdqXVR1W+bz0jqIRFvsJ49OoWYKJ4fpL4YJbx9+d8v4AyCV6QR/tyulIyLZkjlmn/eXEt6/t4qk58dvwgJbcr7XxO1flzF3Pl19Yk5fm+zX8rxbeXNebPQ+gl1tLy4HA8yKacz8GUWJdmvzP9t/hu6TMUfyNkkOWeALaeljtj728Bp9nO59T3vqH9P0NVeDnTPxR3/PjH6f8BYXQbuHnMdqMAAAAASUVORK5CYII=" alt="QR con el enlace a los recursos del taller" style="display:block; width:84px; height:84px;">
+        </div></div>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">03 / 57</span>
   </section>
 
   <!-- DIVIDER DEVOLUCIÓN -->
@@ -639,7 +665,7 @@
       <p>Primero, la pieza que une todo: la teoría de cambio. Luego, dónde está cada grupo, cinco conceptos para reforzar y tres cosas que salieron muy bien. El detalle por grupo está en el informe de devolución.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">03 / 56</span>
+    <span class="slide-foot">04 / 57</span>
   </section>
 
   <!-- ETAPAS DEL DISEÑO -->
@@ -659,7 +685,7 @@
       <p class="source-note">Etapas del Art. 9.1 de la Directiva N° 0001-2026-EF/50.01 (MEF).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">04 / 56</span>
+    <span class="slide-foot">05 / 57</span>
   </section>
 
   <!-- DEL PROBLEMA A LA INTERVENCIÓN -->
@@ -689,7 +715,7 @@
       <p class="source-note">Ejemplo con el marco conceptual de UNICEF sobre desnutrición infantil, el mismo del Día 1 y del instructivo de la Entrega 1.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">05 / 56</span>
+    <span class="slide-foot">06 / 57</span>
   </section>
 
   <!-- POR QUÉ IMPORTA -->
@@ -705,7 +731,7 @@
       <p class="takeaway">Si no puedes dibujar la flecha que va de tu intervención al resultado final, no puedes defender su presupuesto.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">06 / 56</span>
+    <span class="slide-foot">07 / 57</span>
   </section>
 
   <!-- SEMÁFORO DE ENTREGAS (agregado) -->
@@ -730,7 +756,7 @@
       <p class="source-note">Cada punto es un grupo (5 en total), ordenados por estado, no por grupo. El detalle de cada grupo está en su informe de devolución.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">07 / 56</span>
+    <span class="slide-foot">08 / 57</span>
   </section>
 
   <!-- PATRÓN 1 -->
@@ -746,7 +772,7 @@
       <p class="takeaway">Se elige uno solo: el eslabón donde más se juega el programa.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">08 / 56</span>
+    <span class="slide-foot">09 / 57</span>
   </section>
 
   <!-- PATRÓN 2 -->
@@ -771,7 +797,7 @@
       <p class="takeaway">Si la pregunta habla de otra cosa que el supuesto, el diagnóstico pierde su hilo.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">09 / 56</span>
+    <span class="slide-foot">10 / 57</span>
   </section>
 
   <!-- PATRÓN 3 -->
@@ -786,7 +812,7 @@
       <p class="takeaway">Un problema bien escrito ya sugiere su indicador. Un objetivo, no.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">10 / 56</span>
+    <span class="slide-foot">11 / 57</span>
   </section>
 
   <!-- PATRÓN 4 -->
@@ -802,7 +828,7 @@
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">11 / 56</span>
+    <span class="slide-foot">12 / 57</span>
   </section>
 
   <!-- PATRÓN 5 -->
@@ -813,7 +839,7 @@
       <p class="body-text" style="margin-top:1em;">La magnitud responde "¿qué tan grave es?". El indicador de seguimiento responde "¿nos estamos moviendo, y por nosotros?". Son preguntas distintas y a veces piden indicadores distintos. De eso trata la mañana.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">12 / 56</span>
+    <span class="slide-foot">13 / 57</span>
   </section>
 
   <!-- BUEN EJEMPLO G1 -->
@@ -827,7 +853,7 @@
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">13 / 56</span>
+    <span class="slide-foot">14 / 57</span>
   </section>
 
   <!-- BUEN EJEMPLO G2 -->
@@ -846,7 +872,7 @@
       <p class="source-note">Entrega 1 del Grupo 2: cuatro líneas de cadena (infraestructura, formación, materiales, evaluación). Se muestra una.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">14 / 56</span>
+    <span class="slide-foot">15 / 57</span>
   </section>
 
   <!-- BUEN EJEMPLO G4 -->
@@ -864,7 +890,7 @@
       <p class="source-note">Fuente: Entrega 1 del Grupo 4, con datos de INEI, ENDES 2025.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">15 / 56</span>
+    <span class="slide-foot">16 / 57</span>
   </section>
 
   <!-- BUEN EJEMPLO G3 -->
@@ -878,7 +904,7 @@
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">16 / 56</span>
+    <span class="slide-foot">17 / 57</span>
   </section>
 
   <!-- BUEN EJEMPLO G5 -->
@@ -892,22 +918,29 @@
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">17 / 56</span>
+    <span class="slide-foot">18 / 57</span>
   </section>
 
   <!-- TAREA E1 -->
   <section class="slide" style="--phase:var(--phase-work);">
     <div class="slide-pad" style="justify-content:center;">
-      <span class="kicker">Para la tarde</span>
-      <h2 class="slide-title">Ustedes eligen el formato: una presentación o su propio documento</h2>
-      <ul class="plain" style="margin-top:1.2em;">
-        <li>Hay una <b>plantilla de presentación</b> en la página de recursos. Es opcional.</li>
-        <li>Si prefieren, presentan desde el documento de su Entrega 1, ajustado con el informe de devolución.</li>
-        <li>En cualquier caso, que se vea la línea completa: condición de interés → teoría de cambio → supuesto frágil → indicadores.</li>
-      </ul>
+      <span class="kicker">Para la tarde <span class="sub">· Entrega 2</span></span>
+      <h2 class="slide-title">Su presentación recorre seis secciones</h2>
+      <table class="rules secs" style="margin-top:.8em;">
+        <thead><tr><th>#</th><th>Sección</th><th>Qué contiene</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td><b>Condición de interés</b></td><td>El problema, escrito como problema, con dato y fuente.</td></tr>
+          <tr><td class="num">2</td><td><b>Teoría de cambio</b></td><td>Producto → resultado intermedio → resultado final.</td></tr>
+          <tr><td class="num">3</td><td><b>Supuesto frágil y pregunta de evidencia</b></td><td>La flecha más débil y lo que el programa no sabe responder.</td></tr>
+          <tr><td class="num">4</td><td><b>Indicadores actuales</b></td><td>Cómo mide hoy el programa: ¿mide lo correcto?, ¿es verificable?, ¿orienta decisiones?</td></tr>
+          <tr><td class="num">5</td><td><b>Indicadores propuestos</b></td><td>Qué debería medir: nombre, fórmula, fuente y frecuencia.</td></tr>
+          <tr><td class="num">6</td><td><b>Propuesta</b></td><td>Un cambio al programa ligado al supuesto frágil, y la evaluación que pedirían.</td></tr>
+        </tbody>
+      </table>
+      <p class="body-text" style="margin-top:.9em;">Tienen una <b>plantilla de PowerPoint en Paideia</b> (opcional). También pueden presentar desde su documento: como prefieran.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">18 / 56</span>
+    <span class="slide-foot">19 / 57</span>
   </section>
 
   <!-- DIVIDER TEMA III -->
@@ -918,7 +951,7 @@
       <p>Qué es el desempeño, cómo se mide con indicadores y qué hace falta para que el seguimiento cambie decisiones.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">19 / 56</span>
+    <span class="slide-foot">20 / 57</span>
   </section>
 
   <!-- PARA QUÉ MEDIR 2x2 -->
@@ -939,7 +972,7 @@
       <p class="source-note">Adaptado de MEF (2011), esquema de prioridad y desempeño del PpR. Sin indicadores de desempeño, este cuadro no se puede llenar.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">20 / 56</span>
+    <span class="slide-foot">21 / 57</span>
   </section>
 
   <!-- ROBINSON -->
@@ -956,7 +989,7 @@
       <p class="source-note">Robinson, M. (ed.) (2007). Performance Budgeting: Linking Funding and Results. FMI / Palgrave Macmillan. Lectura obligatoria de los Temas III–IV.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">21 / 56</span>
+    <span class="slide-foot">22 / 57</span>
   </section>
 
   <!-- SEGUIMIENTO VS EVALUACIÓN -->
@@ -977,7 +1010,7 @@
       <p class="source-note">Fuente: Banco Mundial (2000), adaptado.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">22 / 56</span>
+    <span class="slide-foot">23 / 57</span>
   </section>
 
   <!-- DIMENSIONES -->
@@ -995,7 +1028,7 @@
       <p class="takeaway">Las dimensiones entran en tensión: más calidad suele costar más.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">23 / 56</span>
+    <span class="slide-foot">24 / 57</span>
   </section>
 
   <!-- ÁMBITOS -->
@@ -1013,7 +1046,7 @@
       <p class="takeaway">A la izquierda, lo que el programa controla. A la derecha, lo que le importa al ciudadano.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">24 / 56</span>
+    <span class="slide-foot">25 / 57</span>
   </section>
 
   <!-- MATRIZ -->
@@ -1036,7 +1069,7 @@
       <p class="source-note">Ejemplos de indicadores: Politeia (2008). Clasificación en la matriz: elaboración propia.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">25 / 56</span>
+    <span class="slide-foot">26 / 57</span>
   </section>
 
   <!-- EJERCICIO -->
@@ -1057,7 +1090,7 @@
       <p class="source-note">Eficacia · eficiencia · economía · calidad. Fuente de la lista: Cáceres (2019).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">26 / 56</span>
+    <span class="slide-foot">27 / 57</span>
   </section>
 
   <!-- RESPUESTAS -->
@@ -1077,7 +1110,7 @@
       <p class="source-note">Clasificación basada en razonamiento sobre las definiciones de la lámina anterior.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">27 / 56</span>
+    <span class="slide-foot">28 / 57</span>
   </section>
 
   <!-- RESULTA -->
@@ -1097,7 +1130,7 @@
       <p class="source-note">Fuente: MEF, RESULTA (valores 2019–2024). P = producto, R = resultado.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">28 / 56</span>
+    <span class="slide-foot">29 / 57</span>
   </section>
 
   <!-- TALLER 1 -->
@@ -1114,7 +1147,7 @@
       <p class="takeaway">Lo que salga de aquí es parte de lo que muestran en la tarde.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">29 / 56</span>
+    <span class="slide-foot">30 / 57</span>
   </section>
 
   <!-- PAUSA -->
@@ -1124,7 +1157,7 @@
       <h2>Pausa</h2>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">30 / 56</span>
+    <span class="slide-foot">31 / 57</span>
   </section>
 
   <!-- SMART -->
@@ -1143,7 +1176,7 @@
       <p class="source-note">Criterios SMART según Cáceres (2019).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">31 / 56</span>
+    <span class="slide-foot">32 / 57</span>
   </section>
 
   <!-- FICHA -->
@@ -1161,10 +1194,10 @@
         <div><span>Sentido esperado</span>Sube ↗ o baja ↘</div>
         <div><span>Limitaciones</span>Qué no captura; sesgos conocidos</div>
       </div>
-      <p class="source-note">Campos típicos de la ficha de indicadores de programas presupuestales del MEF (Directiva N° 0001-2026-EF/50.01). Estos son los que se piden en la lámina 4.</p>
+      <p class="source-note">Campos típicos de la ficha de indicadores de programas presupuestales del MEF (Directiva N° 0001-2026-EF/50.01). Estos son los que se piden en la sección 5 de su presentación (indicadores propuestos).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">32 / 56</span>
+    <span class="slide-foot">33 / 57</span>
   </section>
 
   <!-- TRAMPAS -->
@@ -1182,7 +1215,7 @@
       <p class="source-note">Basado en Cáceres (2019), y en razonamiento propio.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">33 / 56</span>
+    <span class="slide-foot">34 / 57</span>
   </section>
 
   <!-- STOCK VS FLUJO -->
@@ -1207,7 +1240,7 @@
       <p class="source-note">Fuente: INEI, ENDES 2025; MIMP, PNIG (D.S. N° 008-2019-MIMP). Datos de la Entrega 1 del Grupo 4.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">34 / 56</span>
+    <span class="slide-foot">35 / 57</span>
   </section>
 
   <!-- DELIVERY UNITS -->
@@ -1225,7 +1258,7 @@
       <p class="source-note">Fuente: Lafuente, M. y González Córdoba, S. (2018). ¿Qué impacto tienen las unidades de cumplimiento? Evaluando innovaciones en los gobiernos. BID.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">35 / 56</span>
+    <span class="slide-foot">36 / 57</span>
   </section>
 
   <!-- SEMÁFORO CÓMO -->
@@ -1256,42 +1289,42 @@
       <p class="source-note">Fuente: MINEDU (2016). Semáforo Escuela: Generando evidencia sobre la entrega del servicio educativo para impulsar mejoras rápidas. Secretaría de Planificación Estratégica.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">36 / 56</span>
+    <span class="slide-foot">37 / 57</span>
   </section>
 
   <!-- SEMÁFORO CHART -->
   <section class="slide" style="--phase:var(--phase-method);">
     <div class="slide-pad">
       <span class="kicker">Semáforo Escuela · 2015</span>
-      <h2 class="slide-title">El promedio nacional se mueve poco; el valor está en que cada UGEL ve su trayectoria cada mes</h2>
-      <div class="chart-card" style="flex:1; margin-top:.8em;">
+      <h2 class="slide-title" style="max-width:none;">El promedio nacional se mueve poco; el valor está en que cada UGEL ve su trayectoria cada mes</h2>
+      <div class="chart-card wide" style="flex:1; margin-top:.8em;">
         <span class="chart-label">% de asistencia registrada en visitas, abril a noviembre de 2015</span>
-        <svg viewBox="0 0 640 230" role="img" aria-label="Asistencia de directores de 84% a 90%, docentes de 93% a 94%, estudiantes de 88% a 88%, abril a noviembre de 2015">
+        <svg viewBox="0 0 1050 230" role="img" aria-label="Asistencia de directores de 84% a 90%, docentes de 93% a 94%, estudiantes de 88% a 88%, abril a noviembre de 2015">
           <g class="grid">
-            <line x1="50" x2="560" y1="40" y2="40"/><line x1="50" x2="560" y1="80" y2="80"/><line x1="50" x2="560" y1="120" y2="120"/><line x1="50" x2="560" y1="160" y2="160"/><line x1="50" x2="560" y1="200" y2="200"/>
+            <line x1="50" x2="880" y1="40" y2="40"/><line x1="50" x2="880" y1="80" y2="80"/><line x1="50" x2="880" y1="120" y2="120"/><line x1="50" x2="880" y1="160" y2="160"/><line x1="50" x2="880" y1="200" y2="200"/>
           </g>
           <g class="chart-bar-label" text-anchor="end">
             <text x="42" y="43">100%</text><text x="42" y="83">95%</text><text x="42" y="123">90%</text><text x="42" y="163">85%</text><text x="42" y="203">80%</text>
           </g>
           <g class="chart-bar-label" text-anchor="middle">
-            <text x="60" y="222">Abr</text><text x="130" y="222">May</text><text x="200" y="222">Jun</text><text x="270" y="222">Jul</text><text x="340" y="222">Ago</text><text x="410" y="222">Set</text><text x="480" y="222">Oct</text><text x="550" y="222">Nov</text>
+            <text x="60" y="222">Abr</text><text x="176" y="222">May</text><text x="292" y="222">Jun</text><text x="408" y="222">Jul</text><text x="524" y="222">Ago</text><text x="640" y="222">Set</text><text x="756" y="222">Oct</text><text x="872" y="222">Nov</text>
           </g>
-          <polyline class="ln-doc" points="60,96 130,104 200,96 270,88 340,96 410,96 480,88 550,88"/>
-          <polyline class="ln-est" points="60,136 130,144 200,160 270,168 340,152 410,128 480,120 550,136"/>
-          <polyline class="ln-dir" points="60,168 130,160 200,152 270,144 340,160 410,152 480,136 550,120"/>
-          <circle class="pt-dir" cx="550" cy="120" r="4.5"/>
-          <circle class="pt-doc" cx="550" cy="88" r="3.5"/>
-          <circle class="pt-est" cx="550" cy="136" r="3.5"/>
-          <text class="lbl-doc" x="566" y="92">Docentes 94%</text>
-          <text class="lbl-dir" x="566" y="118">Directores 90%</text>
-          <text class="lbl-est" x="566" y="142">Estudiantes 88%</text>
+          <polyline class="ln-doc" points="60,96 176,104 292,96 408,88 524,96 640,96 756,88 872,88"/>
+          <polyline class="ln-est" points="60,136 176,144 292,160 408,168 524,152 640,128 756,120 872,136"/>
+          <polyline class="ln-dir" points="60,168 176,160 292,152 408,144 524,160 640,152 756,136 872,120"/>
+          <circle class="pt-dir" cx="872" cy="120" r="4.5"/>
+          <circle class="pt-doc" cx="872" cy="88" r="3.5"/>
+          <circle class="pt-est" cx="872" cy="136" r="3.5"/>
+          <text class="lbl-doc" x="888" y="92">Docentes 94%</text>
+          <text class="lbl-dir" x="888" y="118">Directores 90%</text>
+          <text class="lbl-est" x="888" y="142">Estudiantes 88%</text>
         </svg>
       </div>
       <p class="takeaway">La herramienta permite saber, escuela por escuela, si lo que hacemos está funcionando, y corregir en el mismo año escolar.</p>
       <p class="source-note">Fuente: MINEDU (2016), Semáforo Escuela, reportes mensuales de 2015.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">37 / 56</span>
+    <span class="slide-foot">38 / 57</span>
   </section>
 
   <!-- SEMÁFORO PREGUNTA -->
@@ -1303,7 +1336,7 @@
       <p class="source-note">Seis claves del delivery: MINEDU (2016).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">38 / 56</span>
+    <span class="slide-foot">39 / 57</span>
   </section>
 
   <!-- DIVIDER EVALUACIÓN -->
@@ -1314,7 +1347,7 @@
       <p>Lo justo para que cada grupo piense qué evaluación necesita su programa.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">39 / 56</span>
+    <span class="slide-foot">40 / 57</span>
   </section>
 
   <!-- 5 TIPOS -->
@@ -1333,7 +1366,7 @@
       <p class="source-note">Tipología de J-PAL LAC (2012). Referencia abierta: Gertler, P. et al. (2017), La evaluación de impacto en la práctica, 2.ª ed., BID y Banco Mundial.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">40 / 56</span>
+    <span class="slide-foot">41 / 57</span>
   </section>
 
   <!-- CONTRAFACTUAL -->
@@ -1351,7 +1384,7 @@
       <p class="body-text" style="margin-top:1.2em;">Como el contrafactual no se observa, se construye con un grupo de comparación. Puede ser un sorteo (experimental), un umbral de elegibilidad (regresión discontinua) o un emparejamiento con doble diferencia (cuasi-experimental).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">41 / 56</span>
+    <span class="slide-foot">42 / 57</span>
   </section>
 
   <!-- ATRIBUCIÓN -->
@@ -1367,7 +1400,7 @@
       <p class="source-note">Afirmaciones adaptadas de Cáceres (2019).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">42 / 56</span>
+    <span class="slide-foot">43 / 57</span>
   </section>
 
   <!-- ATRIBUCIÓN RESPUESTA -->
@@ -1384,23 +1417,29 @@
       <p class="source-note">Afirmaciones adaptadas de Cáceres (2019).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">43 / 56</span>
+    <span class="slide-foot">44 / 57</span>
   </section>
 
   <!-- TALLER 2 -->
   <section class="slide" style="--phase:var(--phase-work);">
     <div class="slide-pad">
-      <span class="kicker">Taller 2 · 25 min · en grupos</span>
-      <h2 class="slide-title">Qué mostrar en la tarde</h2>
-      <ul class="plain" style="margin-top:1.1em;">
-        <li><b>Su Entrega 1, ajustada con la devolución:</b> condición de interés, una línea de la teoría de cambio, el supuesto frágil y la pregunta de evidencia.</li>
-        <li><b>Sus indicadores:</b> los 2 que evaluaron en el Taller 1 y, si les alcanza, cómo los mejorarían.</li>
-        <li><b>Hacia dónde iría la mejora:</b> qué cambiarían del programa y qué evaluación pedirían.</li>
-      </ul>
-      <p class="takeaway">Con la plantilla o desde su documento: lo que importa es que el argumento se sostenga y que cada integrante explique una parte.</p>
+      <span class="kicker">Taller 2 · 25 min · en grupos <span class="sub">· para recordar</span></span>
+      <h2 class="slide-title">Su presentación recorre seis secciones</h2>
+      <table class="rules secs" style="margin-top:.8em;">
+        <thead><tr><th>#</th><th>Sección</th><th>Qué contiene</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td><b>Condición de interés</b></td><td>El problema, escrito como problema, con dato y fuente.</td></tr>
+          <tr><td class="num">2</td><td><b>Teoría de cambio</b></td><td>Producto → resultado intermedio → resultado final.</td></tr>
+          <tr><td class="num">3</td><td><b>Supuesto frágil y pregunta de evidencia</b></td><td>La flecha más débil y lo que el programa no sabe responder.</td></tr>
+          <tr><td class="num">4</td><td><b>Indicadores actuales</b></td><td>Cómo mide hoy el programa: ¿mide lo correcto?, ¿es verificable?, ¿orienta decisiones?</td></tr>
+          <tr><td class="num">5</td><td><b>Indicadores propuestos</b></td><td>Qué debería medir: nombre, fórmula, fuente y frecuencia.</td></tr>
+          <tr><td class="num">6</td><td><b>Propuesta</b></td><td>Un cambio al programa ligado al supuesto frágil, y la evaluación que pedirían.</td></tr>
+        </tbody>
+      </table>
+      <p class="body-text" style="margin-top:.9em;">Tienen una <b>plantilla de PowerPoint en Paideia</b> (opcional). También pueden presentar desde su documento: como prefieran.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">44 / 56</span>
+    <span class="slide-foot">45 / 57</span>
   </section>
 
   <!-- LOGÍSTICA TARDE -->
@@ -1421,7 +1460,7 @@
       <p class="body-text" style="margin-top:.9em;">El grupo par llega con <b>una pregunta preparada</b> sobre el supuesto frágil o los indicadores del grupo que presenta.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">45 / 56</span>
+    <span class="slide-foot">46 / 57</span>
   </section>
 
   <!-- DIVIDER SESIÓN 4 -->
@@ -1432,7 +1471,7 @@
       <p>Cinco programas, un mismo método: es el momento de consolidar lo aprendido. <b style="color:var(--phase-work);">★ Entrega 2 · Trabajo y Exposición · 60%</b></p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">46 / 56</span>
+    <span class="slide-foot">47 / 57</span>
   </section>
 
   <!-- REGLAS -->
@@ -1441,15 +1480,14 @@
       <span class="kicker">Reglas del juego</span>
       <h2 class="slide-title">Cómo funciona cada turno</h2>
       <div class="timebar">
-        <div style="flex:3;"><b>Presentan</b>Desde su documento. Cada integrante explica una parte.</div>
+        <div style="flex:3;"><b>Presentan</b>Con la plantilla o desde su documento. Cada integrante explica una parte.</div>
         <div style="flex:2;"><b>Preguntas</b>Primero el grupo par, luego el docente.</div>
         <div style="flex:2;"><b>Comentarios</b>Qué está sólido y qué ajustar.</div>
       </div>
-      <p class="body-text" style="margin-top:1.2em;">Se valora la solidez del argumento y la capacidad de defenderlo, no el formato.</p>
-      <p class="takeaway">La Entrega 2 (60%) combina una nota grupal con una individual: la parte que cada uno explica y cómo responde.</p>
+      <p class="takeaway">Se valora la solidez del argumento y la capacidad de defenderlo, no el formato.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">47 / 56</span>
+    <span class="slide-foot">48 / 57</span>
   </section>
 
   <!-- G4 TURNO -->
@@ -1461,7 +1499,7 @@
       <p class="turno-par">Abre las preguntas: Grupo 3</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">48 / 56</span>
+    <span class="slide-foot">49 / 57</span>
   </section>
 
   <!-- G3 TURNO -->
@@ -1473,7 +1511,7 @@
       <p class="turno-par">Abre las preguntas: Grupo 1</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">49 / 56</span>
+    <span class="slide-foot">50 / 57</span>
   </section>
 
   <!-- G1 TURNO -->
@@ -1485,7 +1523,7 @@
       <p class="turno-par">Abre las preguntas: Grupo 2</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">50 / 56</span>
+    <span class="slide-foot">51 / 57</span>
   </section>
 
   <!-- PAUSA TARDE -->
@@ -1495,7 +1533,7 @@
       <h2>Pausa</h2>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">51 / 56</span>
+    <span class="slide-foot">52 / 57</span>
   </section>
 
   <!-- G2 TURNO -->
@@ -1507,7 +1545,7 @@
       <p class="turno-par">Abre las preguntas: Grupo 5</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">52 / 56</span>
+    <span class="slide-foot">53 / 57</span>
   </section>
 
   <!-- G5 TURNO -->
@@ -1519,7 +1557,7 @@
       <p class="turno-par">Abre las preguntas: Grupo 4</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">53 / 56</span>
+    <span class="slide-foot">54 / 57</span>
   </section>
 
   <!-- CINCO MENSAJES -->
@@ -1536,7 +1574,7 @@
       </ol>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">54 / 56</span>
+    <span class="slide-foot">55 / 57</span>
   </section>
 
   <!-- RONDA FINAL -->
@@ -1547,7 +1585,7 @@
       <p class="body-text" style="margin-top:1em;">Una frase por persona. Todos hablan.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">55 / 56</span>
+    <span class="slide-foot">56 / 57</span>
   </section>
 
   <!-- GRACIAS -->
@@ -1564,7 +1602,7 @@
         </div></div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">56 / 56</span>
+    <span class="slide-foot">57 / 57</span>
   </section>
 
 </div>
