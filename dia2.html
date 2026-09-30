@@ -577,9 +577,12 @@
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .fade-in { opacity: 1 !important; transform: none !important; }
 }
+
+/* Accesibilidad (auditoría de base-visual, 2026-09-30: estructura) */
 </style>
 </head>
 <body>
+<main id="contenido">
 
 <div class="deck-head">
   <h1>Presupuesto Público por Resultados — Día 2</h1>
@@ -1062,7 +1065,7 @@
       <h2 class="slide-title">Todo indicador tiene una dimensión y un ámbito</h2>
       <div class="table-wrap">
         <table class="matrix">
-          <thead><tr><th></th><th>Insumo</th><th>Proceso</th><th>Producto</th><th>Resultado intermedio</th><th>Resultado</th></tr></thead>
+          <thead><tr><td></td><th>Insumo</th><th>Proceso</th><th>Producto</th><th>Resultado intermedio</th><th>Resultado</th></tr></thead>
           <tbody>
             <tr><th>Eficacia</th><td></td><td></td><td></td><td class="hit">% de casos de TBC curados</td><td class="hit">Mortalidad infantil por 1 000 nacidos vivos</td></tr>
             <tr><th>Eficiencia</th><td></td><td></td><td class="hit">Fiscalizaciones por fiscalizador</td><td></td><td></td></tr>
@@ -1697,6 +1700,7 @@
   if (btn) btn.addEventListener('click', enterPresent);
 })();
 </script>
+</main>
 <script>
 (function(){
   var root = document.documentElement;
