@@ -581,6 +581,78 @@
 /* Accesibilidad (auditoría de base-visual, 2026-09-30: estructura) */
 
 /* Accesibilidad (auditoría de base-visual, 2026-09-30: contraste: colores ajustados a 4,5:1; enlaces subrayados) */
+
+/* Accesibilidad (auditoría de base-visual, 2026-09-30: celular): texto de 12 px como mínimo y objetivos de 44 px */
+@media (max-width: 720px) {
+  .source-note,
+  .kicker,
+  .slide-foot,
+  .cover .eyebrow,
+  .cover .meta,
+  .tile .label,
+  .tile .desc,
+  .stat .sector,
+  .stat .note,
+  table.rules th, table.rules td,
+  table.rules th,
+  .col-card .tag,
+  .col-card ul,
+  .chart-card .chart-label,
+  .chart-bar-label,
+  .stat-pair .sp-tile .yr,
+  .stat-pair .sp-tile .amt,
+  .stat-pair .sp-tile .pct,
+  .stat-pair .sp-arrow,
+  .pending-tag,
+  .pending-item .src,
+  .present-btn,
+  .present-hint,
+  .card-p,
+  .flow-box,
+  .chain-step .tag,
+  .chain-step p,
+  .chain-step small,
+  .quad-axis-y,
+  .quad-axis-x,
+  .quad-cell,
+  .quad-cell .tag,
+  .quad-cell small,
+  table.matrix th, table.matrix td,
+  table.matrix thead th,
+  ol.numbered,
+  .ficha div,
+  .ficha span,
+  .eq-box,
+  .timebar div,
+  .turno-par,
+  .tc-lbl,
+  .tc-down,
+  table.sem th, table.sem td,
+  table.sem thead th,
+  .qr-text .link,
+  .sem-legend,
+  table.semagg th,
+  table.semagg td.cnt { font-size: 12px; }
+  .ci-btn, .check-reset, .copy-btn, .reset-btn, .q-option, .present-btn, a.link { min-height: 44px; }
+}
+
+/* Accesibilidad (auditoría de base-visual, 2026-09-30: celular (2)): tamaños escritos en línea */
+@media (max-width: 720px) {
+  .bv-min12 { font-size: 12px !important; }
+  .reset-btn { max-width: 100%; white-space: normal; }
+}
+
+/* Accesibilidad (auditoría de base-visual, 2026-09-30: celular (3)): tamaños relativos */
+@media (max-width: 720px) {
+  .stat .num small { font-size: max(12px, .4em); }
+  blockquote cite { font-size: max(12px, .62em); }
+  .pill { font-size: max(12px, .78em); }
+  a.link { font-size: max(12px, .85em); }
+  .flow-box small { font-size: max(12px, .82em); }
+  ol.msgs li span { font-size: max(12px, .7em); }
+  .eq-box small { font-size: max(12px, .8em); }
+  table.sem thead th small { font-size: max(12px, .78em); }
+}
 </style>
 </head>
 <body>

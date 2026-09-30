@@ -407,6 +407,48 @@
 /* Accesibilidad (auditoría de base-visual, 2026-09-30: estructura) */
 
 /* Accesibilidad (auditoría de base-visual, 2026-09-30: contraste: colores ajustados a 4,5:1; enlaces subrayados) */
+
+/* Accesibilidad (auditoría de base-visual, 2026-09-30: celular): texto de 12 px como mínimo y objetivos de 44 px */
+@media (max-width: 720px) {
+  .source-note,
+  .kicker,
+  .slide-foot,
+  .cover .eyebrow,
+  .cover .meta,
+  .tile .label,
+  .tile .desc,
+  .stat .sector,
+  .stat .note,
+  table.rules th, table.rules td,
+  table.rules th,
+  .col-card .tag,
+  .col-card ul,
+  .chart-card .chart-label,
+  .chart-bar-label,
+  .stat-pair .sp-tile .yr,
+  .stat-pair .sp-tile .amt,
+  .stat-pair .sp-tile .pct,
+  .stat-pair .sp-arrow,
+  .pending-tag,
+  .pending-item .src,
+  .present-btn,
+  .present-hint { font-size: 12px; }
+  .ci-btn, .check-reset, .copy-btn, .reset-btn, .q-option, .present-btn, a.link { min-height: 44px; }
+}
+
+/* Accesibilidad (auditoría de base-visual, 2026-09-30: celular (2)): tamaños escritos en línea */
+@media (max-width: 720px) {
+  .bv-min12 { font-size: 12px !important; }
+  .reset-btn { max-width: 100%; white-space: normal; }
+}
+
+/* Accesibilidad (auditoría de base-visual, 2026-09-30: celular (3)): tamaños relativos */
+@media (max-width: 720px) {
+  .stat .num small { font-size: max(12px, .4em); }
+  blockquote cite { font-size: max(12px, .62em); }
+  .pill { font-size: max(12px, .78em); }
+  a.link { font-size: max(12px, .85em); }
+}
 </style>
 </head>
 <body>
@@ -471,7 +513,7 @@
           <span class="desc">Propuesta de mejora + presentación oral, con nota individual. Sesión 4, sábado 26.</span>
         </div>
       </div>
-      <p style="font-family:'IBM Plex Mono',monospace; font-size:clamp(.6rem,1.3cqw,.82rem); color:var(--ink-soft); margin-top:.9em;">Nota mínima aprobatoria: 11/20 · Ninguna entrega es recuperable</p>
+      <p class="bv-min12" style="font-family:'IBM Plex Mono',monospace; font-size:clamp(.6rem,1.3cqw,.82rem); color:var(--ink-soft); margin-top:.9em;">Nota mínima aprobatoria: 11/20 · Ninguna entrega es recuperable</p>
     </div>
     <div class="logo"></div>
     <span class="slide-foot">03 / 36</span>
@@ -708,11 +750,11 @@
               <tr><td>Deuda pública (% PBI)</td><td class="num">31*</td><td class="num">29,3</td><td class="num">29,3</td><td class="num">→ 27,7</td></tr>
             </tbody>
           </table>
-          <span style="font-family:'IBM Plex Mono',monospace; font-size:clamp(.5rem,1cqw,.65rem); color:var(--ink-faint); margin-top:.6em;">*2025 preliminar (Consejo Fiscal) · límite legal de deuda: 38% del PBI</span>
+          <span class="bv-min12" style="font-family:'IBM Plex Mono',monospace; font-size:clamp(.5rem,1cqw,.65rem); color:var(--ink-faint); margin-top:.6em;">*2025 preliminar (Consejo Fiscal) · límite legal de deuda: 38% del PBI</span>
         </div>
         <div class="chart-card">
           <span class="chart-label">Reglas de gasto — atadas al crecimiento del PBI</span>
-          <div style="font-size:clamp(.68rem,1.5cqw,.98rem); color:var(--ink-soft); line-height:1.4; margin-top:.3em; display:flex; flex-direction:column; gap:.6em;">
+          <div class="bv-min12" style="font-size:clamp(.68rem,1.5cqw,.98rem); color:var(--ink-soft); line-height:1.4; margin-top:.3em; display:flex; flex-direction:column; gap:.6em;">
             <div>
               <b style="color:var(--ink);">Gasto no financiero:</b> no puede crecer (en términos reales) más que el límite superior del rango ±1 p.p. del promedio de 20 años de crecimiento real del PBI.<br>
               <span class="pill critical" style="margin-top:.3em;">2025: 3,5% real (permitido 0,7%)</span>
@@ -743,11 +785,11 @@
         <div class="col-card" style="border-color:var(--good); background:var(--good-soft);">
           <span class="pill good" style="background:transparent; padding:0;">✓ Déficit fiscal 2025</span>
           <span style="font-family:'Fraunces',serif; font-weight:700; font-size:clamp(1rem,2.6cqw,1.6rem);">2,2% del PBI</span>
-          <span style="font-size:clamp(.62rem,1.3cqw,.85rem); color:var(--ink-soft);">Cumplido — pero por ingresos extraordinarios de commodities que probablemente no se repitan.</span>
+          <span class="bv-min12" style="font-size:clamp(.62rem,1.3cqw,.85rem); color:var(--ink-soft);">Cumplido — pero por ingresos extraordinarios de commodities que probablemente no se repitan.</span>
         </div>
         <div class="col-card" style="border-color:var(--critical); background:var(--critical-soft);">
           <span class="pill critical" style="background:transparent; padding:0;">✕ Reglas de gasto 2025</span>
-          <span style="font-size:clamp(.66rem,1.4cqw,.92rem); line-height:1.5;">Gasto no financiero: <b>+S/ 6 600 M</b> sobre el límite (creció 3,5% real vs. 0,7% permitido)<br>Gasto corriente: <b>+S/ 4 100 M</b> sobre el límite (4,8% real vs. 2,1% permitido)</span>
+          <span class="bv-min12" style="font-size:clamp(.66rem,1.4cqw,.92rem); line-height:1.5;">Gasto no financiero: <b>+S/ 6 600 M</b> sobre el límite (creció 3,5% real vs. 0,7% permitido)<br>Gasto corriente: <b>+S/ 4 100 M</b> sobre el límite (4,8% real vs. 2,1% permitido)</span>
         </div>
       </div>
       <p class="source-note">Fuente: Consejo Fiscal del Perú, Comunicado N.º 01-2026-CF (29-ene-2026).</p>
@@ -831,7 +873,7 @@
               <span class="pct">3,5% del PBI</span>
             </div>
           </div>
-          <ul style="margin:.5em 0 0; padding-left:1.05em; font-size:clamp(.48rem,.95cqw,.6rem); color:var(--ink-soft); line-height:1.35; display:flex; flex-direction:column; gap:.15em;">
+          <ul class="bv-min12" style="margin:.5em 0 0; padding-left:1.05em; font-size:clamp(.48rem,.95cqw,.6rem); color:var(--ink-soft); line-height:1.35; display:flex; flex-direction:column; gap:.15em;">
             <li>Nivelación pensiones docentes — S/ 8 000 M/año</li>
             <li>Régimen pensionario militar-policial (DL 1133) — S/ 14 800-15 000 M (valor presente)</li>
             <li>Beneficios CAS — S/ 3 000 M/año</li>
@@ -861,7 +903,7 @@
     <div class="slide-pad">
       <span class="kicker">De insumos a resultados</span>
       <h2 class="slide-title" style="font-size:clamp(1.2rem,3.2cqw,1.9rem);">El círculo que se rompe</h2>
-      <div style="display:flex; align-items:center; flex-wrap:wrap; gap:.5em; margin-top:.8em; font-size:clamp(.62rem,1.3cqw,.85rem);">
+      <div class="bv-min12" style="display:flex; align-items:center; flex-wrap:wrap; gap:.5em; margin-top:.8em; font-size:clamp(.62rem,1.3cqw,.85rem);">
         <span class="pill" style="background:var(--paper); border:1px solid var(--line);">Ciudadanos generan ingresos</span>
         <span style="color:var(--ink-faint);">→</span>
         <span class="pill" style="background:var(--paper); border:1px solid var(--line);">Pagan impuestos</span>
@@ -873,7 +915,7 @@
       <div class="cols2" style="margin-top:1em; flex:none;">
         <div class="col-card">
           <span class="tag" style="color:var(--critical);">Nos preocupamos por…</span>
-          <ul style="margin:0; padding-left:1.1em; font-size:clamp(.66rem,1.4cqw,.9rem); line-height:1.5;">
+          <ul class="bv-min12" style="margin:0; padding-left:1.1em; font-size:clamp(.66rem,1.4cqw,.9rem); line-height:1.5;">
             <li>Construir colegios y hospitales</li>
             <li>Comprar patrulleros</li>
             <li>Contratar enfermeras</li>
@@ -881,7 +923,7 @@
         </div>
         <div class="col-card" style="border-color:var(--good);">
           <span class="tag" style="color:var(--good);">En vez de preguntarnos por…</span>
-          <ul style="margin:0; padding-left:1.1em; font-size:clamp(.66rem,1.4cqw,.9rem); line-height:1.5;">
+          <ul class="bv-min12" style="margin:0; padding-left:1.1em; font-size:clamp(.66rem,1.4cqw,.9rem); line-height:1.5;">
             <li>Aprendizajes de los estudiantes</li>
             <li>Reducir la mortalidad materna</li>
             <li>Mejorar la seguridad ciudadana</li>
@@ -903,7 +945,7 @@
       <p class="body-text" style="margin-top:.7em;">Administras un edificio de oficinas. Tus inquilinos más importantes se quejan: el ascensor es lento, las filas en hora punta son insoportables. Amenazan con irse.</p>
       <div class="col-card" style="margin-top:.8em; max-width:56ch;">
         <span class="tag" style="color:var(--critical);">Primera reacción</span>
-        <p style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El ascensor es muy lento" → cambiarlo, o potenciar el motor. Caro. Lento de implementar.</p>
+        <p class="bv-min12" style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El ascensor es muy lento" → cambiarlo, o potenciar el motor. Caro. Lento de implementar.</p>
       </div>
       <p class="takeaway">¿Cómo redefinirían el problema?</p>
     </div>
@@ -920,11 +962,11 @@
       <div class="cols2" style="margin-top:.8em; flex:none;">
         <div class="col-card">
           <span class="tag" style="color:var(--critical);">Primera reacción</span>
-          <p style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El ascensor es muy lento" → cambiarlo, o potenciar el motor. Caro. Lento de implementar.</p>
+          <p class="bv-min12" style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El ascensor es muy lento" → cambiarlo, o potenciar el motor. Caro. Lento de implementar.</p>
         </div>
         <div class="col-card" style="border-color:var(--good);">
           <span class="tag" style="color:var(--good);">Redefiniendo el problema</span>
-          <p style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El tiempo de espera se siente largo" → pon espejos, pon música. Rápido. Barato. Resuelve lo que en verdad molestaba.</p>
+          <p class="bv-min12" style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El tiempo de espera se siente largo" → pon espejos, pon música. Rápido. Barato. Resuelve lo que en verdad molestaba.</p>
         </div>
       </div>
       <p class="takeaway">No podemos resolver un problema hasta que no lo hayamos entendido.</p>
@@ -986,12 +1028,12 @@
       <span class="kicker">SNPP</span>
       <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">Clasificador de gasto: 3 preguntas</h2>
       <div class="cols2" style="flex:none; margin-top:1em;">
-        <div class="col-card"><span class="tag">¿Quién gasta?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Institucional</h3><p style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Sector → Pliego → Unidad Ejecutora</p></div>
-        <div class="col-card"><span class="tag">¿En qué se gasta?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Funcional</h3><p style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Función → División funcional → Grupo funcional</p></div>
+        <div class="col-card"><span class="tag">¿Quién gasta?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Institucional</h3><p class="bv-min12" style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Sector → Pliego → Unidad Ejecutora</p></div>
+        <div class="col-card"><span class="tag">¿En qué se gasta?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Funcional</h3><p class="bv-min12" style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Función → División funcional → Grupo funcional</p></div>
       </div>
       <div class="cols2" style="flex:none; margin-top:1em;">
-        <div class="col-card"><span class="tag">¿Para qué resultado?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Programático</h3><p style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Categoría presupuestal → Producto/Proyecto → Actividad</p></div>
-        <div class="col-card"><span class="tag">¿Cómo y dónde?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Económico / Geográfico</h3><p style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Genérica → Subgenérica → Específica · Departamento</p></div>
+        <div class="col-card"><span class="tag">¿Para qué resultado?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Programático</h3><p class="bv-min12" style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Categoría presupuestal → Producto/Proyecto → Actividad</p></div>
+        <div class="col-card"><span class="tag">¿Cómo y dónde?</span><h3 style="font-size:clamp(.85rem,2cqw,1.2rem);">Económico / Geográfico</h3><p class="bv-min12" style="margin:0; font-size:clamp(.66rem,1.4cqw,.9rem); color:var(--ink-soft);">Genérica → Subgenérica → Específica · Departamento</p></div>
       </div>
     </div>
     <div class="logo"></div>
@@ -1016,11 +1058,11 @@
       <span class="kicker">SNPP</span>
       <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">Las 5 fases del proceso presupuestario</h2>
       <div style="display:flex; flex-wrap:wrap; gap:.8em; margin-top:1.2em;">
-        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">31 may</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Programación</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Asignación Presupuestaria Multianual, 3 años</p></div>
-        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">30 ago</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Formulación</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Desagregación del primer año de la APM</p></div>
-        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">31 dic</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Aprobación</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Congreso aprueba → PIA de cada pliego</p></div>
-        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">Año 2</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Ejecución</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Se perciben ingresos y se atienden obligaciones</p></div>
-        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">Año 2</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Evaluación</h3><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Análisis del desempeño y del logro de resultados</p></div>
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">31 may</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Programación</h3><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Asignación Presupuestaria Multianual, 3 años</p></div>
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">30 ago</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Formulación</h3><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Desagregación del primer año de la APM</p></div>
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">31 dic</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Aprobación</h3><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Congreso aprueba → PIA de cada pliego</p></div>
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">Año 2</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Ejecución</h3><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Se perciben ingresos y se atienden obligaciones</p></div>
+        <div class="col-card" style="flex:1; min-width:140px;"><span class="tag">Año 2</span><h3 style="font-size:clamp(.78rem,1.8cqw,1.05rem);">Evaluación</h3><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Análisis del desempeño y del logro de resultados</p></div>
       </div>
     </div>
     <div class="logo"></div>
@@ -1033,9 +1075,9 @@
       <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
       <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">El triángulo estratégico</h2>
       <div class="cols2" style="flex:none; margin-top:1em; grid-template-columns:1fr 1fr 1fr;">
-        <div class="col-card"><span class="tag">Vértice 1</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Valor público</h3><p style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Qué resultado social justifica la acción?</p></div>
-        <div class="col-card"><span class="tag">Vértice 2</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Legitimidad y consenso</h3><p style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Quién autoriza y sostiene la acción?</p></div>
-        <div class="col-card"><span class="tag">Vértice 3</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Capacidad operativa</h3><p style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Puede el Estado ejecutarla?</p></div>
+        <div class="col-card"><span class="tag">Vértice 1</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Valor público</h3><p class="bv-min12" style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Qué resultado social justifica la acción?</p></div>
+        <div class="col-card"><span class="tag">Vértice 2</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Legitimidad y consenso</h3><p class="bv-min12" style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Quién autoriza y sostiene la acción?</p></div>
+        <div class="col-card"><span class="tag">Vértice 3</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Capacidad operativa</h3><p class="bv-min12" style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Puede el Estado ejecutarla?</p></div>
       </div>
       <p class="takeaway">Una política es viable solo cuando los 3 vértices se alinean de forma simultánea y mutuamente reforzada.</p>
     </div>
@@ -1049,7 +1091,7 @@
       <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
       <div class="pending-tag" style="border-color:var(--phase-frame); color:var(--phase-frame);">● antes del análisis…</div>
       <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">Aplicando el triángulo: Operativo Mercurio (2019)</h2>
-      <p class="body-text" style="margin-top:.3em; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Interdicción de minería ilegal, La Pampa (Madre de Dios), 2019 — 1 200 policías + ~300 militares.</p>
+      <p class="body-text bv-min12" style="margin-top:.3em; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Interdicción de minería ilegal, La Pampa (Madre de Dios), 2019 — 1 200 policías + ~300 militares.</p>
       <div class="cols2" style="grid-template-columns:1fr 1fr 1fr; flex:none; margin-top:.5em;">
         <div class="col-card" style="padding:1.2cqw;"><span class="tag">Valor público</span></div>
         <div class="col-card" style="padding:1.2cqw;"><span class="tag">Legitimidad</span></div>
@@ -1066,19 +1108,19 @@
     <div class="slide-pad">
       <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
       <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">Aplicando el triángulo: Operativo Mercurio (2019)</h2>
-      <p class="body-text" style="margin-top:.3em; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Interdicción de minería ilegal, La Pampa (Madre de Dios), 2019 — 1 200 policías + ~300 militares.</p>
+      <p class="body-text bv-min12" style="margin-top:.3em; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Interdicción de minería ilegal, La Pampa (Madre de Dios), 2019 — 1 200 policías + ~300 militares.</p>
       <div class="cols2" style="grid-template-columns:1fr 1fr 1fr; flex:none; margin-top:.5em;">
         <div class="col-card" style="border-color:var(--accent); background:var(--accent-soft); padding:1.2cqw;">
           <span class="pill" style="background:transparent; padding:0; color:var(--accent-ink);">~ Valor público</span>
-          <p style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Problema real, diseño incompleto: atacó el síntoma, no las causas estructurales (sin alternativas económicas).</p>
+          <p class="bv-min12" style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Problema real, diseño incompleto: atacó el síntoma, no las causas estructurales (sin alternativas económicas).</p>
         </div>
         <div class="col-card" style="border-color:var(--accent); background:var(--accent-soft); padding:1.2cqw;">
           <span class="pill" style="background:transparent; padding:0; color:var(--accent-ink);">~ Legitimidad</span>
-          <p style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Quienes no viven ahí apoyaron la mano dura. Quienes sí viven ahí, no (bloqueo Interoceánica, tregua 2022).</p>
+          <p class="bv-min12" style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Quienes no viven ahí apoyaron la mano dura. Quienes sí viven ahí, no (bloqueo Interoceánica, tregua 2022).</p>
         </div>
         <div class="col-card" style="border-color:var(--good); background:var(--good-soft); padding:1.2cqw;">
           <span class="pill good" style="background:transparent; padding:0;">✓ Capacidad operativa</span>
-          <p style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Sí podían ejecutar: -92% deforestación en 5 meses. No sostenerlo fue decisión normativa, no falla de ejecución.</p>
+          <p class="bv-min12" style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Sí podían ejecutar: -92% deforestación en 5 meses. No sostenerlo fue decisión normativa, no falla de ejecución.</p>
         </div>
       </div>
       <p class="takeaway" style="font-size:clamp(.85rem,2.1cqw,1.3rem); padding-top:.3em;">Se pudo ejecutar. Lo que nunca se diseñó fue cómo sostenerlo — y eso no es un problema de capacidad, es un problema de diseño.</p>
@@ -1097,11 +1139,11 @@
         "Una cualidad o atributo intrínseco o extrínseco de las personas, hogares, organizaciones, comunidades, o de su entorno natural y no natural, sobre la cual se desea incidir por ser de interés al desarrollo sostenible."
         <cite>Directiva N.º 0001-2026-EF/50.01, Art. 4.a</cite>
       </blockquote>
-      <p class="body-text" style="margin-top:.7em; font-size:clamp(.66rem,1.4cqw,.88rem); color:var(--ink-soft);">Se documenta en 3 partes — ejemplo con comprensión lectora:</p>
+      <p class="body-text bv-min12" style="margin-top:.7em; font-size:clamp(.66rem,1.4cqw,.88rem); color:var(--ink-soft);">Se documenta en 3 partes — ejemplo con comprensión lectora:</p>
       <div class="cols2" style="grid-template-columns:1fr 1fr 1fr; flex:none; margin-top:.4em;">
-        <div class="col-card"><span class="tag">Descripción</span><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">Comprensión lectora en 4.º de primaria por debajo del nivel esperado según el currículo nacional.</p></div>
-        <div class="col-card"><span class="tag">Relevancia</span><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">La lectura es la base de todo aprendizaje posterior — sin ella, el resto del currículo se construye sobre una base débil.</p></div>
-        <div class="col-card"><span class="tag">Indicador</span><p style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">% de estudiantes de 4.º de primaria en nivel Satisfactorio en Lectura (ENLA, MINEDU-UMC).</p></div>
+        <div class="col-card"><span class="tag">Descripción</span><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">Comprensión lectora en 4.º de primaria por debajo del nivel esperado según el currículo nacional.</p></div>
+        <div class="col-card"><span class="tag">Relevancia</span><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">La lectura es la base de todo aprendizaje posterior — sin ella, el resto del currículo se construye sobre una base débil.</p></div>
+        <div class="col-card"><span class="tag">Indicador</span><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">% de estudiantes de 4.º de primaria en nivel Satisfactorio en Lectura (ENLA, MINEDU-UMC).</p></div>
       </div>
       <p class="source-note">Ejemplo con datos de la apertura (slide 10): ENLA 2024, MINEDU-UMC.</p>
     </div>
@@ -1114,16 +1156,16 @@
     <div class="slide-pad">
       <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
       <h2 class="slide-title" style="font-size:clamp(.95rem,2.6cqw,1.55rem);">Dimensionar el problema: 4 elementos</h2>
-      <p class="body-text" style="margin-top:.2em; font-size:clamp(.56rem,1.15cqw,.75rem); color:var(--ink-soft);">Ejemplo: % que alcanza el nivel Satisfactorio en Lectura, 4.º de primaria (ENLA-MINEDU).</p>
+      <p class="body-text bv-min12" style="margin-top:.2em; font-size:clamp(.56rem,1.15cqw,.75rem); color:var(--ink-soft);">Ejemplo: % que alcanza el nivel Satisfactorio en Lectura, 4.º de primaria (ENLA-MINEDU).</p>
       <div class="cols2" style="flex:none; margin-top:.5em;">
-        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Extensión — ¿cuántos y dónde?</span><p style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">≈423 600 de 630 327 estudiantes (ESCALE 2024) no alcanza el nivel esperado. De 49,4% sin el nivel en Moquegua a 87,2% en Loreto.</p></div>
-        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Intensidad — ¿qué tan grave?</span><p style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">De los que no llegan, no todos igual: 39,0% "en proceso" (cerca), pero 3,4% (≈18 100) en "Previo al inicio" — el nivel más bajo.</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Extensión — ¿cuántos y dónde?</span><p class="bv-min12" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">≈423 600 de 630 327 estudiantes (ESCALE 2024) no alcanza el nivel esperado. De 49,4% sin el nivel en Moquegua a 87,2% en Loreto.</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Intensidad — ¿qué tan grave?</span><p class="bv-min12" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">De los que no llegan, no todos igual: 39,0% "en proceso" (cerca), pero 3,4% (≈18 100) en "Previo al inicio" — el nivel más bajo.</p></div>
       </div>
       <div class="cols2" style="flex:none; margin-top:.4em;">
-        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Evolución — tendencia 2016-2024</span><p style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">31,4% (2016) → 34,5% (2019, prepandemia) → 30,0% (2022, caída) → 32,8% (2024).</p></div>
-        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Brecha — distancia a la meta</span><p style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">La meta es 100% — leer es un derecho de todos. Proyectado a toda primaria (aproximación): ≈2 497 600 de 3 716 712 estudiantes.</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Evolución — tendencia 2016-2024</span><p class="bv-min12" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">31,4% (2016) → 34,5% (2019, prepandemia) → 30,0% (2022, caída) → 32,8% (2024).</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Brecha — distancia a la meta</span><p class="bv-min12" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">La meta es 100% — leer es un derecho de todos. Proyectado a toda primaria (aproximación): ≈2 497 600 de 3 716 712 estudiantes.</p></div>
       </div>
-      <p class="takeaway" style="font-size:clamp(.68rem,1.5cqw,.98rem);">Extensión te dice que hay un problema. Intensidad te dice qué tan grave es. Evolución te dice si va mejorando o empeorando. Brecha te dice qué tan lejos estás de la meta. Sin los 4, tu diagnóstico está incompleto.</p>
+      <p class="takeaway bv-min12" style="font-size:clamp(.68rem,1.5cqw,.98rem);">Extensión te dice que hay un problema. Intensidad te dice qué tan grave es. Evolución te dice si va mejorando o empeorando. Brecha te dice qué tan lejos estás de la meta. Sin los 4, tu diagnóstico está incompleto.</p>
       <p class="source-note">Fuente: UMC-MINEDU, ENLA 2024; ESCALE-MINEDU, Magnitudes de la Educación (matrícula 2024).</p>
     </div>
     <div class="logo"></div>
@@ -1135,7 +1177,7 @@
     <div class="slide-pad">
       <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
       <h2 class="slide-title" style="font-size:clamp(1.1rem,3cqw,1.8rem);">El modelo explicativo</h2>
-      <p class="body-text" style="margin-top:.3em; font-size:clamp(.66rem,1.4cqw,.88rem); color:var(--ink-soft);">El marco causal detrás de la condición de interés, construido con evidencia — no con opiniones. Ejemplo: marco de UNICEF para desnutrición crónica infantil.</p>
+      <p class="body-text bv-min12" style="margin-top:.3em; font-size:clamp(.66rem,1.4cqw,.88rem); color:var(--ink-soft);">El marco causal detrás de la condición de interés, construido con evidencia — no con opiniones. Ejemplo: marco de UNICEF para desnutrición crónica infantil.</p>
       <div class="chart-card" style="margin-top:.6em; flex:1; min-height:0;">
         <svg viewBox="0 0 460 200" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Dieta inadecuada y enfermedades infecciosas, con evidencia, causan desnutrición crónica infantil">
           <defs>
@@ -1177,7 +1219,7 @@
         <div style="background:#fff; padding:8px; border-radius:8px; border:1px solid var(--line);">
           <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAADHUlEQVR4nO1cS46kMAy1A1IvQaoD1FGoG8yRRn0zOErfgCxLCvLIdhJqZkHBpifp2IsIghdWPZ6/oZDgiizukjqA6R+Le/P8XzH9Y3Ht6XuM8khXL3uIPexXRdp/SVyD+h2J6Ma08joQwUQBaJY9eb6Wav8VcU3qo5JzCHzTMdIb0id+KMhK58c32nNe3AVdaF3ffxB93gPgwzO0KydU43+054S4M0ov0rT+8ESYvjj+8pXI9MXErsT+E+Ka1CcSN8ye+qFOWqi7RZA5HGskLtT+8+Ia1N9y1vxB+4K/14406i7yfCzV/iviGtPvmZzpxm9IAMzf4YkEPm5TwfY7039b//aAODKJ70SRpr6P/nkZ2WcDX1n9W+H7BrGu1SAsYZbL4VWKpC4tqXCiuTT7nemf7W+gBGEueIWwROuWMmnfx06H/Z71vW/DU5MnZS3nUoK5uGuauSaemb/a6SjQ/kvi2tSfVm5i3aXq7bTJIYl1XCQcW/ytE18fOxix17ymrsbEdJZF468sBdp/SVxj+iCtDZp5oCC5lLrhNFUABVkDNLvr0ux3pn/29yHNoATkHIkXLZI2my/U+b5BHA3uA0FhstIZIKZWmcTG3wrxDYpqKn15dwgvhTFwTNanhm99+K4Sa3MGJUgLviScjsAbf2vFl7Iv5jVnzYnYwuTYAjH+Vojv2uUOxh6JYzpN6pV3YpdmvzP9Y6GXgJv7zxlu2oEXThu+9fpnUOqqf84z/0E4LSftDN9a5/uk1JU25D1iiTjK/Oj77bki7pI2NKcPaRbIsnvl/GDK00Pjb63nN0I6ocFjQPC32KBcfgWgZewCgOeh/7AWaL8z/WOhv9sYqTRKVS+kdqXVR1W+bz0jqIRFvsJ49OoWYKJ4fpL4YJbx9+d8v4AyCV6QR/tyulIyLZkjlmn/eXEt6/t4qk58dvwgJbcr7XxO1flzF3Pl19Yk5fm+zX8rxbeXNebPQ+gl1tLy4HA8yKacz8GUWJdmvzP9t/hu6TMUfyNkkOWeALaeljtj728Bp9nO59T3vqH9P0NVeDnTPxR3/PjH6f8BYXQbuHnMdqMAAAAASUVORK5CYII=" alt="QR con el enlace a los recursos del taller" style="display:block; width:84px; height:84px;">
         </div>
-        <a class="link" href="https://cain971.github.io/taller-ppr-recursos/" style="font-size:.6rem;">cain971.github.io/taller-ppr-recursos</a>
+        <a class="link bv-min12" href="https://cain971.github.io/taller-ppr-recursos/" style="font-size:.6rem;">cain971.github.io/taller-ppr-recursos</a>
       </div>
     </div>
     <div class="logo"></div>
