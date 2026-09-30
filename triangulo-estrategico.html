@@ -10,12 +10,12 @@
   --navy: #14171a;
   --navy-mid: #1b1f22;
   --navy-light: #23272a;
-  --gold: #b8863a;
+  --gold: #C08E42;
   --gold-light: #f2ddb2;
   --cream: #edeee8;
   --cream-dim: #a9aea3;
-  --rust: #d9654c;
-  --sage: #2f9a7c;
+  --rust: #EE785E;
+  --sage: #4DB394;
   --slate: #6d7268;
   --text-on-dark: #edeee8;
   --text-dim: #a9aea3;
@@ -309,7 +309,7 @@ section + section { padding-top: 2rem; }
 }
 
 .tag-biblioteca { background: rgba(184,134,58,.15); color: var(--gold); }
-.tag-mercurio { background: rgba(217,101,76,.15); color: #d9654c; }
+.tag-mercurio { background: rgba(217,101,76,.15); color: #EE785E; }
 .tag-vacuna { background: rgba(91,200,168,.15); color: #5bc8a8; }
 .tag-anemia { background: rgba(97,175,239,.15); color: #61afef; }
 
@@ -371,7 +371,7 @@ section + section { padding-top: 2rem; }
 
 .alto .pill-val { color: #5bc8a8; }
 .medio .pill-val { color: var(--gold); }
-.bajo .pill-val { color: #d9654c; }
+.bajo .pill-val { color: #EE785E; }
 
 .case-lesson {
   background: rgba(255,255,255,.03);
@@ -427,13 +427,13 @@ section + section { padding-top: 2rem; }
 .q-option.correct {
   border-color: rgba(47,154,124,.6);
   background: rgba(47,154,124,.12);
-  color: #2f9a7c;
+  color: #4DB394;
 }
 
 .q-option.wrong {
   border-color: rgba(217,101,76,.5);
   background: rgba(217,101,76,.1);
-  color: #d9654c;
+  color: #EE785E;
 }
 
 .q-option.locked { cursor: default; }
@@ -452,8 +452,8 @@ section + section { padding-top: 2rem; }
 }
 
 .q-feedback.show { display: block; }
-.q-feedback.correct-fb { background: rgba(47,154,124,.12); border: 1px solid rgba(47,154,124,.3); color: #2f9a7c; }
-.q-feedback.wrong-fb { background: rgba(217,101,76,.1); border: 1px solid rgba(217,101,76,.3); color: #d9654c; }
+.q-feedback.correct-fb { background: rgba(47,154,124,.12); border: 1px solid rgba(47,154,124,.3); color: #4DB394; }
+.q-feedback.wrong-fb { background: rgba(217,101,76,.1); border: 1px solid rgba(217,101,76,.3); color: #EE785E; }
 
 .q-feedback strong { display: block; margin-bottom: .4rem; }
 
@@ -507,13 +507,13 @@ section + section { padding-top: 2rem; }
 .ci-btn.selected-correct {
   background: rgba(47,154,124,.2);
   border-color: rgba(47,154,124,.6);
-  color: #2f9a7c;
+  color: #4DB394;
 }
 
 .ci-btn.selected-wrong {
   background: rgba(217,101,76,.15);
   border-color: rgba(217,101,76,.5);
-  color: #d9654c;
+  color: #EE785E;
 }
 
 .ci-btn.locked { cursor: default; }
@@ -523,8 +523,8 @@ section + section { padding-top: 2rem; }
   line-height: 1.5; display: none;
 }
 .ci-result.show { display: block; }
-.ci-result.ok { color: #2f9a7c; }
-.ci-result.fail { color: #d9654c; }
+.ci-result.ok { color: #4DB394; }
+.ci-result.fail { color: #EE785E; }
 
 /* ── SCORE COUNTER ── */
 .score-bar {
@@ -638,6 +638,9 @@ html { scroll-padding-top: 80px; }
 button.case-header { width: 100%; margin: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; }
 button.case-header:focus-visible { outline: 2px solid currentColor; outline-offset: -3px; }
 .vertex-card { cursor: default; } /* no hacen nada al clic */
+
+/* Accesibilidad (auditoría de base-visual, 2026-09-30: contraste: colores ajustados a 4,5:1; enlaces subrayados) */
+main a:not([class]), footer a:not([class]) { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .15em; }
 </style>
 <script>document.documentElement.classList.add('js') /* auditoría de base-visual, 2026-09-30: sin JS, el contenido se ve */</script>
 </head>
@@ -710,8 +713,8 @@ button.case-header:focus-visible { outline: 2px solid currentColor; outline-offs
         <text x="250" y="198" text-anchor="middle" fill="rgba(184,134,58,0.3)" font-family="'IBM Plex Mono',monospace" font-size="8" letter-spacing="2">= VALOR PÚBLICO</text>
         <!-- Vertex 1 — TOP: Valor Público -->
         <circle cx="250" cy="30" r="22" fill="rgba(184,134,58,0.15)" stroke="rgba(184,134,58,0.6)" stroke-width="1.5"/>
-        <text x="250" y="26" text-anchor="middle" fill="#b8863a" font-family="'IBM Plex Mono',monospace" font-size="8" font-weight="500">VALOR</text>
-        <text x="250" y="37" text-anchor="middle" fill="#b8863a" font-family="'IBM Plex Mono',monospace" font-size="8" font-weight="500">PÚBLICO</text>
+        <text x="250" y="26" text-anchor="middle" fill="#C08E42" font-family="'IBM Plex Mono',monospace" font-size="8" font-weight="500">VALOR</text>
+        <text x="250" y="37" text-anchor="middle" fill="#C08E42" font-family="'IBM Plex Mono',monospace" font-size="8" font-weight="500">PÚBLICO</text>
         <!-- Vertex 2 — BOTTOM RIGHT: Capacidad Operativa -->
         <circle cx="470" cy="310" r="22" fill="rgba(97,175,239,0.12)" stroke="rgba(97,175,239,0.5)" stroke-width="1.5"/>
         <text x="470" y="306" text-anchor="middle" fill="#61afef" font-family="'IBM Plex Mono',monospace" font-size="7.5" font-weight="500">CAPACIDAD</text>
@@ -1086,7 +1089,7 @@ button.case-header:focus-visible { outline: 2px solid currentColor; outline-offs
 
 </main>
 <footer>
-  <a href="index.html" style="color:var(--gold);text-decoration:none;letter-spacing:.12em;">&larr; Volver a recursos del taller</a>
+  <a href="index.html" style="color:var(--gold);text-decoration:underline;text-underline-offset:.2em;letter-spacing:.12em;">&larr; Volver a recursos del taller</a>
   <div style="margin-top:.8rem;">Taller PpR · EGPP-PUCP · Juan Pablo Silva Macher</div>
 </footer>
 
