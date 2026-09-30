@@ -571,6 +571,12 @@
   /* Día 2 · tablas de las seis secciones (láminas 19 y 45): la sección manda, la explicación acompaña */
   table.rules.secs td b{ font-weight:700; color:var(--ink); }
   table.rules.secs td:last-child{ font-weight:400; color:var(--ink-soft); }
+
+/* Accesibilidad (auditoría de base-visual, 2026-09-30): respetar "movimiento reducido" */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .fade-in { opacity: 1 !important; transform: none !important; }
+}
 </style>
 </head>
 <body>
