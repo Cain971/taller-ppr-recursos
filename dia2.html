@@ -653,6 +653,13 @@
   .eq-box small { font-size: max(12px, .8em); }
   table.sem thead th small { font-size: max(12px, .78em); }
 }
+
+/* Accesibilidad (puerta de base-visual, 2026-10-15): el borde del botón de tema a 3:1, con el --mark de Cuentas Claras en el núcleo
+   (3,21 y 3,49:1; --line daba 1,25 y 1,34:1) */
+:root { --borde-control: #818680; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --borde-control: #6A6F66; } }
+:root[data-theme="dark"] { --borde-control: #6A6F66; }
+.theme-btn { border-color: var(--borde-control); }
 </style>
 </head>
 <body>
