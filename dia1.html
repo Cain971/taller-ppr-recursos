@@ -521,7 +521,7 @@ body.presenting .has-steps:not(.revelado) .col-card.veredicto{ border-color:var(
   <h1>Presupuesto Público por Resultados — Día 1</h1>
   <p>31 slides · Taller EGPP-PUCP, sáb. 14 nov. 2026</p>
   <div class="head-actions">
-    <button id="theme-btn" class="present-btn theme-btn" type="button">◑ Tema claro</button>
+    <button id="theme-btn" class="present-btn theme-btn" type="button">Tema oscuro</button>
     <button id="present-btn" class="present-btn" type="button">▶ Presentar</button>
   </div>
 </div>
@@ -1323,7 +1323,7 @@ body.presenting .has-steps:not(.revelado) .col-card.veredicto{ border-color:var(
   function label(){
     var t = root.getAttribute('data-theme');
     if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-    btn.textContent = t === 'dark' ? '◐ Tema oscuro' : '◑ Tema claro';
+    btn.textContent = t === 'dark' ? 'Tema claro' : 'Tema oscuro';
     btn.setAttribute('aria-label', 'Cambiar tema. Actual: ' + (t === 'dark' ? 'oscuro' : 'claro'));
     return t;
   }
