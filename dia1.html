@@ -449,6 +449,44 @@
   .pill { font-size: max(12px, .78em); }
   a.link { font-size: max(12px, .85em); }
 }
+
+/* Botón de tema claro/oscuro (igual que en dia2.html; 2026-11-13) */
+.head-actions{ display:flex; gap:.6em; align-items:center; }
+.theme-btn{ background:transparent; color:var(--ink-soft); }
+.theme-btn:hover{ background:var(--line); color:var(--ink); }
+.present-btn:focus-visible, .theme-btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+:root { --borde-control: #818680; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --borde-control: #6A6F66; } }
+:root[data-theme="dark"] { --borde-control: #6A6F66; }
+.theme-btn { border-color: var(--borde-control); }
+
+/* Lámina final: QR grande para leer desde el fondo del salón (igual que en dia2.html; 2026-11-13) */
+.qr-final .slide-pad{ flex-direction:row; align-items:center; gap:4cqw; padding-top:4cqw; padding-bottom:6cqw; }
+.qr-text{ flex:1; display:flex; flex-direction:column; gap:.6em; min-width:0; }
+.qr-text h2{ font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.4rem,4.4cqw,3rem); line-height:1.08; margin:.2em 0 0; text-wrap:balance; color:var(--phase,var(--ink)); }
+.qr-text p{ margin:0; color:var(--ink-soft); font-size:clamp(.8rem,1.9cqw,1.2rem); line-height:1.45; }
+.qr-text .link{ font-size:clamp(.66rem,1.5cqw,.95rem); }
+.qr-box{ flex:none; width:40cqw; max-width:100%; }
+.qr-box > div{ width:100%; box-sizing:border-box; padding:1.4cqw !important; border-radius:1cqw !important; }
+.qr-box img{ display:block; width:100% !important; height:auto !important; max-width:none !important; image-rendering:pixelated; }
+@media (max-width:720px){
+  .qr-final .slide-pad{ flex-direction:column; }
+  .qr-box{ width:80%; }
+}
+
+/* Lámina top-down (2026-11-13) */
+.td-flow{ display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:1.2cqw; align-items:stretch; margin-top:.7em; }
+.td-flow .col-card h3{ margin:.1em 0 .2em; font-size:clamp(.9rem,2.1cqw,1.3rem); }
+.td-flow .col-card p{ margin:0; font-size:clamp(.66rem,1.45cqw,.95rem); line-height:1.4; color:var(--ink-soft); }
+.td-arrow{ align-self:center; color:var(--ink-faint); font-size:clamp(1rem,2.4cqw,1.6rem); }
+.td-dato{ display:flex; align-items:baseline; gap:1.2cqw; margin-top:.8em; }
+.td-dato .num{ font-family:'Fraunces',serif; font-weight:700; color:var(--critical); font-size:clamp(1.6rem,4.6cqw,3rem); line-height:1; }
+.td-dato p{ margin:0; font-size:clamp(.68rem,1.5cqw,.98rem); line-height:1.4; color:var(--ink-soft); }
+@media (max-width:720px){
+  .td-flow{ grid-template-columns:1fr; }
+  .td-arrow{ transform:rotate(90deg); justify-self:center; }
+  .td-dato{ flex-direction:column; }
+}
 </style>
 </head>
 <body>
@@ -456,8 +494,11 @@
 
 <div class="deck-head">
   <h1>Presupuesto Público por Resultados — Día 1</h1>
-  <p>36 slides · Taller EGPP-PUCP, sáb. 14 nov. 2026</p>
-  <button id="present-btn" class="present-btn" type="button">▶ Presentar</button>
+  <p>37 slides · Taller EGPP-PUCP, sáb. 14 nov. 2026</p>
+  <div class="head-actions">
+    <button id="theme-btn" class="present-btn theme-btn" type="button">◑ Tema claro</button>
+    <button id="present-btn" class="present-btn" type="button">▶ Presentar</button>
+  </div>
 </div>
 
 <div id="present-hint" class="present-hint">← → para avanzar · Esc para salir</div>
@@ -477,7 +518,7 @@
         <span><strong>Juan Pablo Silva Macher</strong>Docente</span>
       </div>
     </div>
-    <span class="slide-foot">01 / 36</span>
+    <span class="slide-foot">01 / 37</span>
   </section>
 
   <!-- 2 BIENVENIDA -->
@@ -492,7 +533,7 @@
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">02 / 36</span>
+    <span class="slide-foot">02 / 37</span>
   </section>
 
   <!-- 3 EVALUACIÓN -->
@@ -516,7 +557,7 @@
       <p class="bv-min12" style="font-family:'IBM Plex Mono',monospace; font-size:clamp(.6rem,1.3cqw,.82rem); color:var(--ink-soft); margin-top:.9em;">Nota mínima aprobatoria: 11/20 · Ninguna entrega es recuperable</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">03 / 36</span>
+    <span class="slide-foot">03 / 37</span>
   </section>
 
   <!-- 4 GRUPOS -->
@@ -528,7 +569,7 @@
       <p class="body-text" style="margin-top:1em; color:var(--ink-soft);">El grupo y el programa elegidos en la Sesión 1 son la base de las dos entregas.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">04 / 36</span>
+    <span class="slide-foot">04 / 37</span>
   </section>
 
   <!-- 5 EL PROGRAMA -->
@@ -540,7 +581,7 @@
       <p class="body-text" style="margin-top:1em; max-width:54ch;"><b>No van a diseñar un programa nuevo ni pedir presupuesto adicional:</b> van a diagnosticarlo con las herramientas del PpR y proponer una mejora concreta, sustentada en evidencia, sobre ese mismo programa.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">05 / 36</span>
+    <span class="slide-foot">05 / 37</span>
   </section>
 
   <!-- 6 OBJETIVOS -->
@@ -556,7 +597,7 @@
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">06 / 36</span>
+    <span class="slide-foot">06 / 37</span>
   </section>
 
   <!-- 7 SELECCIÓN DE PROGRAMA -->
@@ -572,7 +613,7 @@
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">07 / 36</span>
+    <span class="slide-foot">07 / 37</span>
   </section>
 
   <!-- 8 ENTREGABLES -->
@@ -586,7 +627,7 @@
           <h3>Entrega 1</h3>
           <ul>
             <li>Condición de interés: el problema, con dato de magnitud y fuente.</li>
-            <li>Cadena de resultados: insumos → actividades → productos → resultados → impacto.</li>
+            <li>Cadena de resultados: producto → resultado intermedio → resultado (el cambio en la condición de interés).</li>
             <li>El supuesto más frágil de tu cadena.</li>
             <li>Una pregunta de evidencia que tu programa no responde bien.</li>
           </ul>
@@ -604,7 +645,7 @@
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">08 / 36</span>
+    <span class="slide-foot">08 / 37</span>
   </section>
 
   <!-- 9 ANEXO 2 -->
@@ -615,10 +656,10 @@
       <p class="body-text" style="margin-top:1em;">El <b>Anexo II</b> de la Directiva N.º 0001-2026-EF/50.01 define el contenido mínimo de un Programa Presupuestal. Tu Entrega 1 cubre su primera sección:</p>
       <p class="body-text" style="margin-top:.8em; font-family:'Fraunces',serif; font-style:italic;">I. Condición de Interés — I.1 Descripción · I.2 Relevancia · I.3 Indicador</p>
       <p class="body-text" style="margin-top:1em; color:var(--ink-soft);">No necesitas llenar el Anexo completo — solo esa parte, en tu propio lenguaje.</p>
-      <a class="link" href="#" style="margin-top:1.2em;">drive.google.com/…/Directiva-0001-2026-EF-50.01_Anexos-I-II-III.pdf</a>
+      <a class="link" href="https://www.gob.pe/institucion/mef/normas-legales/8237957" target="_blank" rel="noopener" style="margin-top:1.2em;">Directiva y Anexos (MEF): gob.pe/institucion/mef/normas-legales/8237957</a>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">09 / 36</span>
+    <span class="slide-foot">09 / 37</span>
   </section>
 
   <!-- 10A BRECHAS — PREDICCIÓN -->
@@ -647,7 +688,7 @@
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">10 / 36</span>
+    <span class="slide-foot">10 / 37</span>
   </section>
 
   <!-- 10B BRECHAS -->
@@ -680,7 +721,7 @@
       <p class="source-note">Fuentes: INEI, "Perú: Evolución de la Pobreza Monetaria, 2016-2025" · INEI-ENDES, nota de prensa 2025 (anemia) · MINEDU-UMC, ENLA 2024 · INEI, semestre móvil ene-jun 2024 (seguridad, vía El Peruano). Búsqueda 2026-09-19.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">11 / 36</span>
+    <span class="slide-foot">11 / 37</span>
   </section>
 
   <!-- 11 TRANSICIÓN -->
@@ -691,7 +732,7 @@
       <p class="body-text" style="margin-top:1.1em; max-width:56ch;">Cerrar estas brechas exige gasto sostenido en el tiempo — no un impulso de un año. Pero el espacio fiscal no es ilimitado, y la historia peruana ya mostró qué pasa cuando se ignora ese límite.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">12 / 36</span>
+    <span class="slide-foot">12 / 37</span>
   </section>
 
   <!-- 12A HIPERINFLACIÓN — PREDICCIÓN -->
@@ -703,7 +744,7 @@
       <p class="body-text" style="margin-top:.6em; max-width:56ch; color:var(--ink-soft);">Bajo el primer gobierno de Alan García, el déficit fiscal se financió emitiendo dinero.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">13 / 36</span>
+    <span class="slide-foot">13 / 37</span>
   </section>
 
   <!-- 12B HIPERINFLACIÓN -->
@@ -716,7 +757,7 @@
       <p class="source-note">Fuente: BCRP, Memoria Anual 1990 — verificada contra el documento primario (2026-09-19).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">14 / 36</span>
+    <span class="slide-foot">14 / 37</span>
   </section>
 
   <!-- 13 BCRP -->
@@ -731,7 +772,7 @@
       <p class="takeaway">Gastar más de lo que podemos sostener como país nos perjudica a todos.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">15 / 36</span>
+    <span class="slide-foot">15 / 37</span>
   </section>
 
   <!-- 14 REGLAS FISCALES -->
@@ -769,7 +810,7 @@
       <p class="source-note">Déficit y deuda: MEF, Exposición de Motivos — Ley de Presupuesto 2027; Decreto Legislativo N.º 1621 (2024). Reglas de gasto y cifras 2025: Decreto Legislativo N.º 1276; Consejo Fiscal, Comunicado N.º 01-2026-CF. 2026-2030 de las reglas de gasto: no disponible — el límite depende del PBI real de cada año, aún no conocido.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">16 / 36</span>
+    <span class="slide-foot">16 / 37</span>
   </section>
 
   <!-- 15 CONSEJO FISCAL -->
@@ -795,7 +836,7 @@
       <p class="source-note">Fuente: Consejo Fiscal del Perú, Comunicado N.º 01-2026-CF (29-ene-2026).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">17 / 36</span>
+    <span class="slide-foot">17 / 37</span>
   </section>
 
   <!-- 16A CONGRESO — PREDICCIÓN -->
@@ -836,7 +877,7 @@
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">18 / 36</span>
+    <span class="slide-foot">18 / 37</span>
   </section>
 
   <!-- 16B INICIATIVA DE GASTO DEL CONGRESO -->
@@ -883,7 +924,30 @@
       <p class="source-note">Leyes y proyección de costo: MEF, Exposición de Motivos — Ley de Presupuesto del Sector Público 2027 (2026). Detalle de normas: Consejo Fiscal, Comunicado N.º 02-2026-CF (26-mar-2026).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">19 / 36</span>
+    <span class="slide-foot">19 / 37</span>
+  </section>
+
+  <!-- 16C TOP-DOWN: PRIMERO EL LÍMITE (2026-11-13) -->
+  <section class="slide" style="--phase:var(--accent);">
+    <div class="slide-pad">
+      <span class="kicker">Problema de fondo <span class="sub">· La respuesta</span></span>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.3cqw,2rem);">Primero el límite, después las prioridades</h2>
+      <div class="td-flow">
+        <div class="col-card"><span class="tag bv-min12" style="color:var(--ink-faint);">1</span><h3>Límite de gasto</h3><p class="bv-min12">Dentro de las reglas fiscales. Un dato de entrada, no el punto de partida de la negociación.</p></div>
+        <span class="td-arrow" aria-hidden="true">→</span>
+        <div class="col-card"><span class="tag bv-min12" style="color:var(--ink-faint);">2</span><h3>Línea de base</h3><p class="bv-min12">Cuánto cuesta seguir haciendo lo que ya se hace.</p></div>
+        <span class="td-arrow" aria-hidden="true">→</span>
+        <div class="col-card" style="border-color:var(--good);"><span class="tag bv-min12" style="color:var(--good);">3</span><h3>Espacio fiscal</h3><p class="bv-min12">La diferencia: se asigna a resultados prioritarios, con evidencia.</p></div>
+      </div>
+      <div class="td-dato">
+        <span class="num">+21%</span>
+        <p class="bv-min12">Hoy el presupuesto se completa durante el año: el modificado (PIM) superó al inicial (PIA) en 21% en promedio entre 2006 y 2025 (8% en 2025).</p>
+      </div>
+      <p class="takeaway" style="max-width:none;">Sin un presupuesto predecible no hay presupuesto por resultados.</p>
+      <p class="source-note">Fuentes: Ljungman (2009), FMI, Working Paper 09/243 · Marco Macroeconómico Multianual (D. Leg. N.º 1276) · MEF, Consulta Amigable 2006–2025 (cálculo propio).</p>
+    </div>
+    <div class="logo"></div>
+    <span class="slide-foot">20 / 37</span>
   </section>
 
   <!-- 17 PRESUPUESTO 2027 VS BRECHAS -->
@@ -895,7 +959,7 @@
       <p class="source-note">Fuente: MEF, Exposición de Motivos — Ley de Presupuesto del Sector Público 2027 (2026); INEI/INEI-ENDES 2025 (ver slide 10).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">20 / 36</span>
+    <span class="slide-foot">21 / 37</span>
   </section>
 
   <!-- 18 EL CÍRCULO QUE SE ROMPE + LÓGICA POR INSUMOS -->
@@ -933,7 +997,7 @@
       <p class="takeaway">La lógica por insumos nos sitúa lejos de mejorar las condiciones de vida del ciudadano.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">21 / 36</span>
+    <span class="slide-foot">22 / 37</span>
   </section>
 
   <!-- 19A EL CASO DEL ASCENSOR — PREDICCIÓN -->
@@ -950,7 +1014,7 @@
       <p class="takeaway">¿Cómo redefinirían el problema?</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">22 / 36</span>
+    <span class="slide-foot">23 / 37</span>
   </section>
 
   <!-- 19B EL CASO DEL ASCENSOR -->
@@ -972,7 +1036,7 @@
       <p class="takeaway">No podemos resolver un problema hasta que no lo hayamos entendido.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">23 / 36</span>
+    <span class="slide-foot">24 / 37</span>
   </section>
 
   <!-- 20A NADA SE MEJORA SI NO SE MIDE — PREDICCIÓN -->
@@ -984,7 +1048,7 @@
       <p class="body-text" style="margin-top:.7em;">"Queremos mejorar la seguridad ciudadana" — ya vimos que el 86,1% percibe que puede ser víctima de un delito (apertura de hoy). Antes de ver mi lista: ¿qué preguntas de diagnóstico harían ustedes?</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">24 / 36</span>
+    <span class="slide-foot">25 / 37</span>
   </section>
 
   <!-- 20B NADA SE MEJORA SI NO SE MIDE -->
@@ -1002,7 +1066,7 @@
       <p class="takeaway">Nada puede ser mejorado si no es medido.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">25 / 36</span>
+    <span class="slide-foot">26 / 37</span>
   </section>
 
   <!-- 21 SNPP: ÁMBITO INSTITUCIONAL -->
@@ -1019,7 +1083,7 @@
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">26 / 36</span>
+    <span class="slide-foot">27 / 37</span>
   </section>
 
   <!-- 22 CLASIFICADOR DE GASTO -->
@@ -1037,7 +1101,7 @@
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">27 / 36</span>
+    <span class="slide-foot">28 / 37</span>
   </section>
 
   <!-- 23 PROGRAMAS PRESUPUESTALES Y CENTROS DE COSTO -->
@@ -1049,7 +1113,7 @@
       <p class="body-text" style="margin-top:1em;"><b>Centros de Costos:</b> unidades que consolidan los costos de la provisión de bienes y servicios públicos y de los procesos de soporte.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">28 / 36</span>
+    <span class="slide-foot">29 / 37</span>
   </section>
 
   <!-- 24 FASES DEL PROCESO PRESUPUESTARIO -->
@@ -1066,7 +1130,7 @@
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">29 / 36</span>
+    <span class="slide-foot">30 / 37</span>
   </section>
 
   <!-- 25 TRIÁNGULO ESTRATÉGICO: 3 VÉRTICES -->
@@ -1082,7 +1146,7 @@
       <p class="takeaway">Una política es viable solo cuando los 3 vértices se alinean de forma simultánea y mutuamente reforzada.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">30 / 36</span>
+    <span class="slide-foot">31 / 37</span>
   </section>
 
   <!-- 26A CASO OPERATIVO MERCURIO — PREDICCIÓN -->
@@ -1100,7 +1164,7 @@
       <p class="takeaway" style="font-size:clamp(.85rem,2.1cqw,1.3rem); padding-top:.3em;">¿Cada vértice se cumple, o no? ¿Por qué?</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">31 / 36</span>
+    <span class="slide-foot">32 / 37</span>
   </section>
 
   <!-- 26B CASO OPERATIVO MERCURIO -->
@@ -1127,7 +1191,7 @@
       <p class="source-note">Fuente: Ministerio del Interior/Andina; MAAP #193/ACCA; Ojo Público; Mongabay Latam.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">32 / 36</span>
+    <span class="slide-foot">33 / 37</span>
   </section>
 
   <!-- 27 CONDICIÓN DE INTERÉS: DEFINICIÓN -->
@@ -1148,7 +1212,7 @@
       <p class="source-note">Ejemplo con datos de la apertura (slide 10): ENLA 2024, MINEDU-UMC.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">33 / 36</span>
+    <span class="slide-foot">34 / 37</span>
   </section>
 
   <!-- 28 LOS 4 ELEMENTOS DE MAGNITUD -->
@@ -1169,7 +1233,7 @@
       <p class="source-note">Fuente: UMC-MINEDU, ENLA 2024; ESCALE-MINEDU, Magnitudes de la Educación (matrícula 2024).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">34 / 36</span>
+    <span class="slide-foot">35 / 37</span>
   </section>
 
   <!-- 29 MODELO EXPLICATIVO -->
@@ -1206,24 +1270,27 @@
       <p class="source-note">"e+" = relación respaldada por evidencia. Cada factor se desagrega más (ej. Dieta inadecuada ← acceso a alimentos + prácticas de cuidado infantil) — a mayor evidencia, más arriba en la jerarquía. Marco conceptual: UNICEF.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">35 / 36</span>
+    <span class="slide-foot">36 / 37</span>
   </section>
 
   <!-- 30 DIVIDER SESIÓN 2 -->
-  <section class="slide divider" style="--phase:var(--phase-work);">
+  <section class="slide qr-final" style="--phase:var(--phase-work);">
     <div class="slide-pad">
-      <span class="kicker">Sesión 2</span>
-      <h2>Diseño de intervenciones orientadas a resultados</h2>
-      <p>Ahora toca producir la Entrega 1 — con el instructivo y los recursos de apoyo a la mano: trabajo grupal construyendo la cadena de resultados de tu propio programa → presentación cruzada (eslabón más débil) → <b style="color:var(--phase-work);">★ Entrega 1, cierre 17:00</b>.</p>
-      <div style="margin-top:1.2em; display:flex; flex-direction:column; align-items:center; gap:.5em;">
+      <div class="qr-text">
+        <span class="kicker">Sesión 2</span>
+        <h2>Diseño de intervenciones orientadas a resultados</h2>
+        <p>Ahora toca producir la Entrega 1 — con el instructivo y los recursos de apoyo a la mano: trabajo grupal construyendo la cadena de resultados de tu propio programa → presentación cruzada (eslabón más débil) → <b style="color:var(--phase-work);">★ Entrega 1, cierre 17:00</b>.</p>
+        <p>Escanea el código con la cámara del celular.</p>
+        <a class="link bv-min12" href="https://cain971.github.io/taller-ppr-recursos/">cain971.github.io/taller-ppr-recursos</a>
+      </div>
+      <div class="qr-box">
         <div style="background:#fff; padding:8px; border-radius:8px; border:1px solid var(--line);">
           <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAFyAQAAAADAX2ykAAADHUlEQVR4nO1cS46kMAy1A1IvQaoD1FGoG8yRRn0zOErfgCxLCvLIdhJqZkHBpifp2IsIghdWPZ6/oZDgiizukjqA6R+Le/P8XzH9Y3Ht6XuM8khXL3uIPexXRdp/SVyD+h2J6Ma08joQwUQBaJY9eb6Wav8VcU3qo5JzCHzTMdIb0id+KMhK58c32nNe3AVdaF3ffxB93gPgwzO0KydU43+054S4M0ov0rT+8ESYvjj+8pXI9MXErsT+E+Ka1CcSN8ye+qFOWqi7RZA5HGskLtT+8+Ia1N9y1vxB+4K/14406i7yfCzV/iviGtPvmZzpxm9IAMzf4YkEPm5TwfY7039b//aAODKJ70SRpr6P/nkZ2WcDX1n9W+H7BrGu1SAsYZbL4VWKpC4tqXCiuTT7nemf7W+gBGEueIWwROuWMmnfx06H/Z71vW/DU5MnZS3nUoK5uGuauSaemb/a6SjQ/kvi2tSfVm5i3aXq7bTJIYl1XCQcW/ytE18fOxix17ymrsbEdJZF468sBdp/SVxj+iCtDZp5oCC5lLrhNFUABVkDNLvr0ux3pn/29yHNoATkHIkXLZI2my/U+b5BHA3uA0FhstIZIKZWmcTG3wrxDYpqKn15dwgvhTFwTNanhm99+K4Sa3MGJUgLviScjsAbf2vFl7Iv5jVnzYnYwuTYAjH+Vojv2uUOxh6JYzpN6pV3YpdmvzP9Y6GXgJv7zxlu2oEXThu+9fpnUOqqf84z/0E4LSftDN9a5/uk1JU25D1iiTjK/Oj77bki7pI2NKcPaRbIsnvl/GDK00Pjb63nN0I6ocFjQPC32KBcfgWgZewCgOeh/7AWaL8z/WOhv9sYqTRKVS+kdqXVR1W+bz0jqIRFvsJ49OoWYKJ4fpL4YJbx9+d8v4AyCV6QR/tyulIyLZkjlmn/eXEt6/t4qk58dvwgJbcr7XxO1flzF3Pl19Yk5fm+zX8rxbeXNebPQ+gl1tLy4HA8yKacz8GUWJdmvzP9t/hu6TMUfyNkkOWeALaeljtj728Bp9nO59T3vqH9P0NVeDnTPxR3/PjH6f8BYXQbuHnMdqMAAAAASUVORK5CYII=" alt="QR con el enlace a los recursos del taller" style="display:block; width:84px; height:84px;">
         </div>
-        <a class="link bv-min12" href="https://cain971.github.io/taller-ppr-recursos/" style="font-size:.6rem;">cain971.github.io/taller-ppr-recursos</a>
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">36 / 36</span>
+    <span class="slide-foot">37 / 37</span>
   </section>
 
 </div>
@@ -1301,6 +1368,28 @@
 
   var btn = document.getElementById('present-btn');
   if (btn) btn.addEventListener('click', enterPresent);
+})();
+</script>
+<script>
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-btn');
+  if (!btn) return;
+  function label(){
+    var t = root.getAttribute('data-theme');
+    if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    btn.textContent = t === 'dark' ? '◐ Tema oscuro' : '◑ Tema claro';
+    btn.setAttribute('aria-label', 'Cambiar tema. Actual: ' + (t === 'dark' ? 'oscuro' : 'claro'));
+    return t;
+  }
+  try { var saved = localStorage.getItem('taller-ppr-tema'); if (saved) root.setAttribute('data-theme', saved); } catch(e){}
+  label();
+  btn.addEventListener('click', function(){
+    var next = label() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('taller-ppr-tema', next); } catch(e){}
+    label();
+  });
 })();
 </script>
 </body>
