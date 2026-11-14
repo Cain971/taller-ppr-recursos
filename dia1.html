@@ -496,6 +496,15 @@ body.presenting .has-steps:not(.revelado) .despues{ opacity:0; transform:transla
 body.presenting .has-steps:not(.revelado) rect.crece{ opacity:1; transform:scaleY(0); }
 body.presenting .has-steps.revelado .antes{ opacity:0; transform:translateY(-.25em); }
 body.presenting .has-steps .swap .antes{ justify-self:center; }
+.has-steps .pill.swap .antes{ justify-self:start !important; }
+/* Varios pasos: [data-paso="k"] aparece en el clic k (.visto lo pone el script) */
+.has-steps [data-paso]{ transition:opacity .5s ease, transform .5s ease; }
+.has-steps [data-paso].tarde{ transition-delay:.35s; }
+body.presenting .has-steps [data-paso]:not(.visto){ opacity:0; transform:translateY(.25em); }
+/* Veredicto de una tarjeta: el color aparece con la respuesta */
+.col-card.veredicto{ border-color:var(--v-borde); background:var(--v-fondo); transition:background-color .5s ease, border-color .5s ease; }
+body.presenting .has-steps:not(.revelado) .col-card.veredicto{ border-color:var(--line); background:var(--paper-raise); }
+@media print{ .has-steps [data-paso]{ opacity:1 !important; transform:none !important; } }
 @media print{ .has-steps .antes{ display:none !important; } .has-steps .despues{ opacity:1 !important; transform:none !important; } }
 
 @media (max-width:720px){
@@ -510,7 +519,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
 
 <div class="deck-head">
   <h1>Presupuesto Público por Resultados — Día 1</h1>
-  <p>34 slides · Taller EGPP-PUCP, sáb. 14 nov. 2026</p>
+  <p>31 slides · Taller EGPP-PUCP, sáb. 14 nov. 2026</p>
   <div class="head-actions">
     <button id="theme-btn" class="present-btn theme-btn" type="button">◑ Tema claro</button>
     <button id="present-btn" class="present-btn" type="button">▶ Presentar</button>
@@ -534,7 +543,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
         <span><strong>Juan Pablo Silva Macher</strong>Docente</span>
       </div>
     </div>
-    <span class="slide-foot">01 / 34</span>
+    <span class="slide-foot">01 / 31</span>
   </section>
 
   <!-- 2 BIENVENIDA -->
@@ -544,12 +553,12 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <h2 class="slide-title">Bienvenida</h2>
       <p class="body-text" style="margin-top:1em;">Dos jornadas, cuatro sesiones. Hoy por la mañana: fundamentos y coyuntura fiscal. Hoy por la tarde: diseño de intervenciones orientadas a resultados — y la primera entrega. El próximo sábado: medición del desempeño, evaluación y la propuesta final.</p>
       <ul class="plain" style="margin-top:1.4em;">
-        <li>El hilo conductor: desde hoy, cada grupo elige un programa presupuestal vigente y lo trabaja las dos jornadas.</li>
+        <li>El hilo conductor: desde hoy, cada grupo elige un programa presupuestal vigente y lo trabaja durante las dos jornadas.</li>
         <li>El objetivo no es aprender teoría — es producir un diagnóstico y una propuesta de mejora reales.</li>
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">02 / 34</span>
+    <span class="slide-foot">02 / 31</span>
   </section>
 
   <!-- 3 EVALUACIÓN -->
@@ -557,12 +566,12 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
     <div class="slide-pad">
       <span class="kicker">Apertura · Reglas del taller</span>
       <h2 class="slide-title">Evaluación</h2>
-      <p class="body-text" style="margin-top:.8em;">La evaluación se basa en el trabajo grupal que construyen a lo largo de las 4 sesiones: el diagnóstico y la propuesta de mejora de un programa presupuestal vigente. La Entrega 1 es 100% grupal; la Entrega 2 incluye también una nota individual por tu presentación oral.</p>
+      <p class="body-text" style="margin-top:.8em;">La evaluación se basa en el trabajo grupal que construyen a lo largo de las 4 sesiones: el diagnóstico y la propuesta de mejora de un programa presupuestal vigente. La Entrega 1 es 100% grupal; la Entrega 2 incluye también una nota individual por la presentación oral de cada participante.</p>
       <div class="tiles">
         <div class="tile">
           <span class="pct">40%</span>
           <span class="label">Entrega 1 · Trabajo Grupal</span>
-          <span class="desc">Diagnóstico del programa. Cierre Sesión 2, sábado 14.</span>
+          <span class="desc">Diagnóstico del programa. Cierre de la Sesión 2, sábado 14.</span>
         </div>
         <div class="tile">
           <span class="pct">60%</span>
@@ -573,7 +582,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <p class="bv-min12" style="font-family:'IBM Plex Mono',monospace; font-size:clamp(.6rem,1.3cqw,.82rem); color:var(--ink-soft); margin-top:.9em;">Nota mínima aprobatoria: 11/20 · Ninguna entrega es recuperable</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">03 / 34</span>
+    <span class="slide-foot">03 / 31</span>
   </section>
 
   <!-- 4 GRUPOS -->
@@ -585,7 +594,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <p class="body-text" style="margin-top:1em; color:var(--ink-soft);">El grupo y el programa elegidos en la Sesión 1 son la base de las dos entregas.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">04 / 34</span>
+    <span class="slide-foot">04 / 31</span>
   </section>
 
   <!-- 5 EL PROGRAMA -->
@@ -594,10 +603,10 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <span class="kicker">Apertura · Reglas del taller</span>
       <h2 class="slide-title">El programa que trabajarás</h2>
       <p class="body-text" style="margin-top:1em; max-width:54ch;">Cada grupo elige, desde la Sesión 1, un programa presupuestal vigente que le interese — no necesariamente del sector de cada integrante.</p>
-      <p class="body-text" style="margin-top:1em; max-width:54ch;"><b>No van a diseñar un programa nuevo ni pedir presupuesto adicional:</b> van a diagnosticarlo con las herramientas del PpR y proponer una mejora concreta, sustentada en evidencia, sobre ese mismo programa.</p>
+      <p class="body-text" style="margin-top:1em; max-width:54ch;"><b>No van a diseñar un programa nuevo ni a pedir presupuesto adicional:</b> van a diagnosticarlo con las herramientas del PpR y proponer una mejora concreta, sustentada en evidencia, sobre ese mismo programa.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">05 / 34</span>
+    <span class="slide-foot">05 / 31</span>
   </section>
 
   <!-- 6 OBJETIVOS -->
@@ -613,7 +622,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">06 / 34</span>
+    <span class="slide-foot">06 / 31</span>
   </section>
 
   <!-- 7 SELECCIÓN DE PROGRAMA -->
@@ -624,12 +633,12 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <p class="body-text" style="margin-top:1em;">Criterios para elegir tu programa:</p>
       <ul class="plain" style="margin-top:1em;">
         <li>Vigente — que exista hoy en el presupuesto, no uno hipotético.</li>
-        <li>Con información cuantitativa disponible sobre el problema (Consulta Amigable, portal de indicadores MEF).</li>
+        <li>Con información cuantitativa disponible sobre el problema (Consulta Amigable, portal de indicadores del MEF).</li>
         <li>Que le interese al grupo.</li>
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">07 / 34</span>
+    <span class="slide-foot">07 / 31</span>
   </section>
 
   <!-- 8 ENTREGABLES -->
@@ -639,7 +648,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <h2 class="slide-title" style="font-size:clamp(1.3rem,3.6cqw,2.4rem);">Entregables</h2>
       <div class="cols2">
         <div class="col-card">
-          <span class="tag">Día 1 · Cierre Sesión 2, 17:00 · 40% grupal</span>
+          <span class="tag">Día 1 · Cierre de la Sesión 2, 17:00 · 40% grupal</span>
           <h3>Entrega 1</h3>
           <ul>
             <li>Condición de interés: el problema, con dato de magnitud y fuente.</li>
@@ -661,21 +670,21 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">08 / 34</span>
+    <span class="slide-foot">08 / 31</span>
   </section>
 
   <!-- 9 ANEXO 2 -->
   <section class="slide" style="--phase:var(--phase-open);">
     <div class="slide-pad">
       <span class="kicker">Apertura · Reglas del taller</span>
-      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.2rem);">Estructura del trabajo — Anexo 2</h2>
+      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.2rem);">Estructura del trabajo — Anexo II</h2>
       <p class="body-text" style="margin-top:1em;">El <b>Anexo II</b> de la Directiva N.º 0001-2026-EF/50.01 define el contenido mínimo de un Programa Presupuestal. Tu Entrega 1 cubre su primera sección:</p>
-      <p class="body-text" style="margin-top:.8em; font-family:'Fraunces',serif; font-style:italic;">I. Condición de Interés — I.1 Descripción · I.2 Relevancia · I.3 Indicador</p>
-      <p class="body-text" style="margin-top:1em; color:var(--ink-soft);">No necesitas llenar el Anexo completo — solo esa parte, en tu propio lenguaje.</p>
+      <p class="body-text" style="margin-top:.8em; font-family:'Fraunces',serif; font-style:italic;">I. Condición de interés — I.1 Descripción · I.2 Relevancia · I.3 Indicador</p>
+      <p class="body-text" style="margin-top:1em; color:var(--ink-soft);">No necesitas llenar el Anexo completo — solo esa parte, con tus propias palabras.</p>
       <a class="link" href="https://www.gob.pe/institucion/mef/normas-legales/8237957" target="_blank" rel="noopener" style="margin-top:1.2em;">Directiva y Anexos (MEF): gob.pe/institucion/mef/normas-legales/8237957</a>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">09 / 34</span>
+    <span class="slide-foot">09 / 31</span>
   </section>
 
   <!-- 10 BRECHAS — PREDICCIÓN Y RESPUESTA EN UNA LÁMINA (paso, 2026-11-13) -->
@@ -692,23 +701,23 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
         <div class="stat">
           <span class="sector">Salud · Anemia infantil rural</span>
           <span class="num swap"><span class="antes">?</span><span class="despues">43,2<small>%</small></span></span>
-          <span class="note despues tarde">niños de 6-35 meses en zona rural, 2025 (34,9% nacional). INEI-ENDES.</span>
+          <span class="note despues tarde">niñas y niños de 6 a 35 meses en zona rural, 2025 (34,9% a nivel nacional). INEI-ENDES.</span>
         </div>
         <div class="stat">
           <span class="sector">Educación · nivel Satisfactorio en Lectura</span>
           <span class="num swap"><span class="antes">?</span><span class="despues">32,8<small>%</small></span></span>
-          <span class="note despues tarde">4.º primaria con nivel Satisfactorio en Lectura (29,5% en Matemática). ENLA 2024, MINEDU.</span>
+          <span class="note despues tarde">4.º de primaria con nivel Satisfactorio en Lectura (29,5% en Matemática). ENLA 2024, MINEDU.</span>
         </div>
         <div class="stat">
-          <span class="sector">Seguridad · percepción de victimización</span>
+          <span class="sector">Seguridad · percepción de inseguridad</span>
           <span class="num swap"><span class="antes">?</span><span class="despues">86,1<small>%</small></span></span>
-          <span class="note despues tarde">percibe que puede ser víctima de un delito (27,7% ya lo fue en 6 meses). INEI.</span>
+          <span class="note despues tarde">percibe que puede ser víctima de un delito (27,7% lo fue en los últimos 6 meses). INEI.</span>
         </div>
       </div>
       <p class="source-note despues tarde">Fuentes: INEI, "Perú: Evolución de la Pobreza Monetaria, 2016-2025" · INEI-ENDES, nota de prensa 2025 (anemia) · MINEDU-UMC, ENLA 2024 · INEI, semestre móvil ene-jun 2024 (seguridad, vía El Peruano). Búsqueda 2026-09-19.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">10 / 34</span>
+    <span class="slide-foot">10 / 31</span>
   </section>
 
   <!-- 11 TRANSICIÓN -->
@@ -719,7 +728,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <p class="body-text" style="margin-top:1.1em; max-width:56ch;">Cerrar estas brechas exige gasto sostenido en el tiempo — no un impulso de un año. Pero el espacio fiscal no es ilimitado, y la historia peruana ya mostró qué pasa cuando se ignora ese límite.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">11 / 34</span>
+    <span class="slide-foot">11 / 31</span>
   </section>
 
   <!-- 12 HIPERINFLACIÓN — PREDICCIÓN Y RESPUESTA EN UNA LÁMINA (paso, 2026-11-13) -->
@@ -738,7 +747,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <p class="source-note despues tarde">Fuente: BCRP, Memoria Anual 1990 — verificada contra el documento primario (2026-09-19).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">12 / 34</span>
+    <span class="slide-foot">12 / 31</span>
   </section>
 
   <!-- 13 BCRP -->
@@ -753,7 +762,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <p class="takeaway">Gastar más de lo que podemos sostener como país nos perjudica a todos.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">13 / 34</span>
+    <span class="slide-foot">13 / 31</span>
   </section>
 
   <!-- 14 REGLAS FISCALES -->
@@ -788,10 +797,10 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
           </div>
         </div>
       </div>
-      <p class="source-note">Déficit y deuda: MEF, Exposición de Motivos — Ley de Presupuesto 2027; Decreto Legislativo N.º 1621 (2024). Reglas de gasto y cifras 2025: Decreto Legislativo N.º 1276; Consejo Fiscal, Comunicado N.º 01-2026-CF. 2026-2030 de las reglas de gasto: no disponible — el límite depende del PBI real de cada año, aún no conocido.</p>
+      <p class="source-note">Déficit y deuda: MEF, Exposición de Motivos — Ley de Presupuesto 2027; Decreto Legislativo N.º 1621 (2024). Reglas de gasto y cifras 2025: Decreto Legislativo N.º 1276; Consejo Fiscal, Comunicado N.º 01-2026-CF. Reglas de gasto 2026-2030: sin cifras todavía, porque el límite depende del PBI real de cada año.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">14 / 34</span>
+    <span class="slide-foot">14 / 31</span>
   </section>
 
   <!-- 15 CONSEJO FISCAL -->
@@ -805,19 +814,19 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       </blockquote>
       <div class="cols2" style="margin-top:1em; flex:none;">
         <div class="col-card" style="border-color:var(--good); background:var(--good-soft);">
-          <span class="pill good" style="background:transparent; padding:0;">✓ Déficit fiscal 2025</span>
+          <span class="pill good" style="background:transparent; padding:0;">Cumplió · Déficit fiscal 2025</span>
           <span style="font-family:'Fraunces',serif; font-weight:700; font-size:clamp(1rem,2.6cqw,1.6rem);">2,2% del PBI</span>
-          <span class="bv-min12" style="font-size:clamp(.62rem,1.3cqw,.85rem); color:var(--ink-soft);">Cumplido — pero por ingresos extraordinarios de commodities que probablemente no se repitan.</span>
+          <span class="bv-min12" style="font-size:clamp(.62rem,1.3cqw,.85rem); color:var(--ink-soft);">Se cumplió, pero gracias a ingresos extraordinarios por materias primas que probablemente no se repitan.</span>
         </div>
         <div class="col-card" style="border-color:var(--critical); background:var(--critical-soft);">
-          <span class="pill critical" style="background:transparent; padding:0;">✕ Reglas de gasto 2025</span>
+          <span class="pill critical" style="background:transparent; padding:0;">Incumplió · Reglas de gasto 2025</span>
           <span class="bv-min12" style="font-size:clamp(.66rem,1.4cqw,.92rem); line-height:1.5;">Gasto no financiero: <b>+S/ 6 600 M</b> sobre el límite (creció 3,5% real vs. 0,7% permitido)<br>Gasto corriente: <b>+S/ 4 100 M</b> sobre el límite (4,8% real vs. 2,1% permitido)</span>
         </div>
       </div>
       <p class="source-note">Fuente: Consejo Fiscal del Perú, Comunicado N.º 01-2026-CF (29-ene-2026).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">15 / 34</span>
+    <span class="slide-foot">15 / 31</span>
   </section>
 
   <!-- 16 CONGRESO — PREDICCIÓN Y RESPUESTA EN UNA LÁMINA (paso, 2026-11-13) -->
@@ -856,7 +865,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
             </div>
           </div>
           <ul class="bv-min12 despues tarde" style="margin:.5em 0 0; padding-left:1.05em; font-size:clamp(.48rem,.95cqw,.6rem); color:var(--ink-soft); line-height:1.35; display:flex; flex-direction:column; gap:.15em;">
-            <li>Nivelación pensiones docentes — S/ 8 000 M/año</li>
+            <li>Nivelación de pensiones docentes — S/ 8 000 M/año</li>
             <li>Régimen pensionario militar-policial (DL 1133) — S/ 14 800-15 000 M (valor presente)</li>
             <li>Beneficios CAS — S/ 3 000 M/año</li>
           </ul>
@@ -865,7 +874,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <p class="source-note despues tarde">Leyes y proyección de costo: MEF, Exposición de Motivos — Ley de Presupuesto del Sector Público 2027 (2026). Detalle de normas: Consejo Fiscal, Comunicado N.º 02-2026-CF (26-mar-2026).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">16 / 34</span>
+    <span class="slide-foot">16 / 31</span>
   </section>
 
   <!-- 16C TOP-DOWN: PRIMERO EL LÍMITE (2026-11-13) -->
@@ -888,7 +897,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <p class="source-note">Fuentes: Ljungman (2009), FMI, Working Paper 09/243 · Marco Macroeconómico Multianual (D. Leg. N.º 1276) · MEF, Consulta Amigable 2006–2025 (cálculo propio).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">17 / 34</span>
+    <span class="slide-foot">17 / 31</span>
   </section>
 
   <!-- 17 PRESUPUESTO 2027 VS BRECHAS -->
@@ -897,10 +906,10 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <span class="kicker">De insumos a resultados</span>
       <h2 class="slide-title" style="font-size:clamp(1.3rem,3.6cqw,2.3rem);">Más presupuesto no es lo mismo que mejores resultados</h2>
       <p class="body-text" style="margin-top:1em;">El Presupuesto 2027 propuesto es de <b>S/ 266 506 millones</b> — sigue creciendo. Pero las brechas no cierran al mismo ritmo: <b>35,5%</b> de pobreza rural, <b>43,2%</b> de anemia infantil rural (vistas hoy en la apertura).</p>
-      <p class="source-note">Fuente: MEF, Exposición de Motivos — Ley de Presupuesto del Sector Público 2027 (2026); INEI/INEI-ENDES 2025 (ver slide 10).</p>
+      <p class="source-note">Fuente: MEF, Exposición de Motivos — Ley de Presupuesto del Sector Público 2027 (2026); INEI/INEI-ENDES 2025 (ver lámina 10).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">18 / 34</span>
+    <span class="slide-foot">18 / 31</span>
   </section>
 
   <!-- 18 EL CÍRCULO QUE SE ROMPE + LÓGICA POR INSUMOS -->
@@ -935,79 +944,56 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
           </ul>
         </div>
       </div>
-      <p class="takeaway">La lógica por insumos nos sitúa lejos de mejorar las condiciones de vida del ciudadano.</p>
+      <p class="takeaway">La lógica por insumos nos aleja de mejorar las condiciones de vida de la ciudadanía.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">19 / 34</span>
+    <span class="slide-foot">19 / 31</span>
   </section>
 
-  <!-- 19A EL CASO DEL ASCENSOR — PREDICCIÓN -->
-  <section class="slide" style="--phase:var(--phase-method);">
-    <div class="slide-pad">
-      <span class="kicker">De insumos a resultados</span>
-      <div class="pending-tag">● antes de ver la solución…</div>
-      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">El caso del ascensor</h2>
-      <p class="body-text" style="margin-top:.7em;">Administras un edificio de oficinas. Tus inquilinos más importantes se quejan: el ascensor es lento, las filas en hora punta son insoportables. Amenazan con irse.</p>
-      <div class="col-card" style="margin-top:.8em; max-width:56ch;">
-        <span class="tag" style="color:var(--critical);">Primera reacción</span>
-        <p class="bv-min12" style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El ascensor es muy lento" → cambiarlo, o potenciar el motor. Caro. Lento de implementar.</p>
-      </div>
-      <p class="takeaway">¿Cómo redefinirían el problema?</p>
-    </div>
-    <div class="logo"></div>
-    <span class="slide-foot">20 / 34</span>
-  </section>
-
-  <!-- 19B EL CASO DEL ASCENSOR -->
-  <section class="slide" style="--phase:var(--phase-method);">
+  <!-- 19 EL CASO DEL ASCENSOR — PREGUNTA Y RESPUESTA EN UNA LÁMINA (paso, 2026-11-13) -->
+  <section class="slide has-steps" style="--phase:var(--phase-method);">
     <div class="slide-pad">
       <span class="kicker">De insumos a resultados</span>
       <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">El caso del ascensor</h2>
-      <p class="body-text" style="margin-top:.7em;">Administras un edificio de oficinas. Tus inquilinos más importantes se quejan: el ascensor es lento, las filas en hora punta son insoportables. Amenazan con irse.</p>
+      <p class="body-text" style="margin-top:.7em;">Administras un edificio de oficinas. Tus inquilinos más importantes se quejan: el ascensor es lento y las filas en hora punta son insoportables. Amenazan con irse.</p>
       <div class="cols2" style="margin-top:.8em; flex:none;">
         <div class="col-card">
           <span class="tag" style="color:var(--critical);">Primera reacción</span>
-          <p class="bv-min12" style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El ascensor es muy lento" → cambiarlo, o potenciar el motor. Caro. Lento de implementar.</p>
+          <p class="bv-min12" style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El ascensor es muy lento" → cambiarlo o potenciar el motor. Caro y lento de implementar.</p>
         </div>
-        <div class="col-card" style="border-color:var(--good);">
-          <span class="tag" style="color:var(--good);">Redefiniendo el problema</span>
-          <p class="bv-min12" style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"El tiempo de espera se siente largo" → pon espejos, pon música. Rápido. Barato. Resuelve lo que en verdad molestaba.</p>
+        <div class="col-card despues" style="border-color:var(--good);">
+          <span class="tag" style="color:var(--good);">El problema, redefinido</span>
+          <p class="bv-min12" style="margin:0; font-size:clamp(.7rem,1.5cqw,.95rem); line-height:1.4;">"La espera se siente larga" → poner espejos y música. Rápido y barato, y resuelve lo que de verdad molestaba.</p>
         </div>
       </div>
-      <p class="takeaway">No podemos resolver un problema hasta que no lo hayamos entendido.</p>
+      <div class="swap-block">
+        <p class="takeaway antes">¿Cómo redefinirían el problema?</p>
+        <p class="takeaway despues tarde">No podemos resolver un problema que no hemos entendido.</p>
+      </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">21 / 34</span>
+    <span class="slide-foot">20 / 31</span>
   </section>
 
-  <!-- 20A NADA SE MEJORA SI NO SE MIDE — PREDICCIÓN -->
-  <section class="slide" style="--phase:var(--phase-method);">
+  <!-- 20 NADA SE MEJORA SI NO SE MIDE — PREGUNTA Y RESPUESTA EN UNA LÁMINA (paso, 2026-11-13) -->
+  <section class="slide has-steps" style="--phase:var(--phase-method);">
     <div class="slide-pad">
       <span class="kicker">De insumos a resultados</span>
-      <div class="pending-tag">● antes de ver la lista…</div>
-      <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">¿Qué preguntas harían ustedes?</h2>
-      <p class="body-text" style="margin-top:.7em;">"Queremos mejorar la seguridad ciudadana" — ya vimos que el 86,1% percibe que puede ser víctima de un delito (apertura de hoy). Antes de ver mi lista: ¿qué preguntas de diagnóstico harían ustedes?</p>
-    </div>
-    <div class="logo"></div>
-    <span class="slide-foot">22 / 34</span>
-  </section>
-
-  <!-- 20B NADA SE MEJORA SI NO SE MIDE -->
-  <section class="slide" style="--phase:var(--phase-method);">
-    <div class="slide-pad">
-      <span class="kicker">De insumos a resultados</span>
-      <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">Nada se mejora si no se mide</h2>
-      <p class="body-text" style="margin-top:.7em;">"Queremos mejorar la seguridad ciudadana" — ya vimos que el 86,1% percibe que puede ser víctima de un delito (apertura de hoy). Preguntas que sí permiten actuar:</p>
-      <ul class="plain" style="margin-top:.8em;">
-        <li>¿Cuál es la tasa de criminalidad por región y cómo cambió en 5 años?</li>
-        <li>¿Qué % de denuncias se resuelven?</li>
-        <li>¿Cómo varía la percepción de seguridad entre regiones?</li>
+      <h2 class="slide-title swap-block" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);"><span class="antes">¿Qué preguntas harían ustedes?</span><span class="despues">Nada se mejora si no se mide</span></h2>
+      <div class="swap-block" style="margin-top:.7em;">
+        <p class="body-text antes" style="margin:0;">"Queremos mejorar la seguridad ciudadana." Ya vimos que el 86,1% percibe que puede ser víctima de un delito. Antes de ver mi lista: ¿qué preguntas de diagnóstico harían ustedes?</p>
+        <p class="body-text despues" style="margin:0;">"Queremos mejorar la seguridad ciudadana." Ya vimos que el 86,1% percibe que puede ser víctima de un delito. Preguntas que sí permiten actuar:</p>
+      </div>
+      <ul class="plain despues tarde" style="margin-top:.8em;">
+        <li>¿Cuál es la tasa de criminalidad por región y cómo cambió en los últimos 5 años?</li>
+        <li>¿Qué % de las denuncias se resuelve?</li>
+        <li>¿Cómo varía la percepción de inseguridad entre regiones?</li>
         <li>¿Cuál es la tasa de reincidencia delictiva?</li>
       </ul>
-      <p class="takeaway">Nada puede ser mejorado si no es medido.</p>
+      <p class="takeaway despues tarde">Lo que no se mide no se puede mejorar.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">23 / 34</span>
+    <span class="slide-foot">21 / 31</span>
   </section>
 
   <!-- 21 SNPP: ÁMBITO INSTITUCIONAL -->
@@ -1020,11 +1006,11 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
         <li><b>Titular de la entidad</b> — responsable de la gestión presupuestaria en todas sus fases.</li>
         <li><b>Oficina de presupuesto</b> — conduce el proceso presupuestario de la entidad.</li>
         <li><b>Unidad ejecutora</b> — administra los ingresos y gastos públicos.</li>
-        <li><b>Responsable de Programa Presupuestal</b> — gestión estratégica y operativa del PP.</li>
+        <li><b>Responsable del Programa Presupuestal</b> — conduce la gestión estratégica y operativa del PP.</li>
       </ul>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">24 / 34</span>
+    <span class="slide-foot">22 / 31</span>
   </section>
 
   <!-- 22 CLASIFICADOR DE GASTO -->
@@ -1042,7 +1028,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">25 / 34</span>
+    <span class="slide-foot">23 / 31</span>
   </section>
 
   <!-- 23 PROGRAMAS PRESUPUESTALES Y CENTROS DE COSTO -->
@@ -1054,7 +1040,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <p class="body-text" style="margin-top:1em;"><b>Centros de Costos:</b> unidades que consolidan los costos de la provisión de bienes y servicios públicos y de los procesos de soporte.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">26 / 34</span>
+    <span class="slide-foot">24 / 31</span>
   </section>
 
   <!-- 24 FASES DEL PROCESO PRESUPUESTARIO -->
@@ -1071,7 +1057,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">27 / 34</span>
+    <span class="slide-foot">25 / 31</span>
   </section>
 
   <!-- 25 TRIÁNGULO ESTRATÉGICO: 3 VÉRTICES -->
@@ -1084,55 +1070,40 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
         <div class="col-card"><span class="tag">Vértice 2</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Legitimidad y consenso</h3><p class="bv-min12" style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Quién autoriza y sostiene la acción?</p></div>
         <div class="col-card"><span class="tag">Vértice 3</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Capacidad operativa</h3><p class="bv-min12" style="margin:0; font-size:clamp(.62rem,1.3cqw,.82rem); color:var(--ink-soft);">¿Puede el Estado ejecutarla?</p></div>
       </div>
-      <p class="takeaway">Una política es viable solo cuando los 3 vértices se alinean de forma simultánea y mutuamente reforzada.</p>
+      <p class="takeaway">Una política es viable solo cuando los 3 vértices se alinean al mismo tiempo y se refuerzan entre sí.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">28 / 34</span>
+    <span class="slide-foot">26 / 31</span>
   </section>
 
-  <!-- 26A CASO OPERATIVO MERCURIO — PREDICCIÓN -->
-  <section class="slide" style="--phase:var(--phase-frame);">
-    <div class="slide-pad">
-      <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
-      <div class="pending-tag" style="border-color:var(--phase-frame); color:var(--phase-frame);">● antes del análisis…</div>
-      <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">Aplicando el triángulo: Operativo Mercurio (2019)</h2>
-      <p class="body-text bv-min12" style="margin-top:.3em; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Interdicción de minería ilegal, La Pampa (Madre de Dios), 2019 — 1 200 policías + ~300 militares.</p>
-      <div class="cols2" style="grid-template-columns:1fr 1fr 1fr; flex:none; margin-top:.5em;">
-        <div class="col-card" style="padding:1.2cqw;"><span class="tag">Valor público</span></div>
-        <div class="col-card" style="padding:1.2cqw;"><span class="tag">Legitimidad</span></div>
-        <div class="col-card" style="padding:1.2cqw;"><span class="tag">Capacidad operativa</span></div>
-      </div>
-      <p class="takeaway" style="font-size:clamp(.85rem,2.1cqw,1.3rem); padding-top:.3em;">¿Cada vértice se cumple, o no? ¿Por qué?</p>
-    </div>
-    <div class="logo"></div>
-    <span class="slide-foot">29 / 34</span>
-  </section>
-
-  <!-- 26B CASO OPERATIVO MERCURIO -->
-  <section class="slide" style="--phase:var(--phase-frame);">
+  <!-- 26 CASO OPERATIVO MERCURIO — PREGUNTA Y RESPUESTA EN UNA LÁMINA (paso, 2026-11-13) -->
+  <section class="slide has-steps" style="--phase:var(--phase-frame);">
     <div class="slide-pad">
       <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
       <h2 class="slide-title" style="font-size:clamp(1.1rem,3.1cqw,1.9rem);">Aplicando el triángulo: Operativo Mercurio (2019)</h2>
-      <p class="body-text bv-min12" style="margin-top:.3em; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Interdicción de minería ilegal, La Pampa (Madre de Dios), 2019 — 1 200 policías + ~300 militares.</p>
+      <p class="body-text bv-min12" style="margin-top:.3em; font-size:clamp(.6rem,1.25cqw,.8rem); color:var(--ink-soft);">Interdicción de minería ilegal en La Pampa (Madre de Dios), 2019: 1 200 policías y unos 300 militares.</p>
       <div class="cols2" style="grid-template-columns:1fr 1fr 1fr; flex:none; margin-top:.5em;">
-        <div class="col-card" style="border-color:var(--accent); background:var(--accent-soft); padding:1.2cqw;">
-          <span class="pill" style="background:transparent; padding:0; color:var(--accent-ink);">~ Valor público</span>
-          <p class="bv-min12" style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Problema real, diseño incompleto: atacó el síntoma, no las causas estructurales (sin alternativas económicas).</p>
+        <div class="col-card veredicto" style="--v-borde:var(--accent); --v-fondo:var(--accent-soft); padding:1.2cqw;">
+          <span class="pill swap" style="background:transparent; padding:0; color:var(--accent-ink);"><span class="antes" style="color:var(--ink-soft);">Valor público</span><span class="despues">Parcial · Valor público</span></span>
+          <p class="bv-min12 despues" style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Problema real, diseño incompleto: atacó el síntoma, no las causas estructurales (sin alternativas económicas).</p>
         </div>
-        <div class="col-card" style="border-color:var(--accent); background:var(--accent-soft); padding:1.2cqw;">
-          <span class="pill" style="background:transparent; padding:0; color:var(--accent-ink);">~ Legitimidad</span>
-          <p class="bv-min12" style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Quienes no viven ahí apoyaron la mano dura. Quienes sí viven ahí, no (bloqueo Interoceánica, tregua 2022).</p>
+        <div class="col-card veredicto" style="--v-borde:var(--accent); --v-fondo:var(--accent-soft); padding:1.2cqw;">
+          <span class="pill swap" style="background:transparent; padding:0; color:var(--accent-ink);"><span class="antes" style="color:var(--ink-soft);">Legitimidad</span><span class="despues">Parcial · Legitimidad</span></span>
+          <p class="bv-min12 despues" style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Quienes no viven ahí apoyaron la mano dura; quienes sí viven ahí, no (bloqueo de la Interoceánica, tregua de 2022).</p>
         </div>
-        <div class="col-card" style="border-color:var(--good); background:var(--good-soft); padding:1.2cqw;">
-          <span class="pill good" style="background:transparent; padding:0;">✓ Capacidad operativa</span>
-          <p class="bv-min12" style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Sí podían ejecutar: -92% deforestación en 5 meses. No sostenerlo fue decisión normativa, no falla de ejecución.</p>
+        <div class="col-card veredicto" style="--v-borde:var(--good); --v-fondo:var(--good-soft); padding:1.2cqw;">
+          <span class="pill good swap" style="background:transparent; padding:0;"><span class="antes" style="color:var(--ink-soft);">Capacidad operativa</span><span class="despues">Cumple · Capacidad operativa</span></span>
+          <p class="bv-min12 despues" style="margin:0; font-size:clamp(.56rem,1.15cqw,.74rem); line-height:1.35;">Sí se pudo ejecutar: −92% de deforestación en 5 meses. No sostenerlo fue una decisión normativa, no una falla de ejecución.</p>
         </div>
       </div>
-      <p class="takeaway" style="font-size:clamp(.85rem,2.1cqw,1.3rem); padding-top:.3em;">Se pudo ejecutar. Lo que nunca se diseñó fue cómo sostenerlo — y eso no es un problema de capacidad, es un problema de diseño.</p>
-      <p class="source-note">Fuente: Ministerio del Interior/Andina; MAAP #193/ACCA; Ojo Público; Mongabay Latam.</p>
+      <div class="swap-block">
+        <p class="takeaway antes" style="font-size:clamp(.85rem,2.1cqw,1.3rem); padding-top:.3em;">¿Cada vértice se cumple, o no? ¿Por qué?</p>
+        <p class="takeaway despues tarde" style="font-size:clamp(.85rem,2.1cqw,1.3rem); padding-top:.3em;">Se pudo ejecutar. Lo que nunca se diseñó fue cómo sostenerlo, y eso no es un problema de capacidad: es un problema de diseño.</p>
+      </div>
+      <p class="source-note despues tarde">Fuentes: Ministerio del Interior/Andina; MAAP #193/ACCA; Ojo Público; Mongabay Latam.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">30 / 34</span>
+    <span class="slide-foot">27 / 31</span>
   </section>
 
   <!-- 27 CONDICIÓN DE INTERÉS: DEFINICIÓN -->
@@ -1141,40 +1112,40 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
       <h2 class="slide-title" style="font-size:clamp(1.2rem,3.4cqw,2.1rem);">La condición de interés</h2>
       <blockquote style="margin-top:.4em; font-size:clamp(.75rem,1.7cqw,1.05rem);">
-        "Una cualidad o atributo intrínseco o extrínseco de las personas, hogares, organizaciones, comunidades, o de su entorno natural y no natural, sobre la cual se desea incidir por ser de interés al desarrollo sostenible."
+        "Es una cualidad o atributo intrínseco o extrínseco de las personas, hogares, organizaciones, comunidades, o del entorno natural y no natural (construcción o modificación del entorno realizado por las personas), sobre la cual se desea incidir por ser de interés al desarrollo sostenible."
         <cite>Directiva N.º 0001-2026-EF/50.01, Art. 4.a</cite>
       </blockquote>
-      <p class="body-text bv-min12" style="margin-top:.7em; font-size:clamp(.66rem,1.4cqw,.88rem); color:var(--ink-soft);">Se documenta en 3 partes — ejemplo con comprensión lectora:</p>
+      <p class="body-text bv-min12" style="margin-top:.7em; font-size:clamp(.66rem,1.4cqw,.88rem); color:var(--ink-soft);">Se documenta en 3 partes. Ejemplo con comprensión lectora:</p>
       <div class="cols2" style="grid-template-columns:1fr 1fr 1fr; flex:none; margin-top:.4em;">
         <div class="col-card"><span class="tag">Descripción</span><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">Comprensión lectora en 4.º de primaria por debajo del nivel esperado según el currículo nacional.</p></div>
         <div class="col-card"><span class="tag">Relevancia</span><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">La lectura es la base de todo aprendizaje posterior — sin ella, el resto del currículo se construye sobre una base débil.</p></div>
         <div class="col-card"><span class="tag">Indicador</span><p class="bv-min12" style="margin:0; font-size:clamp(.6rem,1.25cqw,.8rem); line-height:1.35;">% de estudiantes de 4.º de primaria en nivel Satisfactorio en Lectura (ENLA, MINEDU-UMC).</p></div>
       </div>
-      <p class="source-note">Ejemplo con datos de la apertura (slide 10): ENLA 2024, MINEDU-UMC.</p>
+      <p class="source-note">Ejemplo con datos de la apertura (lámina 10): ENLA 2024, MINEDU-UMC.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">31 / 34</span>
+    <span class="slide-foot">28 / 31</span>
   </section>
 
-  <!-- 28 LOS 4 ELEMENTOS DE MAGNITUD -->
-  <section class="slide" style="--phase:var(--phase-frame);">
+  <!-- 28 LOS 4 ELEMENTOS DE MAGNITUD — UN ELEMENTO POR CLIC (pasos 1-4, 2026-11-13) -->
+  <section class="slide has-steps" style="--phase:var(--phase-frame);">
     <div class="slide-pad">
       <span class="kicker">Triángulo, condición de interés y modelo explicativo</span>
       <h2 class="slide-title" style="font-size:clamp(.95rem,2.6cqw,1.55rem);">Dimensionar el problema: 4 elementos</h2>
-      <p class="body-text bv-min12" style="margin-top:.2em; font-size:clamp(.56rem,1.15cqw,.75rem); color:var(--ink-soft);">Ejemplo: % que alcanza el nivel Satisfactorio en Lectura, 4.º de primaria (ENLA-MINEDU).</p>
+      <p class="body-text bv-min12" style="margin-top:.2em; font-size:clamp(.56rem,1.15cqw,.75rem); color:var(--ink-soft);">Ejemplo: % de estudiantes de 4.º de primaria que alcanza el nivel Satisfactorio en Lectura (ENLA, MINEDU).</p>
       <div class="cols2" style="flex:none; margin-top:.5em;">
-        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Extensión — ¿cuántos y dónde?</span><p class="bv-min12" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">≈423 600 de 630 327 estudiantes (ESCALE 2024) no alcanza el nivel esperado. De 49,4% sin el nivel en Moquegua a 87,2% en Loreto.</p></div>
-        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Intensidad — ¿qué tan grave?</span><p class="bv-min12" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">De los que no llegan, no todos igual: 39,0% "en proceso" (cerca), pero 3,4% (≈18 100) en "Previo al inicio" — el nivel más bajo.</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Extensión — ¿cuántos y dónde?</span><p class="bv-min12" data-paso="1" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">≈423 600 de 630 327 estudiantes (ESCALE 2024) no alcanzan el nivel esperado. Por región, los que no lo alcanzan van de 49,4% en Moquegua a 87,2% en Loreto.</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Intensidad — ¿qué tan grave?</span><p class="bv-min12" data-paso="2" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">No todos los que no llegan están igual de lejos. Del total de estudiantes, 39,0% está «en proceso», cerca del nivel esperado; pero 3,4% (≈18 100) sigue «previo al inicio», el nivel más bajo.</p></div>
       </div>
       <div class="cols2" style="flex:none; margin-top:.4em;">
-        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Evolución — tendencia 2016-2024</span><p class="bv-min12" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">31,4% (2016) → 34,5% (2019, prepandemia) → 30,0% (2022, caída) → 32,8% (2024).</p></div>
-        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Brecha — distancia a la meta</span><p class="bv-min12" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">La meta es 100% — leer es un derecho de todos. Proyectado a toda primaria (aproximación): ≈2 497 600 de 3 716 712 estudiantes.</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Evolución — tendencia 2016-2024</span><p class="bv-min12" data-paso="3" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">31,4% (2016) → 34,5% (2019, antes de la pandemia) → 30,0% (2022, caída) → 32,8% (2024).</p></div>
+        <div class="col-card" style="padding:1.1cqw;"><span class="tag">Brecha — distancia a la meta</span><p class="bv-min12" data-paso="4" style="margin:0; font-size:clamp(.54rem,1.12cqw,.72rem); line-height:1.32;">La meta es 100%: leer es un derecho de todos. Proyectado a toda la primaria (aproximación), ≈2 497 600 de 3 716 712 estudiantes no leerían al nivel esperado.</p></div>
       </div>
-      <p class="takeaway bv-min12" style="font-size:clamp(.68rem,1.5cqw,.98rem);">Extensión te dice que hay un problema. Intensidad te dice qué tan grave es. Evolución te dice si va mejorando o empeorando. Brecha te dice qué tan lejos estás de la meta. Sin los 4, tu diagnóstico está incompleto.</p>
+      <p class="takeaway bv-min12 tarde" data-paso="4" style="font-size:clamp(.68rem,1.5cqw,.98rem);">La extensión dice que hay un problema; la intensidad, qué tan grave es; la evolución, si mejora o empeora; la brecha, qué tan lejos está la meta. Sin los cuatro, el diagnóstico queda incompleto.</p>
       <p class="source-note">Fuente: UMC-MINEDU, ENLA 2024; ESCALE-MINEDU, Magnitudes de la Educación (matrícula 2024).</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">32 / 34</span>
+    <span class="slide-foot">29 / 31</span>
   </section>
 
   <!-- 29 MODELO EXPLICATIVO -->
@@ -1204,14 +1175,14 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
 
           <rect x="280" y="60" width="160" height="80" rx="4" fill="var(--phase-frame)" opacity=".15" stroke="var(--phase-frame)" stroke-width="1.5"/>
           <text x="360" y="93" text-anchor="middle" class="chart-value-label" style="font-size:13px;">Desnutrición</text>
-          <text x="360" y="110" text-anchor="middle" class="chart-value-label" style="font-size:13px;">Crónica Infantil</text>
+          <text x="360" y="110" text-anchor="middle" class="chart-value-label" style="font-size:13px;">crónica infantil</text>
           <text x="360" y="127" text-anchor="middle" class="chart-bar-label">condición de interés</text>
         </svg>
       </div>
       <p class="source-note">"e+" = relación respaldada por evidencia. Cada factor se desagrega más (ej. Dieta inadecuada ← acceso a alimentos + prácticas de cuidado infantil) — a mayor evidencia, más arriba en la jerarquía. Marco conceptual: UNICEF.</p>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">33 / 34</span>
+    <span class="slide-foot">30 / 31</span>
   </section>
 
   <!-- 30 DIVIDER SESIÓN 2 -->
@@ -1220,7 +1191,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       <div class="qr-text">
         <span class="kicker">Sesión 2</span>
         <h2>Diseño de intervenciones orientadas a resultados</h2>
-        <p>Ahora toca producir la Entrega 1 — con el instructivo y los recursos de apoyo a la mano: trabajo grupal construyendo la cadena de resultados de tu propio programa → presentación cruzada (eslabón más débil) → <b style="color:var(--phase-work);">★ Entrega 1, cierre 17:00</b>.</p>
+        <p>Ahora toca producir la Entrega 1, con el instructivo y los recursos de apoyo a la mano: trabajo en grupo sobre la cadena de resultados de su programa → presentación cruzada (eslabón más débil) → <b style="color:var(--phase-work);">★ Entrega 1, cierre 17:00</b>.</p>
         <p>Escanea el código con la cámara del celular.</p>
         <a class="link bv-min12" href="https://cain971.github.io/taller-ppr-recursos/" target="_blank" rel="noopener">Taller PpR · Recursos</a>
       </div>
@@ -1231,7 +1202,7 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
       </div>
     </div>
     <div class="logo"></div>
-    <span class="slide-foot">34 / 34</span>
+    <span class="slide-foot">31 / 31</span>
   </section>
 
 </div>
@@ -1249,18 +1220,35 @@ body.presenting .has-steps .swap .antes{ justify-self:center; }
     idx = Math.max(0, Math.min(slides.length - 1, i));
     slides.forEach(function(s, j){ s.classList.toggle('active', j === idx); });
     var cur = slides[idx];
-    if (cur.classList.contains('has-steps')) cur.classList.toggle('revelado', dir === 'back');
+    if (cur.classList.contains('has-steps')) setPaso(cur, dir === 'back' ? totalPasos(cur) : 0);
   }
 
-  /* Pasos: en una lámina .has-steps, avanzar primero revela la respuesta */
+  /* Pasos: en una lámina .has-steps, cada avance revela el paso siguiente.
+     .antes/.despues = paso 1; [data-paso="k"] = paso k. */
+  function totalPasos(s){
+    var n = s.querySelector('.despues') ? 1 : 0;
+    s.querySelectorAll('[data-paso]').forEach(function(e){ n = Math.max(n, +e.getAttribute('data-paso')); });
+    return n;
+  }
+  function setPaso(s, k){
+    s.dataset.pasoActual = k;
+    s.classList.toggle('revelado', k >= 1);
+    s.querySelectorAll('[data-paso]').forEach(function(e){ e.classList.toggle('visto', +e.getAttribute('data-paso') <= k); });
+  }
   function next(){
     var cur = slides[idx];
-    if (cur.classList.contains('has-steps') && !cur.classList.contains('revelado')){ cur.classList.add('revelado'); return; }
+    if (cur.classList.contains('has-steps')){
+      var k = +(cur.dataset.pasoActual || 0);
+      if (k < totalPasos(cur)){ setPaso(cur, k + 1); return; }
+    }
     if (idx < slides.length - 1) showSlide(idx + 1, 'fwd');
   }
   function prev(){
     var cur = slides[idx];
-    if (cur.classList.contains('has-steps') && cur.classList.contains('revelado')){ cur.classList.remove('revelado'); return; }
+    if (cur.classList.contains('has-steps')){
+      var k = +(cur.dataset.pasoActual || 0);
+      if (k > 0){ setPaso(cur, k - 1); return; }
+    }
     if (idx > 0) showSlide(idx - 1, 'back');
   }
 
