@@ -228,6 +228,7 @@
     position:relative;
     max-width:56ch;
   }
+  ul.plain.ancha li{ max-width:none; }
   ul.plain li::before{
     content:"";
     position:absolute; left:0; top:.55em;
@@ -899,13 +900,17 @@
       <span class="kicker">Para reforzar <span class="sub">3 de 5</span></span>
       <h2 class="slide-title">La última flecha necesita escala</h2>
       <div class="flow" style="margin-top:1.4em;">
-        <div class="flow-box">Mujeres víctimas reciben una medida de protección<small>producto · llega a un grupo</small></div>
+        <div class="flow-box">Mujeres víctimas de violencia de pareja reciben una medida de protección otorgada por el juzgado y ejecutada por la PNP<small>producto · llega a un grupo</small></div>
         <div class="flow-arrow">→</div>
-        <div class="flow-box">Baja la reincidencia en ese grupo<small>resultado intermedio</small></div>
+        <div class="flow-box">Baja la reincidencia entre las mujeres con medida<small>resultado intermedio</small></div>
         <div class="flow-arrow">→</div>
-        <div class="flow-box accent">Baja la violencia en todas las mujeres de 18 a 49 años<small>resultado · ¿cuántas llegan a tener una medida?</small></div>
+        <div class="flow-box accent">Baja el % de mujeres de 18 a 49 años que sufrió violencia de su pareja en los últimos 12 meses<small>resultado · mide a toda la población</small></div>
       </div>
-      <p class="takeaway">El indicador mide a toda la población. Digan cuántos atiende el programa frente al total: sin esa cifra, la última flecha no se puede defender.</p>
+      <div class="cols2" style="flex:none; margin-top:1em;">
+        <div class="col-card"><span class="tag">Primera flecha</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">El agresor cumple la medida</h3><p class="card-p">Una condición fuera del programa: la ejecución policial ya es parte del producto.</p></div>
+        <div class="col-card" style="border-color:var(--phase-work);"><span class="tag">Última flecha · escala</span><h3 style="font-size:clamp(.85rem,1.9cqw,1.15rem);">Una parte suficiente de las afectadas llega a tener una medida</h3><p class="card-p">Se respalda con una cifra: mujeres con medida frente al total de afectadas.</p></div>
+      </div>
+      <p class="takeaway" style="margin-top:1.1em;">El producto llega a un grupo; el indicador mide a todas. Digan cuántas atiende el programa frente al total: sin esa cifra, no se sabe si falla la medida o falla el acceso a ella.</p>
     </div>
     <div class="logo"></div>
     <span class="slide-foot">11 / 52</span>
@@ -916,13 +921,13 @@
     <div class="slide-pad">
       <span class="kicker">Para reforzar <span class="sub">4 de 5</span></span>
       <h2 class="slide-title">La IA busca; ustedes verifican y concluyen</h2>
-      <ul class="plain" style="margin-top:1.2em;">
+      <ul class="plain ancha" style="margin-top:1.2em;">
         <li><b>Lista de referencias completa.</b> Cada fuente citada en el texto, con URL o DOI que abra.</li>
-        <li><b>Cada cifra con su etiqueta exacta.</b> Pobreza total no es pobreza extrema; la edad del indicador es la que dice su ficha.</li>
+        <li><b>Cada cifra con su etiqueta exacta.</b> Pobreza total no es pobreza extrema; el grupo de edad y el período son los de la ficha.</li>
         <li><b>La prensa ubica un hecho; no es evidencia.</b> El dato se toma del informe oficial o del estudio, no de la nota.</li>
         <li><b>Nada «por completar» en la versión entregada.</b> Si un dato no se encontró, se dice.</li>
       </ul>
-      <p class="body-text" style="margin-top:1em;">Reglas y prompts para usarla bien, en los recursos del taller: <a class="link" href="https://cain971.github.io/taller-ppr-recursos/ia-entrega-1.html" target="_blank" rel="noopener">IA para la Entrega 1</a></p>
+      <p class="body-text" style="margin-top:1em;">Reglas y prompts para usarla bien, en los recursos del taller: <a class="link" style="word-break:normal; white-space:nowrap;" href="https://cain971.github.io/taller-ppr-recursos/ia-entrega-1.html" target="_blank" rel="noopener">IA para la Entrega 1</a></p>
     </div>
     <div class="logo"></div>
     <span class="slide-foot">12 / 52</span>
@@ -971,8 +976,8 @@
       <div class="stat-grid" style="flex:none;">
         <div class="stat"><span class="sector">Extensión</span><span class="num">610<small>mil</small></span><span class="note">viviendas rurales con techo de calamina o similar en 814 distritos de riesgo alto o muy alto por heladas (73%)</span></div>
         <div class="stat"><span class="sector">Intensidad</span><span class="num">2,7<small>°C</small></span><span class="note">temperatura interior mínima medida en viviendas de Langui (Cusco)</span></div>
-        <div class="stat"><span class="sector">Evolución</span><span class="num">+16,6<small>p.p.</small></span><span class="note">de 56,4% (Censo 2017) a 73,0% (Censo 2025)</span></div>
-        <div class="stat"><span class="sector">Brecha</span><span class="num">−15,3<small>°C</small></span><span class="note">hasta esa distancia de los 18 °C que recomienda la OMS</span></div>
+        <div class="stat"><span class="sector">Evolución</span><span class="num">+16,6<small>p.p.</small></span><span class="note">más viviendas rurales con techo de calamina o similar: de 56,4% (Censo 2017) a 73,0% (Censo 2025)</span></div>
+        <div class="stat"><span class="sector">Brecha</span><span class="num">−15,3<small>°C</small></span><span class="note">por debajo de los 18 °C que recomienda la OMS como mínimo interior (18 − 2,7)</span></div>
       </div>
       <p class="takeaway">Los cuatro elementos de la magnitud, con un cruce propio de dos fuentes oficiales.</p>
       <p class="source-note">Fuente: Entrega 1 del Grupo 2, cruce distrital del escenario de riesgo por heladas de CENEPRED (2024) con los Censos 2017 y 2025 del INEI (Redatam).</p>
