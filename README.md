@@ -40,3 +40,7 @@ Requiere `push` (no solo commit); Pages reconstruye en ~1–2 min.
 - **`cadena-desde-la-solucion.html`** — riesgos de construir la cadena causal
   desde una intervención ya decidida en vez de desde los factores: caso
   anemia + caso extorsión y sicariato (normas oficiales 2025-2026).
+- **`evaluacion-de-impacto.html`** — qué es una evaluación de impacto, desde
+  cero: magnitud frente a causa, contrafactual, grupo de comparación y métodos,
+  con casos de India y Pakistán, ejercicios y lista de control para la sección 6.
+  Adaptado del recurso de GEP201 (`unidad-4/evaluacion-de-impacto.html`).
